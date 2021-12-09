@@ -1,25 +1,101 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/game/entity/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/entity/player/assets/ship.png" type="Texture" id=2]
 [ext_resource path="res://scenes/game/entity/player/assets/2d_perspective.gdshader" type="Shader" id=3]
+[ext_resource path="res://scenes/game/entity/player/assets/gun_light_transparent.png" type="Texture" id=4]
+[ext_resource path="res://scenes/game/entity/player/assets/exhaust.png" type="Texture" id=6]
+[ext_resource path="res://scenes/game/entity/player/assets/exhaust_flame.gdshader" type="Shader" id=7]
+[ext_resource path="res://scenes/game/entity/player/player_visual.gd" type="Script" id=8]
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
 shader_param/gradient_effect = 0.0
 shader_param/warp_effect = 0.0
 
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 7 )
+shader_param/speed = 10.0
+shader_param/amount = 0.2
+
+[sub_resource type="CanvasItemMaterial" id=10]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 3 )
+shader_param/gradient_effect = 0.0
+shader_param/warp_effect = 0.0
+
+[sub_resource type="ViewportTexture" id=5]
+viewport_path = NodePath("Visual/PlayerViewport")
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 1 )
+fire_rate = 0.1
 
 [node name="Visual" type="Node2D" parent="."]
-material = SubResource( 2 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 0, 48 )
+script = ExtResource( 8 )
+gun_light_modulate = Color( 0.75, 1.0957, 1.5, 1 )
 
-[node name="Sprite" type="Sprite" parent="Visual"]
-use_parent_material = true
+[node name="PlayerViewport" type="Viewport" parent="Visual"]
+size = Vector2( 512, 512 )
+transparent_bg = true
+disable_3d = true
+usage = 0
+render_target_v_flip = true
+
+[node name="Ship" type="Sprite" parent="Visual/PlayerViewport"]
+material = SubResource( 1 )
+position = Vector2( 256, 128 )
 texture = ExtResource( 2 )
 
+[node name="ExhaustFlameLeft" type="Sprite" parent="Visual/PlayerViewport"]
+material = SubResource( 4 )
+position = Vector2( 144, 232 )
+scale = Vector2( 0.2, 0.2 )
+z_index = -1
+texture = ExtResource( 6 )
+offset = Vector2( 0, 48 )
+
+[node name="ExhaustFlameMiddle" type="Sprite" parent="Visual/PlayerViewport"]
+material = SubResource( 4 )
+position = Vector2( 368, 232 )
+scale = Vector2( 0.2, 0.2 )
+z_index = -1
+texture = ExtResource( 6 )
+offset = Vector2( 0, 48 )
+
+[node name="ExhaustFlameRight" type="Sprite" parent="Visual/PlayerViewport"]
+material = SubResource( 4 )
+position = Vector2( 256, 248 )
+scale = Vector2( 0.5, 0.5 )
+z_index = -1
+texture = ExtResource( 6 )
+offset = Vector2( 0, 48 )
+
+[node name="GunLightLeft" type="Sprite" parent="Visual/PlayerViewport"]
+material = SubResource( 10 )
+position = Vector2( 128, 128 )
+texture = ExtResource( 4 )
+
+[node name="GunLightRight" type="Sprite" parent="Visual/PlayerViewport"]
+material = SubResource( 10 )
+position = Vector2( 384, 128 )
+texture = ExtResource( 4 )
+flip_h = true
+
+[node name="Sprite" type="Sprite" parent="Visual"]
+material = SubResource( 6 )
+scale = Vector2( 0.5, 0.5 )
+texture = SubResource( 5 )
+
 [node name="Shape" type="CollisionPolygon2D" parent="."]
-visible = false
+position = Vector2( 0, -16 )
 polygon = PoolVector2Array( 0, -56, 16, -48, 96, 32, 88, 38, -88, 38, -96, 32, -16, -48 )
+
+[node name="GunPositionLeft" type="Position2D" parent="."]
+position = Vector2( -64, -54 )
+
+[node name="GunPositionRight" type="Position2D" parent="."]
+position = Vector2( 64, -54 )
