@@ -1,14 +1,10 @@
 extends Area2D
 
-export var direction_vector := Vector2(0.0, -100.0)
-export var lifetime := 5.0
-
-var lifetime_timer := Timer.new()
-
-func _ready():
-	add_child(lifetime_timer)
-	lifetime_timer.connect("timeout", self, "queue_free")
-	lifetime_timer.start(lifetime)
+export var speed : float = 10.0
+export var damage : int = 10
+export var active_area := Rect2(0.0, 0.0, 128.0, 128.0)
 
 func _physics_process(delta):
-	translate(direction_vector * delta)
+	active_area.position = global_position - (active_area.size / 2.0)
+	if not active_area.intersects(get_viewport_rect()):
+		queue_free()

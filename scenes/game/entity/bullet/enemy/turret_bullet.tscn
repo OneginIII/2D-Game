@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/game/entity/bullet/base_bullet.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/entity/player/assets/bullet.png" type="Texture" id=2]
+[ext_resource path="res://scenes/game/entity/bullet/enemy/turret_bullet.gd" type="Script" id=3]
+
+[node name="TurretBullet" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="1"]
+modulate = Color( 1, 0, 0, 1 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )

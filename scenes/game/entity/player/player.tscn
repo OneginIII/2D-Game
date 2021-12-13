@@ -30,6 +30,7 @@ shader_param/warp_effect = 0.0
 viewport_path = NodePath("Visual/PlayerViewport")
 
 [node name="Player" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 1 )
 fire_rate = 0.1
 

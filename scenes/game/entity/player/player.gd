@@ -8,7 +8,7 @@ enum Gun {GUN_LEFT, GUN_RIGHT}
 
 signal gun_fired(gun_position)
 
-export var speed := 10.0
+export var speed := 500.0
 export var acceleration := 10.0
 export var fire_rate := 0.5
 
@@ -26,16 +26,16 @@ func _ready():
 	add_child(fire_rate_timer)
 	connect("gun_fired", player_visual, "gun_fired")
 
-func _physics_process(delta):
-	current_move_vector = current_move_vector.move_toward(input_move_vector, delta * acceleration)
-	move_and_collide(current_move_vector * speed)
-
-func _process(_delta):
+func _process(delta):
 	input_move_vector = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
 	input_move_vector = input_move_vector.clamped(1.0);
+	current_move_vector = current_move_vector.move_toward(input_move_vector, delta * acceleration)
 	if Input.is_action_pressed("fire"):
 		fire()
 	player_visual.reference_vector = current_move_vector
+
+func _physics_process(_delta):
+	move_and_slide(current_move_vector * speed)
 
 func fire():
 	if fire_rate_timer.is_stopped():
