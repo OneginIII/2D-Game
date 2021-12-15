@@ -48,5 +48,9 @@ func fire():
 			bullet.global_position = gun_position_left.global_position
 			emit_signal("gun_fired", Gun.GUN_LEFT)
 			last_fired = Gun.GUN_LEFT
+		bullet.color = player_visual.gun_light_modulate
 		get_parent().add_child(bullet)
 		fire_rate_timer.start(fire_rate)
+
+func take_damage(_amount: int, color: Color):
+	player_visual.damage_flash(color)

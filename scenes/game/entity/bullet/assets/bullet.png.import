@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bullet_light.png-9ac261ac85f76541aa20b1abb919a5da.stex"
+path="res://.import/bullet.png-ff4ec81fb5ffcdd006de1d80d22de1b1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/game/entity/player/assets/bullet_light.png"
-dest_files=[ "res://.import/bullet_light.png-9ac261ac85f76541aa20b1abb919a5da.stex" ]
+source_file="res://scenes/game/entity/bullet/assets/bullet.png"
+dest_files=[ "res://.import/bullet.png-ff4ec81fb5ffcdd006de1d80d22de1b1.stex" ]
 
 [params]
 

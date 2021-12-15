@@ -31,6 +31,7 @@ viewport_path = NodePath("Visual/PlayerViewport")
 
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
+collision_mask = 5
 script = ExtResource( 1 )
 fire_rate = 0.1
 
@@ -38,6 +39,7 @@ fire_rate = 0.1
 position = Vector2( 0, 48 )
 script = ExtResource( 8 )
 gun_light_modulate = Color( 0.75, 1.0957, 1.5, 1 )
+flashing_sprites = [ NodePath("PlayerViewport/Ship") ]
 
 [node name="PlayerViewport" type="Viewport" parent="Visual"]
 size = Vector2( 512, 512 )
