@@ -5,14 +5,18 @@ const explosion_scene := preload("res://scenes/game/entity/effect/explosion/expl
 export var health : int = 100
 export (Array, NodePath) var flashing_sprites
 
+onready var shape := $Shape
+
 var active := true
 var flash_tween := Tween.new()
+var effects_parent
 
 const FLASH_MULTIPLY = 2.5
 const FLASH_TIME = 0.2
 const DESTROY_DELAY = 0.5
 
 func _ready():
+	effects_parent = get_tree().root.find_node("Effects", true, false)
 	add_child(flash_tween)
 
 func take_damage(amount: int, color: Color):
@@ -31,8 +35,9 @@ func take_damage(amount: int, color: Color):
 
 func destroy():
 	active = false
+	shape.set_deferred("disabled", true)
 	var explosion = explosion_scene.instance()
-	explosion.global_position = global_position
-	get_parent().add_child(explosion)
+	explosion.position = position
+	effects_parent.add_child(explosion)
 	yield(get_tree().create_timer(DESTROY_DELAY), "timeout")
 	queue_free()

@@ -6,6 +6,7 @@ onready var shoot_position := $Head/ShootPosition
 onready var turret_light := $Head/TurretLight
 
 var player_node
+var bullets_parent
 var light_tween := Tween.new()
 var initial_light_color := Color.tomato
 
@@ -13,6 +14,7 @@ const ANGLE_OFFSET := 90.0
 
 func _ready():
 	player_node = get_tree().root.find_node("Player", true, false)
+	bullets_parent = get_tree().root.find_node("Bullets", true, false)
 	add_child(light_tween)
 	initial_light_color = turret_light.modulate
 	turret_light.modulate = Color.black
@@ -29,7 +31,7 @@ func shoot():
 	bullet.rotation = shoot_position.global_rotation
 	bullet.global_position = shoot_position.global_position
 	bullet.direction = bullet.direction.rotated(bullet.rotation)
-	get_parent().add_child(bullet)
+	bullets_parent.add_child(bullet)
 	light_tween.interpolate_property(turret_light, "modulate", initial_light_color, Color.black, 0.5)
 	light_tween.start()
 

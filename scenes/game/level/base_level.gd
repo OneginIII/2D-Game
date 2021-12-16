@@ -17,6 +17,11 @@ func update_level_size(value):
 
 func _ready():
 	update_level_size(level_length)
+	if Engine.editor_hint:
+		set_physics_process(false)
+
+func _physics_process(delta):
+	translate(Vector2.DOWN * scroll_speed * delta)
 
 func _draw():
 	if Engine.editor_hint:
