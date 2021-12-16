@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/game/level/base_level.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game/level/assets/tileset.tres" type="TileSet" id=2]
+
+[node name="BaseLevel" type="Node2D"]
+script = ExtResource( 1 )
+level_length = 22
+
+[node name="BGPolygon" type="Polygon2D" parent="."]
+z_index = -2
+color = Color( 0.145098, 0.345098, 0.552941, 1 )
+polygon = PoolVector2Array( -128, -2240, 1408, -2240, 1408, 832, -128, 832 )
+
+[node name="SandTiles" type="TileMap" parent="."]
+z_index = -1
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 128, 128 )
+format = 1
+
+[node name="GrassTiles" type="TileMap" parent="."]
+z_index = -1
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 128, 128 )
+format = 1
+
+[node name="BaseTiles" type="TileMap" parent="."]
+z_index = -1
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 128, 128 )
+format = 1
