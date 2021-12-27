@@ -4,6 +4,7 @@ export var gun_light_modulate := Color.lightskyblue
 export (Array, NodePath) var flashing_sprites
 
 onready var sprite_material := $Sprite.material as ShaderMaterial
+onready var shadow_material := $Shadow.material as ShaderMaterial
 onready var exhaust_materials := []
 onready var gun_light_left := $PlayerViewport/GunLightLeft
 onready var gun_light_right := $PlayerViewport/GunLightRight
@@ -14,6 +15,7 @@ var flash_tween := Tween.new()
 
 const GRADIENT_AMOUNT := 0.1
 const WARP_AMOUNT := 0.05
+const SHADOW_WARP_AMOUNT := 0.02
 const EXHAUST_SPEED := 10.0
 const EXHAUST_SPEED_MIN := 5.0
 const EXHAUST_AMOUNT := 1.0
@@ -34,6 +36,7 @@ func _ready():
 func _process(_delta):
 	sprite_material.set_shader_param("gradient_effect", -reference_vector.x * GRADIENT_AMOUNT)
 	sprite_material.set_shader_param("warp_effect", reference_vector.x * WARP_AMOUNT)
+	shadow_material.set_shader_param("warp_effect", reference_vector.x * SHADOW_WARP_AMOUNT)
 	
 	for mat in exhaust_materials:
 		mat.set_shader_param("speed", -reference_vector.y * EXHAUST_SPEED + EXHAUST_SPEED_MIN)

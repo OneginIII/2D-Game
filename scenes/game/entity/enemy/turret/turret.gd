@@ -5,7 +5,6 @@ onready var head := $Head
 onready var shoot_position := $Head/ShootPosition
 onready var turret_light := $Head/TurretLight
 
-var player_node
 var bullets_parent
 var light_tween := Tween.new()
 var initial_light_color := Color.tomato
@@ -13,7 +12,6 @@ var initial_light_color := Color.tomato
 const ANGLE_OFFSET := 90.0
 
 func _ready():
-	player_node = get_tree().root.find_node("Player", true, false)
 	bullets_parent = get_tree().root.find_node("Bullets", true, false)
 	add_child(light_tween)
 	initial_light_color = turret_light.modulate
