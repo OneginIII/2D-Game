@@ -1,17 +1,24 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/game/entity/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entity/edge_collision/edge_collision.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/gui/gui.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/level/level01/level01.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/game/game.gd" type="Script" id=5]
 
 [node name="Game" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 520, 320 )
-scale = Vector2( 0.6, 0.6 )
+position = Vector2( 960, 864 )
 
 [node name="EdgeCollision" parent="." instance=ExtResource( 2 )]
 
 [node name="Level01" parent="." instance=ExtResource( 4 )]
 
 [node name="Bullets" type="Node2D" parent="."]
+
+[node name="GuiLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="GameGui" parent="GuiLayer" instance=ExtResource( 3 )]

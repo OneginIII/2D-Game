@@ -7,7 +7,7 @@ export(float) var scroll_speed = 1.0
 var level_rect := Rect2()
 
 const TILE_SIZE := 128.0
-const LEVEL_WIDTH := 10
+const LEVEL_WIDTH := 15
 
 func update_level_size(value):
 	level_length = value

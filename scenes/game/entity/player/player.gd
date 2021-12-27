@@ -7,7 +7,12 @@ const bullet_scene = preload("res://scenes/game/entity/bullet/player/player_bull
 enum Gun {GUN_LEFT, GUN_RIGHT}
 
 signal gun_fired(gun_position)
+signal health_updated(value)
 
+export var health := 100 setget set_health
+func set_health(value: int):
+	health = value
+	emit_signal("health_updated", health)
 export var speed := 500.0
 export var acceleration := 10.0
 export var fire_rate := 0.5
@@ -52,5 +57,6 @@ func fire():
 		get_parent().add_child(bullet)
 		fire_rate_timer.start(fire_rate)
 
-func take_damage(_amount: int, color: Color):
+func take_damage(amount: int, color: Color):
 	player_visual.damage_flash(color)
+	self.health -= amount

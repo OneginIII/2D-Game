@@ -10,24 +10,21 @@ level_length = 22
 [node name="BGPolygon" type="Polygon2D" parent="."]
 z_index = -2
 color = Color( 0.145098, 0.345098, 0.552941, 1 )
-polygon = PoolVector2Array( -128, -2240, 1408, -2240, 1408, 832, -128, 832 )
+polygon = PoolVector2Array( -128, -2240, 2048, -2240, 2048, 1216, -128, 1216 )
 
 [node name="SandTiles" type="TileMap" parent="."]
-scale = Vector2( 0.5, 0.5 )
 z_index = -1
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 128, 128 )
 format = 1
 
 [node name="GrassTiles" type="TileMap" parent="."]
-scale = Vector2( 0.5, 0.5 )
 z_index = -1
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 128, 128 )
 format = 1
 
 [node name="BaseTiles" type="TileMap" parent="."]
-scale = Vector2( 0.5, 0.5 )
 z_index = -1
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 128, 128 )

@@ -5,10 +5,12 @@ const explosion_scene := preload("res://scenes/game/entity/effect/explosion/expl
 export var health : int = 100
 export (Array, NodePath) var flashing_sprites
 export var activation_margin : float = 64.0
+export var score_value := 10
 
 onready var shape := $Shape
 
 var player_node
+var game_node
 var active := false
 var flash_tween := Tween.new()
 var effects_parent
@@ -21,6 +23,7 @@ const ACTIVATION_INTERVAL = 0.1
 
 func _ready():
 	player_node = get_tree().root.find_node("Player", true, false)
+	game_node = get_tree().root.find_node("Game", true, false)
 	effects_parent = get_tree().root.find_node("Effects", true, false)
 	add_child(flash_tween)
 	add_child(activation_timer)
@@ -43,6 +46,7 @@ func take_damage(amount: int, color: Color):
 
 func destroy():
 	active = false
+	game_node.score += score_value
 	shape.set_deferred("disabled", true)
 	var explosion = explosion_scene.instance()
 	explosion.position = position
