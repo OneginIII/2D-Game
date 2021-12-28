@@ -1,6 +1,5 @@
 extends Node2D
 
-export var gun_light_modulate := Color.lightskyblue
 export (Array, NodePath) var flashing_sprites
 
 onready var sprite_material := $Sprite.material as ShaderMaterial
@@ -42,11 +41,13 @@ func _process(_delta):
 		mat.set_shader_param("speed", -reference_vector.y * EXHAUST_SPEED + EXHAUST_SPEED_MIN)
 		mat.set_shader_param("amount", -reference_vector.y * EXHAUST_AMOUNT + EXHAUST_AMOUNT_MIN)
 
-func gun_fired(gun_position):
-	if gun_position == PlayerShip.Gun.GUN_LEFT:
-		light_tween.interpolate_property(gun_light_left, "modulate", gun_light_modulate, Color.black, GUN_LIGHTUP_TIME)
-	elif gun_position == PlayerShip.Gun.GUN_RIGHT:
-		light_tween.interpolate_property(gun_light_right, "modulate", gun_light_modulate, Color.black, GUN_LIGHTUP_TIME)
+func gun_fired(gun_position, gun_color):
+	light_tween.interpolate_property(gun_light_left, "modulate", gun_color, Color.black, GUN_LIGHTUP_TIME)
+	light_tween.interpolate_property(gun_light_right, "modulate", gun_color, Color.black, GUN_LIGHTUP_TIME)
+	if gun_position == get_parent().player_gun.Gun.GUN_LEFT:
+		light_tween.remove(gun_light_right, "modulate")
+	elif gun_position == get_parent().player_gun.Gun.GUN_RIGHT:
+		light_tween.remove(gun_light_left, "modulate")
 	light_tween.start()
 
 func damage_flash(color: Color):

@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/game/entity/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/entity/player/assets/ship.png" type="Texture" id=2]
 [ext_resource path="res://scenes/game/entity/player/assets/2d_perspective.gdshader" type="Shader" id=3]
 [ext_resource path="res://scenes/game/entity/player/assets/gun_light_transparent.png" type="Texture" id=4]
+[ext_resource path="res://scenes/game/entity/player/gun.gd" type="Script" id=5]
 [ext_resource path="res://scenes/game/entity/player/assets/exhaust.png" type="Texture" id=6]
 [ext_resource path="res://scenes/game/entity/player/assets/exhaust_flame.gdshader" type="Shader" id=7]
 [ext_resource path="res://scenes/game/entity/player/player_visual.gd" type="Script" id=8]
@@ -32,13 +33,12 @@ viewport_path = NodePath("Visual/PlayerViewport")
 [node name="Player" type="KinematicBody2D"]
 z_index = 2
 collision_layer = 2
+collision_mask = 9
 script = ExtResource( 1 )
-fire_rate = 0.1
 
 [node name="Visual" type="Node2D" parent="."]
 position = Vector2( 0, 48 )
 script = ExtResource( 8 )
-gun_light_modulate = Color( 0.75, 1.0957, 1.5, 1 )
 flashing_sprites = [ NodePath("PlayerViewport/Ship") ]
 
 [node name="PlayerViewport" type="Viewport" parent="Visual"]
@@ -104,8 +104,11 @@ texture = SubResource( 5 )
 position = Vector2( 0, -16 )
 polygon = PoolVector2Array( 0, -56, 16, -48, 96, 32, 88, 38, -88, 38, -96, 32, -16, -48 )
 
-[node name="GunPositionLeft" type="Position2D" parent="."]
+[node name="Gun" type="Node2D" parent="."]
+script = ExtResource( 5 )
+
+[node name="GunPositionLeft" type="Position2D" parent="Gun"]
 position = Vector2( -64, -54 )
 
-[node name="GunPositionRight" type="Position2D" parent="."]
+[node name="GunPositionRight" type="Position2D" parent="Gun"]
 position = Vector2( 64, -54 )

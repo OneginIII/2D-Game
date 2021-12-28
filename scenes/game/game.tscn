@@ -9,6 +9,15 @@
 [node name="Game" type="Node2D"]
 script = ExtResource( 5 )
 
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="BGPolygon" type="Polygon2D" parent="BackgroundLayer"]
+position = Vector2( 960, 540 )
+z_index = -2
+color = Color( 0.145098, 0.345098, 0.552941, 1 )
+polygon = PoolVector2Array( -4096, -4096, 4096, -4096, 4096, 4096, -4096, 4096 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 960, 864 )
 

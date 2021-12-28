@@ -4,4 +4,4 @@ var direction := Vector2.UP
 
 func _physics_process(delta):
 	._physics_process(delta)
-	translate(direction * speed)
+	translate(direction * speed * delta)

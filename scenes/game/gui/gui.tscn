@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/game/gui/assets/status_title_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/game/gui/assets/life.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://scenes/game/gui/assets/power_meter_filling.png" type="Texture" id=6]
 [ext_resource path="res://scenes/game/gui/assets/score_font.tres" type="DynamicFont" id=7]
 [ext_resource path="res://scenes/game/gui/gui.gd" type="Script" id=8]
+[ext_resource path="res://scenes/game/gui/assets/life_filling.png" type="Texture" id=9]
 
 [node name="GameGui" type="Control"]
 anchor_right = 1.0
@@ -59,25 +60,76 @@ margin_right = 358.0
 margin_bottom = 51.0
 custom_constants/separation = 10
 
-[node name="1" type="TextureRect" parent="PlayerInfo/Status/Top/Lives"]
+[node name="Slot1" type="TextureRect" parent="PlayerInfo/Status/Top/Lives"]
 margin_right = 63.0
 margin_bottom = 51.0
 texture = ExtResource( 2 )
 stretch_mode = 6
 
-[node name="2" type="TextureRect" parent="PlayerInfo/Status/Top/Lives"]
+[node name="Fill" type="TextureRect" parent="PlayerInfo/Status/Top/Lives/Slot1"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -22.5
+margin_top = -13.5
+margin_right = 22.5
+margin_bottom = 13.5
+rect_min_size = Vector2( 45, 27 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot2" type="TextureRect" parent="PlayerInfo/Status/Top/Lives"]
 margin_left = 73.0
 margin_right = 136.0
 margin_bottom = 51.0
 texture = ExtResource( 2 )
 stretch_mode = 6
 
-[node name="3" type="TextureRect" parent="PlayerInfo/Status/Top/Lives"]
+[node name="Fill" type="TextureRect" parent="PlayerInfo/Status/Top/Lives/Slot2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -22.5
+margin_top = -13.5
+margin_right = 22.5
+margin_bottom = 13.5
+rect_min_size = Vector2( 45, 27 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot3" type="TextureRect" parent="PlayerInfo/Status/Top/Lives"]
 margin_left = 146.0
 margin_right = 209.0
 margin_bottom = 51.0
 texture = ExtResource( 2 )
 stretch_mode = 6
+
+[node name="Fill" type="TextureRect" parent="PlayerInfo/Status/Top/Lives/Slot3"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -22.5
+margin_top = -13.5
+margin_right = 22.5
+margin_bottom = 13.5
+rect_min_size = Vector2( 45, 27 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Bottom" type="HBoxContainer" parent="PlayerInfo/Status"]
 margin_top = 56.0
@@ -120,11 +172,11 @@ margin_top = 56.0
 margin_right = 274.0
 margin_bottom = 106.0
 
-[node name="HealthBar" type="TextureProgress" parent="PlayerInfo/Power/Bottom"]
+[node name="PowerBar" type="TextureProgress" parent="PlayerInfo/Power/Bottom"]
 margin_right = 274.0
 margin_bottom = 50.0
 max_value = 7.0
-value = 4.0
+value = 1.0
 texture_under = ExtResource( 5 )
 texture_progress = ExtResource( 6 )
 texture_progress_offset = Vector2( 8, 8 )

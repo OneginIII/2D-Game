@@ -1,4 +1,6 @@
 extends Node
 
-func _ready():
-	pass
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		if event.scancode == KEY_ESCAPE:
+			get_tree().quit()
