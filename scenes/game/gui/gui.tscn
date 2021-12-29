@@ -29,21 +29,22 @@ margin_top = -150.0
 margin_right = 960.0
 rect_min_size = Vector2( 0, 150 )
 size_flags_horizontal = 3
-custom_constants/separation = 420
+custom_constants/separation = 340
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Status" type="VBoxContainer" parent="PlayerInfo"]
-margin_left = 81.0
-margin_right = 445.0
+margin_left = 83.0
+margin_right = 483.0
 margin_bottom = 150.0
+rect_min_size = Vector2( 400, 0 )
 size_flags_vertical = 3
 custom_constants/separation = 5
 
 [node name="Top" type="HBoxContainer" parent="PlayerInfo/Status"]
-margin_right = 364.0
+margin_right = 400.0
 margin_bottom = 51.0
 custom_constants/separation = 20
 
@@ -133,7 +134,7 @@ __meta__ = {
 
 [node name="Bottom" type="HBoxContainer" parent="PlayerInfo/Status"]
 margin_top = 56.0
-margin_right = 364.0
+margin_right = 400.0
 margin_bottom = 105.0
 
 [node name="HealthBar" type="TextureProgress" parent="PlayerInfo/Status/Bottom"]
@@ -147,8 +148,8 @@ texture_progress = ExtResource( 4 )
 texture_progress_offset = Vector2( 8, 8 )
 
 [node name="Power" type="VBoxContainer" parent="PlayerInfo"]
-margin_left = 865.0
-margin_right = 1139.0
+margin_left = 823.0
+margin_right = 1097.0
 margin_bottom = 150.0
 size_flags_vertical = 3
 custom_constants/separation = 5
@@ -182,14 +183,15 @@ texture_progress = ExtResource( 6 )
 texture_progress_offset = Vector2( 8, 8 )
 
 [node name="Score" type="VBoxContainer" parent="PlayerInfo"]
-margin_left = 1559.0
-margin_right = 1839.0
+margin_left = 1437.0
+margin_right = 1837.0
 margin_bottom = 150.0
+rect_min_size = Vector2( 400, 0 )
 size_flags_vertical = 3
 custom_constants/separation = -5
 
 [node name="Title" type="Label" parent="PlayerInfo/Score"]
-margin_right = 280.0
+margin_right = 400.0
 margin_bottom = 51.0
 custom_fonts/font = ExtResource( 1 )
 text = "Score"
@@ -198,9 +200,8 @@ uppercase = true
 
 [node name="Score" type="Label" parent="PlayerInfo/Score"]
 margin_top = 46.0
-margin_right = 280.0
+margin_right = 400.0
 margin_bottom = 123.0
-rect_min_size = Vector2( 280, 0 )
 custom_fonts/font = ExtResource( 7 )
 text = "01234567"
 align = 2

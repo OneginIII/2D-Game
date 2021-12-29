@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://scenes/game/entity/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/entity/player/assets/ship.png" type="Texture" id=2]
@@ -8,6 +8,10 @@
 [ext_resource path="res://scenes/game/entity/player/assets/exhaust.png" type="Texture" id=6]
 [ext_resource path="res://scenes/game/entity/player/assets/exhaust_flame.gdshader" type="Shader" id=7]
 [ext_resource path="res://scenes/game/entity/player/player_visual.gd" type="Script" id=8]
+[ext_resource path="res://scenes/game/entity/bullet/player/player_bullet.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/game/entity/bullet/player/player_bullet_lvl2.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/game/entity/bullet/player/player_bullet_lvl3.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/game/entity/player/gun_level.gd" type="Script" id=12]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -29,6 +33,76 @@ shader_param/warp_effect = 0.0
 
 [sub_resource type="ViewportTexture" id=5]
 viewport_path = NodePath("Visual/PlayerViewport")
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 12 )
+damage = 10
+fire_rate = 0.2
+bullet_speed = 600.0
+bullet_scene = ExtResource( 9 )
+alternating = true
+give_index = false
+give_side = false
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 12 )
+damage = 12
+fire_rate = 0.16
+bullet_speed = 650.0
+bullet_scene = ExtResource( 9 )
+alternating = true
+give_index = false
+give_side = false
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 12 )
+damage = 15
+fire_rate = 0.12
+bullet_speed = 700.0
+bullet_scene = ExtResource( 9 )
+alternating = true
+give_index = false
+give_side = false
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 12 )
+damage = 20
+fire_rate = 0.2
+bullet_speed = 800.0
+bullet_scene = ExtResource( 10 )
+alternating = false
+give_index = false
+give_side = false
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 12 )
+damage = 22
+fire_rate = 0.175
+bullet_speed = 850.0
+bullet_scene = ExtResource( 10 )
+alternating = false
+give_index = false
+give_side = false
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 12 )
+damage = 25
+fire_rate = 0.15
+bullet_speed = 900.0
+bullet_scene = ExtResource( 10 )
+alternating = false
+give_index = false
+give_side = false
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 12 )
+damage = 30
+fire_rate = 0.1
+bullet_speed = 1000.0
+bullet_scene = ExtResource( 11 )
+alternating = false
+give_index = true
+give_side = true
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 2
@@ -106,6 +180,7 @@ polygon = PoolVector2Array( 0, -56, 16, -48, 96, 32, 88, 38, -88, 38, -96, 32, -
 
 [node name="Gun" type="Node2D" parent="."]
 script = ExtResource( 5 )
+gun_levels = [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ]
 
 [node name="GunPositionLeft" type="Position2D" parent="Gun"]
 position = Vector2( -64, -54 )

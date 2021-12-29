@@ -44,9 +44,9 @@ func _process(_delta):
 func gun_fired(gun_position, gun_color):
 	light_tween.interpolate_property(gun_light_left, "modulate", gun_color, Color.black, GUN_LIGHTUP_TIME)
 	light_tween.interpolate_property(gun_light_right, "modulate", gun_color, Color.black, GUN_LIGHTUP_TIME)
-	if gun_position == get_parent().player_gun.Gun.GUN_LEFT:
+	if gun_position == get_parent().player_gun.GunPosition.GUN_LEFT:
 		light_tween.remove(gun_light_right, "modulate")
-	elif gun_position == get_parent().player_gun.Gun.GUN_RIGHT:
+	elif gun_position == get_parent().player_gun.GunPosition.GUN_RIGHT:
 		light_tween.remove(gun_light_left, "modulate")
 	light_tween.start()
 

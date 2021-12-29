@@ -21,7 +21,7 @@ func _ready():
 	game_node.connect("lives_updated", self, "set_lives")
 	set_score_text(game_node.score)
 	set_lives(game_node.lives)
-	set_power(player_node.player_gun.gun_level)
+	set_power(player_node.player_gun.current_gun_level)
 	add_child(score_tween)
 
 func update_health_bar(value: int):
