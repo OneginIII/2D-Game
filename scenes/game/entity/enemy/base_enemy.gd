@@ -45,14 +45,15 @@ func take_damage(amount: int, color: Color):
 	flash_tween.start()
 
 func destroy():
+	if !active:
+		return
 	active = false
 	game_node.score += score_value
 	shape.set_deferred("disabled", true)
 	var explosion = explosion_scene.instance()
 	explosion.position = position
 	effects_parent.add_child(explosion)
-	yield(get_tree().create_timer(DESTROY_DELAY), "timeout")
-	queue_free()
+	get_tree().create_timer(DESTROY_DELAY).connect("timeout", self, "queue_free")
 
 func check_activation():
 	if global_position.y > -activation_margin and not active:

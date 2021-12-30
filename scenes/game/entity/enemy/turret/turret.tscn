@@ -18,6 +18,7 @@ collision_mask = 0
 script = ExtResource( 2 )
 health = 50
 flashing_sprites = [ NodePath("Sprite"), NodePath("Head") ]
+activation_margin = 96.0
 score_value = 25
 
 [node name="Shape" parent="." index="0"]

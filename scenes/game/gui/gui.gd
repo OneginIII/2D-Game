@@ -20,6 +20,7 @@ func _ready():
 	game_node.connect("score_updated", self, "update_score")
 	game_node.connect("lives_updated", self, "set_lives")
 	set_score_text(game_node.score)
+	display_score = game_node.score
 	set_lives(game_node.lives)
 	set_power(player_node.player_gun.current_gun_level)
 	add_child(score_tween)
@@ -37,10 +38,10 @@ func set_power(value: int):
 	power.value = float(value + 1)
 
 func update_score(value: int):
-	display_score = int(score.text)
 	var time = abs(display_score - value) / SCORE_TWEEN_SPEED
 	score_tween.interpolate_method(self, "set_score_text", display_score, value, time)
 	score_tween.start()
+	display_score = value
 
 func set_score_text(value: int):
 	score.text = "%08d" % value
