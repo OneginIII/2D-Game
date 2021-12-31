@@ -37,10 +37,12 @@ func fire():
 			bullet.damage = gun.damage
 			if last_fired_position == GunPosition.GUN_LEFT:
 				bullet.global_position = gun_position_right.global_position
+				bullet.global_position -= bullets_parent.global_position
 				emit_signal("gun_fired", GunPosition.GUN_RIGHT, bullet.color)
 				last_fired_position = GunPosition.GUN_RIGHT
 			elif last_fired_position == GunPosition.GUN_RIGHT:
 				bullet.global_position = gun_position_left.global_position
+				bullet.global_position -= bullets_parent.global_position
 				emit_signal("gun_fired", GunPosition.GUN_LEFT, bullet.color)
 				last_fired_position = GunPosition.GUN_LEFT
 			bullets_parent.add_child(bullet)
@@ -52,7 +54,9 @@ func fire():
 			bullet_right.speed = gun.bullet_speed
 			bullet_right.damage = gun.damage
 			bullet_left.global_position = gun_position_left.global_position
+			bullet_left.global_position -= bullets_parent.global_position
 			bullet_right.global_position = gun_position_right.global_position
+			bullet_right.global_position -= bullets_parent.global_position
 			if gun.give_index:
 				bullet_left.index = bullet_index
 				bullet_right.index = bullet_index

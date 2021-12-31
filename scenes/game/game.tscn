@@ -25,8 +25,6 @@ position = Vector2( 960, 864 )
 
 [node name="Level01" parent="." instance=ExtResource( 4 )]
 
-[node name="Bullets" type="Node2D" parent="."]
-
 [node name="GuiLayer" type="CanvasLayer" parent="."]
 layer = 100
 

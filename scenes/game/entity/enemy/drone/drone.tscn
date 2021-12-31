@@ -29,32 +29,37 @@ shape = null
 disabled = true
 
 [node name="Collision" type="CollisionPolygon2D" parent="." index="1"]
+rotation = -1.57079
 polygon = PoolVector2Array( -136, -136, 0, -72, 136, -136, 0, 136 )
 
 [node name="Shadow" type="Sprite" parent="." index="2"]
 modulate = Color( 0, 0, 0, 0.25098 )
 position = Vector2( 0, 96 )
+rotation = -1.57079
 texture = ExtResource( 2 )
 
 [node name="ExhaustFlame" type="Sprite" parent="." index="3"]
 material = SubResource( 2 )
-position = Vector2( 0, -148 )
-rotation = 3.14159
+position = Vector2( -144, 0 )
+rotation = 1.57079
 scale = Vector2( 0.3, 0.3 )
 z_index = -1
 texture = ExtResource( 5 )
 offset = Vector2( 0, 48 )
 
 [node name="Sprite" parent="." index="4"]
+rotation = -1.57079
 texture = ExtResource( 2 )
 
 [node name="Light" type="Sprite" parent="." index="5"]
 modulate = Color( 1, 0.916667, 0.5, 1 )
 material = SubResource( 1 )
+rotation = -1.57079
 texture = ExtResource( 3 )
 
 [node name="ShootPosition" type="Position2D" parent="." index="6"]
-position = Vector2( 0, 32 )
+position = Vector2( 32, 0 )
+rotation = 1.5708
 
 [node name="ShootTimer" type="Timer" parent="." index="7"]
 wait_time = 2.0

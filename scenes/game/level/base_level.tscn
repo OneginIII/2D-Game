@@ -28,3 +28,5 @@ format = 1
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Effects" type="Node2D" parent="."]
+
+[node name="Bullets" type="Node2D" parent="."]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/game/entity/enemy/drone/drone.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/entity/enemy/drone/drone_path.gd" type="Script" id=2]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, -258.996, 0, 258.996, 0, 128, 2.55991, 0.535158, -2.55991, -0.535158, -256, 384, 0, 0, 0, 0, -320, 384, 0, -255.633, 0, 255.633, -576, 640, 0, 0, 0, 0, -576, 1280 )
+}
+
+[node name="DronePath" type="Path2D"]
+curve = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="DroneFollow" type="PathFollow2D" parent="."]
+rotation = -1.5708
+
+[node name="Drone" parent="DroneFollow" instance=ExtResource( 1 )]

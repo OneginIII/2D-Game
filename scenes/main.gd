@@ -1,6 +1,16 @@
 extends Node
 
+export var debug := true
+
 func _input(event):
-	if event is InputEventKey and event.pressed:
-		if event.scancode == KEY_ESCAPE:
-			get_tree().quit()
+	if !debug:
+		return
+	if event is InputEventKey:
+		if event.pressed:
+			if event.scancode == KEY_ESCAPE:
+				get_tree().quit()
+			if event.scancode == KEY_R:
+				Engine.time_scale = 5.0
+		else:
+			if event.scancode == KEY_R:
+				Engine.time_scale = 1.0

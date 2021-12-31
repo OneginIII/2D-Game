@@ -26,6 +26,7 @@ func shoot():
 	var bullet = bullet_scene.instance()
 	bullet.rotation = shoot_position.global_rotation
 	bullet.global_position = shoot_position.global_position
+	bullet.global_position -= bullets_parent.global_position
 	bullet.direction = bullet.direction.rotated(bullet.rotation)
 	bullets_parent.add_child(bullet)
 	light_tween.interpolate_property(turret_light, "modulate", bullet.color, Color.black, 0.5)

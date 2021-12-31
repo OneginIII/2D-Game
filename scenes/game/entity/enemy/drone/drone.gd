@@ -4,7 +4,7 @@ onready var bullet_scene := preload("res://scenes/game/entity/bullet/enemy/drone
 onready var shoot_position := $ShootPosition
 onready var gun_light := $Light
 
-export var movement_speed := -75.0
+export var movement_speed := 0.0
 
 var bullets_parent
 var light_tween := Tween.new()
@@ -23,6 +23,9 @@ func shoot():
 		return
 	var bullet = bullet_scene.instance()
 	bullet.global_position = shoot_position.global_position
+	bullet.global_position -= bullets_parent.global_position
+	bullet.rotation = shoot_position.global_rotation
+	bullet.direction = bullet.direction.rotated(bullet.rotation)
 	bullets_parent.add_child(bullet)
 	light_tween.interpolate_property(gun_light, "modulate", bullet.color, Color.black, 0.5)
 	light_tween.start()
