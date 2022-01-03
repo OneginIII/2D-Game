@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scenes/game/entity/enemy/base_enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entity/enemy/drone/assets/drone.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/game/entity/enemy/drone/drone.gd" type="Script" id=4]
 [ext_resource path="res://scenes/game/entity/player/assets/exhaust.png" type="Texture" id=5]
 [ext_resource path="res://scenes/game/entity/player/assets/exhaust_flame.gdshader" type="Shader" id=6]
+[ext_resource path="res://scenes/game/entity/effect/shadow.gd" type="Script" id=7]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 6 )
@@ -34,9 +35,11 @@ polygon = PoolVector2Array( -136, -136, 0, -72, 136, -136, 0, 136 )
 
 [node name="Shadow" type="Sprite" parent="." index="2"]
 modulate = Color( 0, 0, 0, 0.25098 )
-position = Vector2( 0, 96 )
+position = Vector2( 0, 48 )
 rotation = -1.57079
 texture = ExtResource( 2 )
+script = ExtResource( 7 )
+reference_path = NodePath("..")
 
 [node name="ExhaustFlame" type="Sprite" parent="." index="3"]
 material = SubResource( 2 )

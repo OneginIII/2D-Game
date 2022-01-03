@@ -10,6 +10,7 @@ export var score_value := 10
 onready var shape := $Shape
 
 var player_node
+var bullets_parent
 var game_node
 var active := false
 var flash_tween := Tween.new()
@@ -23,6 +24,7 @@ const ACTIVATION_INTERVAL = 0.1
 
 func _ready():
 	player_node = get_tree().root.find_node("Player", true, false)
+	bullets_parent = get_tree().root.find_node("Bullets", true, false)
 	game_node = get_tree().root.find_node("Game", true, false)
 	effects_parent = get_tree().root.find_node("Effects", true, false)
 	add_child(flash_tween)

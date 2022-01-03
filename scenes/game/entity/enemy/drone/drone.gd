@@ -6,11 +6,9 @@ onready var gun_light := $Light
 
 export var movement_speed := 0.0
 
-var bullets_parent
 var light_tween := Tween.new()
 
 func _ready():
-	bullets_parent = get_tree().root.find_node("Bullets", true, false)
 	add_child(light_tween)
 	gun_light.modulate = Color.black
 
@@ -22,8 +20,8 @@ func shoot():
 	if !active:
 		return
 	var bullet = bullet_scene.instance()
-	bullet.global_position = shoot_position.global_position
-	bullet.global_position -= bullets_parent.global_position
+	bullet.position = shoot_position.global_position
+	bullet.position -= bullets_parent.global_position
 	bullet.rotation = shoot_position.global_rotation
 	bullet.direction = bullet.direction.rotated(bullet.rotation)
 	bullets_parent.add_child(bullet)
