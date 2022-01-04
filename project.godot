@@ -14,6 +14,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/game/entity/player/gun_level.gd"
 }, {
+"base": "Resource",
+"class": "A_PowerupGun",
+"language": "GDScript",
+"path": "res://scenes/game/entity/powerup/powerup_gun.gd"
+}, {
+"base": "Resource",
+"class": "A_PowerupHealth",
+"language": "GDScript",
+"path": "res://scenes/game/entity/powerup/powerup_health.gd"
+}, {
+"base": "Resource",
+"class": "A_PowerupLife",
+"language": "GDScript",
+"path": "res://scenes/game/entity/powerup/powerup_life.gd"
+}, {
+"base": "Resource",
+"class": "A_PowerupSpeed",
+"language": "GDScript",
+"path": "res://scenes/game/entity/powerup/powerup_speed.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "PlayerShip",
 "language": "GDScript",
@@ -21,6 +41,10 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "A_GunLevel": "",
+"A_PowerupGun": "",
+"A_PowerupHealth": "",
+"A_PowerupLife": "",
+"A_PowerupSpeed": "",
 "PlayerShip": ""
 }
 

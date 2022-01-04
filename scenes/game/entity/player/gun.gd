@@ -13,7 +13,7 @@ onready var gun_position_right := $GunPositionRight
 export(Array, Resource) var gun_levels
 export var current_gun_level := 0 setget set_gun_level
 func set_gun_level(level: int):
-	current_gun_level = level
+	current_gun_level = int(min(level, 6))
 	emit_signal("gun_level_set", current_gun_level)
 
 var bullet_scene

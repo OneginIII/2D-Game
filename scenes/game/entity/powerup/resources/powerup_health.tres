@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://scenes/game/entity/powerup/powerup_health.gd" type="Script" id=1]
+[ext_resource path="res://scenes/game/entity/powerup/assets/powerup_armor.png" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+powerup_color = Color( 1, 0.635294, 0.298039, 1 )
+powerup_sprite = ExtResource( 2 )
+heal_amount = 50

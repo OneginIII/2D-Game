@@ -8,6 +8,14 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 5 )
+level_path = NodePath("Level01")
+powerup_list = {
+"gun": "res://scenes/game/entity/powerup/resources/powerup_gun.tres",
+"health": "res://scenes/game/entity/powerup/resources/powerup_health.tres",
+"life": "res://scenes/game/entity/powerup/resources/powerup_life.tres",
+"speed": "res://scenes/game/entity/powerup/resources/powerup_speed.tres"
+}
+powerup_order = [ "speed", "health", "gun", "speed", "health", "gun", "speed", "health", "gun", "life" ]
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -2
@@ -29,3 +37,6 @@ position = Vector2( 960, 864 )
 layer = 100
 
 [node name="GameGui" parent="GuiLayer" instance=ExtResource( 3 )]
+
+[node name="PowerupSpawnPoint" type="Position2D" parent="."]
+position = Vector2( 960, -256 )

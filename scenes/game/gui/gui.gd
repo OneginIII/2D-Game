@@ -18,10 +18,10 @@ func _ready():
 	player_node.player_gun.connect("gun_level_set", self, "set_power")
 	game_node = get_tree().root.find_node("Game", true, false)
 	game_node.connect("score_updated", self, "update_score")
-	game_node.connect("lives_updated", self, "set_lives")
+	player_node.connect("lives_updated", self, "set_lives")
 	set_score_text(game_node.score)
 	display_score = game_node.score
-	set_lives(game_node.lives)
+	set_lives(player_node.lives)
 	set_power(player_node.player_gun.current_gun_level)
 	add_child(score_tween)
 

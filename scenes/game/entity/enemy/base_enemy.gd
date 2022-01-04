@@ -13,7 +13,7 @@ var player_node
 var bullets_parent
 var game_node
 var active := false
-var flash_tween := Tween.new()
+var modulate_tween := Tween.new()
 var effects_parent
 var activation_timer := Timer.new()
 
@@ -27,7 +27,7 @@ func _ready():
 	bullets_parent = get_tree().root.find_node("Bullets", true, false)
 	game_node = get_tree().root.find_node("Game", true, false)
 	effects_parent = get_tree().root.find_node("Effects", true, false)
-	add_child(flash_tween)
+	add_child(modulate_tween)
 	add_child(activation_timer)
 	activation_timer.connect("timeout", self, "check_activation")
 	activation_timer.start(ACTIVATION_INTERVAL)
@@ -43,18 +43,22 @@ func take_damage(amount: int, color: Color):
 	flash_color.a = 1.0
 	for path in flashing_sprites:
 		var sprite = get_node(path)
-		flash_tween.interpolate_property(sprite, "modulate", flash_color, Color.white, FLASH_TIME)
-	flash_tween.start()
+		modulate_tween.interpolate_property(sprite, "modulate", flash_color, Color.white, FLASH_TIME)
+	modulate_tween.start()
 
 func destroy():
 	if !active:
 		return
 	active = false
+	activation_timer.stop()
 	game_node.score += score_value
 	shape.set_deferred("disabled", true)
 	var explosion = explosion_scene.instance()
-	explosion.position = position
+	explosion.position = global_position
+	explosion.position -= effects_parent.global_position
 	effects_parent.add_child(explosion)
+	modulate_tween.interpolate_property(self, "modulate", Color.white, Color.transparent, DESTROY_DELAY)
+	modulate_tween.start()
 	get_tree().create_timer(DESTROY_DELAY).connect("timeout", self, "queue_free")
 
 func check_activation():

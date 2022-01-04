@@ -2,16 +2,26 @@ extends KinematicBody2D
 
 class_name PlayerShip
 
-const DEFAULT_HEALTH := 100
+const FULL_HEALTH := 100
 const DEFAULT_SPEED := 500.0
+const MAX_SPEED := 1000.0
+const FULL_LIVES = 3
 
 signal health_updated(value)
+signal player_death(out_of_lives)
+signal lives_updated(value)
 
-export var health := 100 setget set_health
+export var health := FULL_HEALTH setget set_health
 func set_health(value: int):
-	health = value
+	health = int(min(value, FULL_HEALTH))
 	emit_signal("health_updated", health)
-export var speed := 500.0
+export var speed := DEFAULT_SPEED setget set_speed
+func set_speed(value: float):
+	speed = min(value, MAX_SPEED)
+export var lives: int = FULL_LIVES setget set_lives
+func set_lives(value: int):
+	lives = int(min(value, FULL_LIVES))
+	emit_signal("lives_updated", lives)
 export var acceleration := 10.0
 
 onready var player_visual := $Visual
@@ -39,9 +49,16 @@ func _physics_process(_delta):
 func take_damage(amount: int, color: Color):
 	player_visual.damage_flash(color)
 	self.health -= amount
+	if health <= 0:
+		if lives <= 0:
+			emit_signal("player_death", true)
+		else:
+			emit_signal("player_death", false)
 
-func reset_player():
-	health = DEFAULT_HEALTH
-	speed = DEFAULT_SPEED
-	# player_gun.gun_level = 0
+func reset_player(full_reset: bool = false):
+	self.health = FULL_HEALTH
 	position = initial_position
+	if full_reset:
+		self.lives = FULL_LIVES
+		self.speed = DEFAULT_SPEED
+		player_gun.current_gun_level = 0

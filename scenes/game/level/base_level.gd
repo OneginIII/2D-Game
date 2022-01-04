@@ -4,6 +4,8 @@ extends Node2D
 export(int) var level_length = 20 setget update_level_size
 export(float) var scroll_speed = 1.0
 
+onready var bullets := $Bullets
+
 var level_rect := Rect2()
 
 const TILE_SIZE := 128.0
@@ -19,6 +21,7 @@ func _ready():
 	update_level_size(level_length)
 	if Engine.editor_hint:
 		set_physics_process(false)
+	bullets.movement_compensation = scroll_speed
 
 func _physics_process(delta):
 	translate(Vector2.DOWN * scroll_speed * delta)
