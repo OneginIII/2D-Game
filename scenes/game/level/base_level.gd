@@ -5,6 +5,7 @@ export(int) var level_length = 20 setget update_level_size
 export(float) var scroll_speed = 1.0
 
 onready var bullets := $Bullets
+onready var checkpoints: Dictionary
 
 var level_rect := Rect2()
 
@@ -22,6 +23,8 @@ func _ready():
 	if Engine.editor_hint:
 		set_physics_process(false)
 	bullets.movement_compensation = scroll_speed
+	for node in $Checkpoints.get_children():
+		checkpoints[node.name] = node
 
 func _physics_process(delta):
 	translate(Vector2.DOWN * scroll_speed * delta)

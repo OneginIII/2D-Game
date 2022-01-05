@@ -24,7 +24,6 @@ var bullets_parent
 
 func _ready():
 	bullet_scene = gun_levels[0].bullet_scene
-	bullets_parent = get_tree().root.find_node("Bullets", true, false)
 	add_child(fire_rate_timer)
 	fire_rate_timer.one_shot = true
 

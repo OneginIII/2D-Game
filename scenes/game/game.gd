@@ -2,19 +2,21 @@ extends Node2D
 
 const POWERUP_PICKUP := preload("res://scenes/game/entity/powerup/powerup_pickup.tscn")
 const POWERUP_INTERVAL := 200
+const SPAWN_OFFSET := Vector2(960.0 ,864.0)
 
 signal score_updated(value)
 
 onready var player_node := $Player
 onready var powerup_spawn_point := $PowerupSpawnPoint
 
-export(NodePath) var level_path
+export(PackedScene) var level_scene
 export(Dictionary) var powerup_list
 export(Array, String) var powerup_order
 
 var level_node
 var powerup_index := 0
 var score_treshold := POWERUP_INTERVAL
+var current_checkpoint := ""
 
 var score: int = 0 setget set_score
 func set_score(value: int):
@@ -25,16 +27,31 @@ func set_score(value: int):
 	emit_signal("score_updated", score)
 
 func _ready():
-	level_node = get_node(level_path)
+	level_node = level_scene.instance()
+	add_child(level_node)
 	player_node.connect("player_death", self, "player_death")
+	for checkpoint in level_node.checkpoints:
+		level_node.checkpoints[checkpoint].connect("checkpoint_reached", self, "checkpoint_reached")
+	start_game()
 
 func start_game():
 	score = 0
-	player_node.health = player_node.MAX_HEALTH
-	player_node.lives = player_node.DEFAULT_LIVES
+	player_node.reset_player(true)
+	player_node.player_gun.bullets_parent = level_node.bullets
+
+func reload_level():
+	level_node.queue_free()
+	yield(get_tree(), "idle_frame")
+	level_node = level_scene.instance()
+	add_child(level_node)
+	level_node.position.y -= level_node.checkpoints[current_checkpoint].level_scroll
+	level_node.position.y += SPAWN_OFFSET.y
+	player_node.player_gun.bullets_parent = level_node.bullets
 
 func player_death(out_of_lives: bool):
-	pass
+	player_node.position = SPAWN_OFFSET
+	reload_level()
+	player_node.reset_player()
 
 func spawn_powerup():
 	var powerup_node = POWERUP_PICKUP.instance()
@@ -47,3 +64,9 @@ func spawn_powerup():
 		powerup_index += 1
 	else:
 		powerup_index = 0
+
+func checkpoint_reached(checkpoint_name: String):
+	current_checkpoint = checkpoint_name
+	for checkpoint in level_node.checkpoints:
+		level_node.checkpoints[checkpoint].active = true
+	level_node.checkpoints[checkpoint_name].active = false

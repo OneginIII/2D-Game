@@ -10,6 +10,7 @@
 shader = ExtResource( 3 )
 shader_param/waves_color = Color( 0.4, 0.407843, 0.752941, 0.12549 )
 shader_param/waves_speed = 0.5
+shader_param/only_edge = false
 shader_param/edge_texture = ExtResource( 2 )
 
 [resource]

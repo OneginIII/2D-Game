@@ -3,6 +3,7 @@ shader_type canvas_item;
 uniform sampler2D edge_texture;
 uniform vec4 waves_color : hint_color;
 uniform float waves_speed : hint_range(0.0, 2.0) = 0.5;
+uniform bool only_edge = false;
 
 void fragment(){
 	vec4 water_edge = texture(edge_texture, UV);
@@ -19,5 +20,10 @@ void fragment(){
 	final_edge = min(final_edge, vec4(1.0, 1.0, 1.0, 1.0));
 	// COLOR = vec4(edge - edge2);
 	vec4 main_texture = texture(TEXTURE, UV);
-	COLOR = mix(final_edge, main_texture, main_texture.a);
+	if(only_edge){
+		COLOR = final_edge
+	}
+	else{
+		COLOR = mix(final_edge, main_texture, main_texture.a);
+	}
 }

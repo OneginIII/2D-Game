@@ -11,6 +11,8 @@ func _input(event):
 				get_tree().quit()
 			if event.scancode == KEY_R:
 				Engine.time_scale = 5.0
+			if event.scancode == KEY_P:
+				$Game.score += 100
 		else:
 			if event.scancode == KEY_R:
 				Engine.time_scale = 1.0

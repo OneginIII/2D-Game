@@ -107,7 +107,7 @@ give_side = true
 [node name="Player" type="KinematicBody2D"]
 z_index = 2
 collision_layer = 2
-collision_mask = 9
+collision_mask = 25
 script = ExtResource( 1 )
 
 [node name="Visual" type="Node2D" parent="."]

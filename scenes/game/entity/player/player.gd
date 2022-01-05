@@ -57,7 +57,6 @@ func take_damage(amount: int, color: Color):
 
 func reset_player(full_reset: bool = false):
 	self.health = FULL_HEALTH
-	position = initial_position
 	if full_reset:
 		self.lives = FULL_LIVES
 		self.speed = DEFAULT_SPEED
