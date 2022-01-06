@@ -80,6 +80,7 @@ z_index = 1
 
 [node name="Checkpoint" parent="Checkpoints" index="0"]
 position = Vector2( 960, 540 )
+display_message = false
 
 [node name="Checkpoint2" parent="Checkpoints" index="1" instance=ExtResource( 6 )]
 position = Vector2( 960, -8896 )

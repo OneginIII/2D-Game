@@ -4,13 +4,14 @@ onready var health_bar := $PlayerInfo/Status/Bottom/HealthBar
 onready var score := $PlayerInfo/Score/Score
 onready var lives := $PlayerInfo/Status/Top/Lives
 onready var power := $PlayerInfo/Power/Bottom/PowerBar
+onready var center_text := $CenterText
 
 var player_node
 var game_node
-var score_tween := Tween.new()
+var tween := Tween.new()
 var display_score: int
 
-const SCORE_TWEEN_SPEED = 50.0
+const tween_SPEED = 50.0
 
 func _ready():
 	player_node = get_tree().root.find_node("Player", true, false)
@@ -23,7 +24,8 @@ func _ready():
 	display_score = game_node.score
 	set_lives(player_node.lives)
 	set_power(player_node.player_gun.current_gun_level)
-	add_child(score_tween)
+	add_child(tween)
+	center_text.modulate = Color.transparent
 
 func update_health_bar(value: int):
 	health_bar.value = float(value)
@@ -38,11 +40,18 @@ func set_power(value: int):
 	power.value = float(value + 1)
 
 func update_score(value: int):
-	var time = abs(display_score - value) / SCORE_TWEEN_SPEED
-	score_tween.interpolate_method(self, "set_score_text", display_score, value, time)
-	score_tween.start()
+	var time = abs(display_score - value) / tween_SPEED
+	tween.interpolate_method(self, "set_score_text", display_score, value, time)
+	tween.start()
 	display_score = value
 
 func set_score_text(value: int):
 	score.text = "%08d" % value
 	score.text = score.text.replace("0", "O")
+
+func center_message(text: String):
+	center_text.get_node("Text").text = text
+	tween.interpolate_property(center_text, "modulate", Color.transparent, Color.white, 1.0)
+	tween.interpolate_property(center_text, "modulate", Color.white, Color.transparent, 1.0,
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT, 3.0)
+	tween.start()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/game/entity/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/entity/player/assets/ship.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scenes/game/entity/bullet/player/player_bullet_lvl2.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/game/entity/bullet/player/player_bullet_lvl3.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/game/entity/player/gun_level.gd" type="Script" id=12]
+[ext_resource path="res://scenes/game/entity/effect/explosion/player_explosion.tscn" type="PackedScene" id=13]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -109,6 +110,7 @@ z_index = 2
 collision_layer = 2
 collision_mask = 25
 script = ExtResource( 1 )
+death_particles = ExtResource( 13 )
 
 [node name="Visual" type="Node2D" parent="."]
 position = Vector2( 0, 48 )

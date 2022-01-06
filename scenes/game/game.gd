@@ -3,10 +3,14 @@ extends Node2D
 const POWERUP_PICKUP := preload("res://scenes/game/entity/powerup/powerup_pickup.tscn")
 const POWERUP_INTERVAL := 200
 const SPAWN_OFFSET := Vector2(960.0 ,864.0)
+const CHECKPOINT_MESSAGE := "Checkpoint Reached"
+const GAME_OVER_MESSAGE := "Game Over"
+const DEATH_SCORE_MULTIPLY := 0.75
 
 signal score_updated(value)
 
 onready var player_node := $Player
+onready var gui_node := $GuiLayer/GameGui
 onready var powerup_spawn_point := $PowerupSpawnPoint
 
 export(PackedScene) var level_scene
@@ -39,6 +43,9 @@ func start_game():
 	player_node.reset_player(true)
 	player_node.player_gun.bullets_parent = level_node.bullets
 
+func game_over():
+	gui_node.center_message(GAME_OVER_MESSAGE)
+
 func reload_level():
 	level_node.queue_free()
 	yield(get_tree(), "idle_frame")
@@ -49,9 +56,14 @@ func reload_level():
 	player_node.player_gun.bullets_parent = level_node.bullets
 
 func player_death(out_of_lives: bool):
+	if out_of_lives:
+		game_over()
+		return
 	player_node.position = SPAWN_OFFSET
 	reload_level()
 	player_node.reset_player()
+	self.score *= DEATH_SCORE_MULTIPLY
+	score_treshold = int(ceil(float(score) / float(POWERUP_INTERVAL)) * float(POWERUP_INTERVAL))
 
 func spawn_powerup():
 	var powerup_node = POWERUP_PICKUP.instance()
@@ -65,8 +77,10 @@ func spawn_powerup():
 	else:
 		powerup_index = 0
 
-func checkpoint_reached(checkpoint_name: String):
+func checkpoint_reached(checkpoint_name: String, display_message: bool):
 	current_checkpoint = checkpoint_name
 	for checkpoint in level_node.checkpoints:
 		level_node.checkpoints[checkpoint].active = true
 	level_node.checkpoints[checkpoint_name].active = false
+	if display_message:
+		gui_node.center_message(CHECKPOINT_MESSAGE)
