@@ -1,11 +1,247 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://scenes/menu/main_menu.gd" type="Script" id=1]
+[ext_resource path="res://scenes/menu/assets/background.png" type="Texture" id=2]
+[ext_resource path="res://scenes/menu/assets/logo_text.png" type="Texture" id=3]
+[ext_resource path="res://scenes/menu/menu_button.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/menu/assets/ship.png" type="Texture" id=5]
+[ext_resource path="res://scenes/menu/assets/ship_shadow.png" type="Texture" id=6]
+[ext_resource path="res://scenes/menu/assets/ship_reflection.png" type="Texture" id=7]
+[ext_resource path="res://scenes/game/entity/player/assets/exhaust.png" type="Texture" id=8]
+[ext_resource path="res://scenes/game/entity/player/assets/exhaust_flame.gdshader" type="Shader" id=9]
+[ext_resource path="res://scenes/menu/assets/splash_particle.png" type="Texture" id=10]
+[ext_resource path="res://scenes/menu/assets/dark_gradient.png" type="Texture" id=11]
+[ext_resource path="res://scenes/menu/assets/blurred_exhaust.png" type="Texture" id=12]
+[ext_resource path="res://scenes/menu/ship_decoration.gd" type="Script" id=13]
 
-[node name="MainMenu" type="Control"]
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 9 )
+shader_param/speed = 25.0
+shader_param/amount = 0.4
+shader_param/brightness = 1.5
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 9 )
+shader_param/speed = 25.0
+shader_param/amount = 0.4
+shader_param/brightness = 1.25
+
+[sub_resource type="Gradient" id=2]
+offsets = PoolRealArray( 0, 0.05, 0.6, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
+width = 512
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 0.502273 ), 0.0, 1.28205, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=5]
+width = 512
+curve = SubResource( 4 )
+
+[sub_resource type="ParticlesMaterial" id=6]
+emission_shape = 2
+emission_box_extents = Vector3( 200, 40, 1 )
+flag_disable_z = true
+direction = Vector3( -1, -0.08, 0 )
+spread = 1.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1500.0
+initial_velocity_random = 0.3
+angular_velocity = 5.0
+angular_velocity_random = 1.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.3
+scale_random = 0.5
+scale_curve = SubResource( 5 )
+color_ramp = SubResource( 3 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "Hover"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Ship:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3, 6 ),
+"transitions": PoolRealArray( -2, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -200 ), Vector2( 0, -250 ), Vector2( 0, -200 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ShipReflection:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 3, 6 ),
+"transitions": PoolRealArray( -2, -2, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 200 ), Vector2( 0, 250 ), Vector2( 0, 200 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Ship:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -200 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ShipReflection:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 200 ) ]
+}
+
+[node name="MainMenu" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+texture = ExtResource( 2 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ShipDecoration" type="Node2D" parent="."]
+position = Vector2( 1280, 740 )
+script = ExtResource( 13 )
+
+[node name="ShipReflection" type="Sprite" parent="ShipDecoration"]
+position = Vector2( 0, 200 )
+texture = ExtResource( 7 )
+
+[node name="BlurredExhaust" type="Sprite" parent="ShipDecoration/ShipReflection"]
+modulate = Color( 1, 1, 1, 0.501961 )
+show_behind_parent = true
+material = SubResource( 9 )
+position = Vector2( -280, 0 )
+rotation = 1.5708
+scale = Vector2( 0.5, 0.75 )
+texture = ExtResource( 12 )
+offset = Vector2( 0, 40 )
+
+[node name="ShipShadow" type="Sprite" parent="ShipDecoration"]
+texture = ExtResource( 6 )
+
+[node name="Ship" type="Sprite" parent="ShipDecoration"]
+position = Vector2( 0, -200 )
+texture = ExtResource( 5 )
+
+[node name="ExhaustFlameMiddle" type="Sprite" parent="ShipDecoration/Ship"]
+show_behind_parent = true
+material = SubResource( 1 )
+position = Vector2( -320, 0 )
+rotation = 1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+offset = Vector2( 0, 48 )
+
+[node name="SplashParticles" type="Particles2D" parent="ShipDecoration"]
+modulate = Color( 1, 1, 1, 0.501961 )
+position = Vector2( -400, 0 )
+amount = 32
+process_material = SubResource( 6 )
+texture = ExtResource( 10 )
+
+[node name="ShipAnimation" type="AnimationPlayer" parent="ShipDecoration"]
+anims/Hover = SubResource( 7 )
+anims/RESET = SubResource( 8 )
+
+[node name="MenuDarkGradient" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.501961 )
+anchor_bottom = 1.0
+margin_right = 1080.0
+size_flags_vertical = 3
+texture = ExtResource( 11 )
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MenuMargin" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 0
+custom_constants/margin_top = 220
+custom_constants/margin_left = 200
+custom_constants/margin_bottom = 160
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="VBoxContainer" parent="MenuMargin"]
+margin_left = 200.0
+margin_top = 220.0
+margin_right = 1920.0
+margin_bottom = 920.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Logo" type="TextureRect" parent="MenuMargin/Menu"]
+margin_right = 1720.0
+margin_bottom = 190.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.5
+texture = ExtResource( 3 )
+
+[node name="Start" parent="MenuMargin/Menu" instance=ExtResource( 4 )]
+margin_top = 190.0
+margin_right = 420.0
+margin_bottom = 318.0
+rect_min_size = Vector2( 420, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 3
+
+[node name="Scores" parent="MenuMargin/Menu" instance=ExtResource( 4 )]
+margin_top = 318.0
+margin_right = 420.0
+margin_bottom = 445.0
+rect_min_size = Vector2( 420, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "Scores"
+
+[node name="Options" parent="MenuMargin/Menu" instance=ExtResource( 4 )]
+margin_top = 445.0
+margin_right = 420.0
+margin_bottom = 572.0
+rect_min_size = Vector2( 420, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "Options"
+
+[node name="Quit" parent="MenuMargin/Menu" instance=ExtResource( 4 )]
+margin_top = 572.0
+margin_right = 420.0
+margin_bottom = 700.0
+rect_min_size = Vector2( 420, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "Quit"
