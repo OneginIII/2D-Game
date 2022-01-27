@@ -32,7 +32,7 @@ position = Vector2( 960, 864 )
 [node name="EdgeCollision" parent="." instance=ExtResource( 2 )]
 
 [node name="GuiLayer" type="CanvasLayer" parent="."]
-layer = 100
+layer = 64
 
 [node name="GameGui" parent="GuiLayer" instance=ExtResource( 3 )]
 

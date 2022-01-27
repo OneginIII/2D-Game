@@ -40,6 +40,7 @@ func _ready():
 	add_child(tween)
 	player_gun.connect("gun_fired", player_visual, "gun_fired")
 	reset_player()
+	set_process(false)
 
 func _process(delta):
 	input_move_vector = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
@@ -76,6 +77,7 @@ func death():
 	self.lives -= 1
 
 func reset_player(full_reset: bool = false):
+	set_process(true)
 	dead = false
 	player_shape.set_deferred("disabled", false)
 	player_visual.modulate = Color.white

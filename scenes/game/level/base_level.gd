@@ -1,6 +1,7 @@
 tool
 extends Node2D
 
+export var running := false
 export(int) var level_length = 20 setget update_level_size
 export(float) var scroll_speed = 1.0
 
@@ -27,7 +28,8 @@ func _ready():
 		checkpoints[node.name] = node
 
 func _physics_process(delta):
-	translate(Vector2.DOWN * scroll_speed * delta)
+	if running:
+		translate(Vector2.DOWN * scroll_speed * delta)
 
 func _draw():
 	if Engine.editor_hint:

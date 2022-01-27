@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/main.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/game.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/menu/main_menu.tscn" type="PackedScene" id=3]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -13,3 +14,10 @@ powerup_list = {
 "life": "res://scenes/game/entity/powerup/resources/powerup_life.tres",
 "speed": "res://scenes/game/entity/powerup/resources/powerup_speed.tres"
 }
+
+[node name="MainMenuLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="MainMenu" parent="MainMenuLayer" instance=ExtResource( 3 )]
+
+[connection signal="game_started" from="MainMenuLayer/MainMenu" to="." method="game_started"]

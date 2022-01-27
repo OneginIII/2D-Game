@@ -34,26 +34,31 @@ func _ready():
 	level_node = level_scene.instance()
 	add_child(level_node)
 	player_node.connect("player_death", self, "player_death")
-	for checkpoint in level_node.checkpoints:
-		level_node.checkpoints[checkpoint].connect("checkpoint_reached", self, "checkpoint_reached")
-	start_game()
 
 func start_game():
 	score = 0
+	current_checkpoint = ""
 	player_node.reset_player(true)
-	player_node.player_gun.bullets_parent = level_node.bullets
+	reload_level()
 
 func game_over():
 	gui_node.center_message(GAME_OVER_MESSAGE)
+	player_node.set_process(false)
 
 func reload_level():
 	level_node.queue_free()
 	yield(get_tree(), "idle_frame")
 	level_node = level_scene.instance()
 	add_child(level_node)
-	level_node.position.y -= level_node.checkpoints[current_checkpoint].level_scroll
-	level_node.position.y += SPAWN_OFFSET.y
+	if current_checkpoint != "":
+		level_node.position.y -= level_node.checkpoints[current_checkpoint].level_scroll
+		level_node.position.y += SPAWN_OFFSET.y
+		level_node.checkpoints[current_checkpoint].display_message = false
 	player_node.player_gun.bullets_parent = level_node.bullets
+	for checkpoint in level_node.checkpoints:
+		level_node.checkpoints[checkpoint].connect("checkpoint_reached", self, "checkpoint_reached")
+	level_node.running = true
+	
 
 func player_death(out_of_lives: bool):
 	if out_of_lives:

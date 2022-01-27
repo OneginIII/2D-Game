@@ -2,6 +2,9 @@ extends Node
 
 export var debug := true
 
+func game_started():
+	$Game.start_game()
+
 func _input(event):
 	if !debug:
 		return
