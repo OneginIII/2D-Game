@@ -38,3 +38,5 @@ layer = 64
 
 [node name="PowerupSpawnPoint" type="Position2D" parent="."]
 position = Vector2( 960, -256 )
+
+[connection signal="highscore_entry" from="GuiLayer/GameGui" to="." method="set_highscore"]

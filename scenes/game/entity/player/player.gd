@@ -7,6 +7,8 @@ const DEFAULT_SPEED := 500.0
 const MAX_SPEED := 1000.0
 const FULL_LIVES := 3
 const DEATH_DELAY := 3.0
+const SPAWN_OFFSET := Vector2(0.5, 0.75)
+const SPAWN_LENGTH := 2.0
 
 signal health_updated(value)
 signal player_death(out_of_lives)
@@ -35,23 +37,26 @@ onready var tween := Tween.new()
 var input_move_vector := Vector2.ZERO
 var current_move_vector := Vector2.ZERO
 var dead := false
+var controllable := false
 
 func _ready():
+	visible = false
 	add_child(tween)
 	player_gun.connect("gun_fired", player_visual, "gun_fired")
-	reset_player()
-	set_process(false)
+	controllable = false
+	position += SPAWN_OFFSET
 
 func _process(delta):
 	input_move_vector = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
 	input_move_vector = input_move_vector.clamped(1.0);
 	current_move_vector = current_move_vector.move_toward(input_move_vector, delta * acceleration)
-	if Input.is_action_pressed("fire") and not dead:
+	if Input.is_action_pressed("fire") and controllable:
 		player_gun.fire()
-	player_visual.reference_vector = current_move_vector
+	if controllable:
+		player_visual.reference_vector = current_move_vector
 
 func _physics_process(_delta):
-	if not dead:
+	if controllable:
 		move_and_slide(current_move_vector * speed)
 
 func take_damage(amount: int, color: Color):
@@ -64,12 +69,15 @@ func take_damage(amount: int, color: Color):
 
 func death():
 	dead = true
+	controllable = false
 	player_shape.set_deferred("disabled", true)
 	var particles = death_particles.instance()
 	add_child(particles)
 	tween.interpolate_property(player_visual, "modulate", Color.white, Color.transparent, 1.0)
 	tween.start()
 	yield(get_tree().create_timer(DEATH_DELAY), "timeout")
+	player_visual.modulate = Color.white
+	visible = false
 	if lives <= 0:
 		emit_signal("player_death", true)
 	else:
@@ -77,12 +85,23 @@ func death():
 	self.lives -= 1
 
 func reset_player(full_reset: bool = false):
-	set_process(true)
+	visible = true
+	player_visual.modulate = Color.white
 	dead = false
 	player_shape.set_deferred("disabled", false)
-	player_visual.modulate = Color.white
-	self.health = FULL_HEALTH
 	if full_reset:
 		self.lives = FULL_LIVES
 		self.speed = DEFAULT_SPEED
 		player_gun.current_gun_level = 0
+	# Animating player ship arrival
+	position = get_viewport_rect().size * SPAWN_OFFSET
+	var reset_position := position
+	position.y += get_viewport_rect().size.y * SPAWN_OFFSET.y
+	tween.interpolate_property(self, "position", null, reset_position,
+		SPAWN_LENGTH, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	tween.interpolate_property(self, "health", null, FULL_HEALTH,
+		SPAWN_LENGTH, Tween.TRANS_QUAD, Tween.EASE_OUT)
+	tween.start()
+	# Enable controls only after animation
+	yield(tween, "tween_all_completed")
+	controllable = true

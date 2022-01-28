@@ -1,9 +1,36 @@
 extends Node
 
+const MAX_HIGHSCORES := 8
+
 export var debug := true
+
+var highscore_list : Array
 
 func game_started():
 	$Game.start_game()
+
+func game_ended():
+	$MainMenuLayer/MainMenu.start_menu()
+
+func update_highscore(new_score: Array):
+	highscore_list.append(new_score)
+	highscore_list.sort_custom(self, "sort_highscore")
+	if highscore_list.size() > MAX_HIGHSCORES:
+		highscore_list.remove(MAX_HIGHSCORES)
+
+func check_highscore(new_score: int):
+	if highscore_list.size() < MAX_HIGHSCORES:
+		return true
+	for score in highscore_list:
+		if score[1] < new_score:
+			return true
+	return false
+
+func sort_highscore(a: Array, b: Array):
+	if a[1] > b[1]:
+		return true
+	else:
+		return false
 
 func _input(event):
 	if !debug:

@@ -20,4 +20,5 @@ layer = 128
 
 [node name="MainMenu" parent="MainMenuLayer" instance=ExtResource( 3 )]
 
+[connection signal="exit_game" from="Game" to="." method="game_ended"]
 [connection signal="game_started" from="MainMenuLayer/MainMenu" to="." method="game_started"]

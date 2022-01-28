@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scenes/game/gui/assets/status_title_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/game/gui/assets/life.png" type="Texture" id=2]
@@ -11,6 +11,29 @@
 [ext_resource path="res://scenes/game/gui/assets/life_filling.png" type="Texture" id=9]
 [ext_resource path="res://scenes/game/gui/assets/center_text_font.tres" type="DynamicFont" id=10]
 [ext_resource path="res://scenes/game/gui/assets/center_shadow.png" type="Texture" id=11]
+[ext_resource path="res://scenes/menu/menu_button.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/menu/assets/slider_dot.png" type="Texture" id=14]
+[ext_resource path="res://scenes/menu/assets/menu_title_font.tres" type="DynamicFont" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 14 )
+region_rect = Rect2( 0, 0, 40, 40 )
+margin_left = 20.0
+margin_right = 20.0
+margin_top = 20.0
+margin_bottom = 20.0
+modulate_color = Color( 1, 1, 1, 0.0627451 )
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 14 )
+region_rect = Rect2( 0, 0, 40, 40 )
+margin_left = 20.0
+margin_right = 20.0
+margin_top = 20.0
+margin_bottom = 20.0
+modulate_color = Color( 0, 0, 0, 0.501961 )
 
 [node name="GameGui" type="Control"]
 anchor_right = 1.0
@@ -243,3 +266,56 @@ custom_fonts/font = ExtResource( 10 )
 text = "Checkpoint reached"
 align = 1
 valign = 1
+
+[node name="ScoreEntry" type="CenterContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="VBoxContainer" parent="ScoreEntry"]
+margin_left = 607.0
+margin_top = 322.0
+margin_right = 1313.0
+margin_bottom = 758.0
+custom_constants/separation = 40
+
+[node name="Text" type="Label" parent="ScoreEntry/Menu"]
+margin_right = 706.0
+margin_bottom = 127.0
+custom_fonts/font = ExtResource( 15 )
+text = "New highscore!"
+align = 1
+valign = 1
+
+[node name="LineEdit" type="LineEdit" parent="ScoreEntry/Menu"]
+margin_left = 103.0
+margin_top = 167.0
+margin_right = 603.0
+margin_bottom = 284.0
+rect_min_size = Vector2( 500, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 7 )
+custom_styles/read_only = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/normal = SubResource( 1 )
+align = 1
+max_length = 12
+placeholder_text = "Enter name"
+placeholder_alpha = 0.25
+caret_blink = true
+
+[node name="Back" parent="ScoreEntry/Menu" instance=ExtResource( 12 )]
+margin_left = 188.0
+margin_top = 324.0
+margin_right = 518.0
+margin_bottom = 436.0
+rect_min_size = Vector2( 330, 0 )
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Confirm"
+
+[connection signal="button_down" from="ScoreEntry/Menu/Back" to="." method="score_entered"]

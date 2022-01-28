@@ -9,16 +9,16 @@
 [ext_resource path="res://scenes/menu/assets/ship_reflection.png" type="Texture" id=7]
 [ext_resource path="res://scenes/game/entity/player/assets/exhaust.png" type="Texture" id=8]
 [ext_resource path="res://scenes/game/entity/player/assets/exhaust_flame.gdshader" type="Shader" id=9]
-[ext_resource path="res://scenes/menu/assets/splash_particle.png" type="Texture" id=10]
+[ext_resource path="res://scenes/menu/assets/splash_particle2.png" type="Texture" id=10]
 [ext_resource path="res://scenes/menu/assets/dark_gradient.png" type="Texture" id=11]
 [ext_resource path="res://scenes/menu/assets/blurred_exhaust.png" type="Texture" id=12]
 [ext_resource path="res://scenes/menu/ship_decoration.gd" type="Script" id=13]
 [ext_resource path="res://scenes/menu/assets/menu_title_font.tres" type="DynamicFont" id=14]
 [ext_resource path="res://scenes/game/gui/assets/submenu_font.tres" type="DynamicFont" id=15]
-[ext_resource path="res://scenes/menu/assets/scores_font.tres" type="DynamicFont" id=16]
 [ext_resource path="res://scenes/menu/menu_panel.gd" type="Script" id=17]
 [ext_resource path="res://scenes/menu/assets/slider_dot.png" type="Texture" id=18]
 [ext_resource path="res://scenes/menu/assets/settings_font.tres" type="DynamicFont" id=19]
+[ext_resource path="res://scenes/menu/highscore_list.gd" type="Script" id=20]
 
 [sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 9 )
@@ -52,7 +52,7 @@ lifetime_randomness = 0.25
 emission_shape = 2
 emission_box_extents = Vector3( 200, 40, 1 )
 flag_disable_z = true
-direction = Vector3( -1, -0.08, 0 )
+direction = Vector3( -1, 0, 0 )
 spread = 1.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 1500.0
@@ -68,7 +68,8 @@ color_ramp = SubResource( 3 )
 
 [sub_resource type="Animation" id=7]
 resource_name = "Hover"
-length = 6.0
+length = 10.0
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Ship:position")
 tracks/0/interp = 1
@@ -76,10 +77,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 3, 6 ),
+"times": PoolRealArray( 0, 5, 10 ),
 "transitions": PoolRealArray( -2, -2, 1 ),
 "update": 0,
-"values": [ Vector2( 0, -200 ), Vector2( 0, -250 ), Vector2( 0, -200 ) ]
+"values": [ Vector2( 0, -200 ), Vector2( 0, -225 ), Vector2( 0, -200 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("ShipReflection:position")
@@ -88,10 +89,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 3, 6 ),
+"times": PoolRealArray( 0, 5, 10 ),
 "transitions": PoolRealArray( -2, -2, 1 ),
 "update": 0,
-"values": [ Vector2( 0, 200 ), Vector2( 0, 250 ), Vector2( 0, 200 ) ]
+"values": [ Vector2( 0, 200 ), Vector2( 0, 225 ), Vector2( 0, 200 ) ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -157,6 +158,8 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+default_focus_target = NodePath("MainPanel/Menu/Start")
+highscore_list_node = NodePath("ScorePanel/Scores/ScoreList")
 
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -210,6 +213,7 @@ process_material = SubResource( 6 )
 texture = ExtResource( 10 )
 
 [node name="ShipAnimation" type="AnimationPlayer" parent="ShipDecoration"]
+autoplay = "Hover"
 anims/Hover = SubResource( 7 )
 anims/RESET = SubResource( 8 )
 
@@ -310,9 +314,9 @@ initial_focus_target = NodePath("Scores/CenterContainer/Back")
 
 [node name="Scores" type="VBoxContainer" parent="ScorePanel"]
 margin_left = 200.0
-margin_top = 64.0
+margin_top = 92.0
 margin_right = 1720.0
-margin_bottom = 1015.0
+margin_bottom = 987.0
 size_flags_vertical = 4
 custom_constants/separation = 20
 __meta__ = {
@@ -327,201 +331,194 @@ text = "Scores"
 align = 1
 
 [node name="ScoreList" type="VBoxContainer" parent="ScorePanel/Scores"]
-margin_left = 360.0
+margin_left = 330.0
 margin_top = 147.0
-margin_right = 1160.0
-margin_bottom = 819.0
-rect_min_size = Vector2( 800, 0 )
+margin_right = 1190.0
+margin_bottom = 763.0
+rect_min_size = Vector2( 860, 0 )
 size_flags_horizontal = 4
 custom_constants/separation = 0
+script = ExtResource( 20 )
 
 [node name="ScoreEntry1" type="HBoxContainer" parent="ScorePanel/Scores/ScoreList"]
-margin_right = 800.0
-margin_bottom = 84.0
+margin_right = 860.0
+margin_bottom = 77.0
 custom_constants/separation = 0
 
 [node name="Name" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry1"]
-margin_right = 400.0
-margin_bottom = 84.0
+margin_right = 430.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 16 )
+custom_fonts/font = ExtResource( 15 )
 text = "Name"
 
 [node name="Score" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry1"]
-margin_left = 400.0
-margin_top = 3.0
-margin_right = 800.0
-margin_bottom = 80.0
+margin_left = 430.0
+margin_right = 860.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 15 )
 text = "1234567890"
 align = 2
 
 [node name="ScoreEntry2" type="HBoxContainer" parent="ScorePanel/Scores/ScoreList"]
-margin_top = 84.0
-margin_right = 800.0
-margin_bottom = 168.0
+margin_top = 77.0
+margin_right = 860.0
+margin_bottom = 154.0
 custom_constants/separation = 0
 
 [node name="Name" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry2"]
-margin_right = 400.0
-margin_bottom = 84.0
+margin_right = 430.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 16 )
+custom_fonts/font = ExtResource( 15 )
 text = "Name"
 
 [node name="Score" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry2"]
-margin_left = 400.0
-margin_top = 3.0
-margin_right = 800.0
-margin_bottom = 80.0
+margin_left = 430.0
+margin_right = 860.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 15 )
 text = "1234567890"
 align = 2
 
 [node name="ScoreEntry3" type="HBoxContainer" parent="ScorePanel/Scores/ScoreList"]
-margin_top = 168.0
-margin_right = 800.0
-margin_bottom = 252.0
+margin_top = 154.0
+margin_right = 860.0
+margin_bottom = 231.0
 custom_constants/separation = 0
 
 [node name="Name" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry3"]
-margin_right = 400.0
-margin_bottom = 84.0
+margin_right = 430.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 16 )
+custom_fonts/font = ExtResource( 15 )
 text = "Name"
 
 [node name="Score" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry3"]
-margin_left = 400.0
-margin_top = 3.0
-margin_right = 800.0
-margin_bottom = 80.0
+margin_left = 430.0
+margin_right = 860.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 15 )
 text = "1234567890"
 align = 2
 
 [node name="ScoreEntry4" type="HBoxContainer" parent="ScorePanel/Scores/ScoreList"]
-margin_top = 252.0
-margin_right = 800.0
-margin_bottom = 336.0
+margin_top = 231.0
+margin_right = 860.0
+margin_bottom = 308.0
 custom_constants/separation = 0
 
 [node name="Name" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry4"]
-margin_right = 400.0
-margin_bottom = 84.0
+margin_right = 430.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 16 )
+custom_fonts/font = ExtResource( 15 )
 text = "Name"
 
 [node name="Score" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry4"]
-margin_left = 400.0
-margin_top = 3.0
-margin_right = 800.0
-margin_bottom = 80.0
+margin_left = 430.0
+margin_right = 860.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 15 )
 text = "1234567890"
 align = 2
 
 [node name="ScoreEntry5" type="HBoxContainer" parent="ScorePanel/Scores/ScoreList"]
-margin_top = 336.0
-margin_right = 800.0
-margin_bottom = 420.0
+margin_top = 308.0
+margin_right = 860.0
+margin_bottom = 385.0
 custom_constants/separation = 0
 
 [node name="Name" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry5"]
-margin_right = 400.0
-margin_bottom = 84.0
+margin_right = 430.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 16 )
+custom_fonts/font = ExtResource( 15 )
 text = "Name"
 
 [node name="Score" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry5"]
-margin_left = 400.0
-margin_top = 3.0
-margin_right = 800.0
-margin_bottom = 80.0
+margin_left = 430.0
+margin_right = 860.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 15 )
 text = "1234567890"
 align = 2
 
 [node name="ScoreEntry6" type="HBoxContainer" parent="ScorePanel/Scores/ScoreList"]
-margin_top = 420.0
-margin_right = 800.0
-margin_bottom = 504.0
+margin_top = 385.0
+margin_right = 860.0
+margin_bottom = 462.0
 custom_constants/separation = 0
 
 [node name="Name" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry6"]
-margin_right = 400.0
-margin_bottom = 84.0
+margin_right = 430.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 16 )
+custom_fonts/font = ExtResource( 15 )
 text = "Name"
 
 [node name="Score" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry6"]
-margin_left = 400.0
-margin_top = 3.0
-margin_right = 800.0
-margin_bottom = 80.0
+margin_left = 430.0
+margin_right = 860.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 15 )
 text = "1234567890"
 align = 2
 
 [node name="ScoreEntry7" type="HBoxContainer" parent="ScorePanel/Scores/ScoreList"]
-margin_top = 504.0
-margin_right = 800.0
-margin_bottom = 588.0
+margin_top = 462.0
+margin_right = 860.0
+margin_bottom = 539.0
 custom_constants/separation = 0
 
 [node name="Name" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry7"]
-margin_right = 400.0
-margin_bottom = 84.0
+margin_right = 430.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 16 )
+custom_fonts/font = ExtResource( 15 )
 text = "Name"
 
 [node name="Score" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry7"]
-margin_left = 400.0
-margin_top = 3.0
-margin_right = 800.0
-margin_bottom = 80.0
+margin_left = 430.0
+margin_right = 860.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 15 )
 text = "1234567890"
 align = 2
 
 [node name="ScoreEntry8" type="HBoxContainer" parent="ScorePanel/Scores/ScoreList"]
-margin_top = 588.0
-margin_right = 800.0
-margin_bottom = 672.0
+margin_top = 539.0
+margin_right = 860.0
+margin_bottom = 616.0
 custom_constants/separation = 0
 
 [node name="Name" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry8"]
-margin_right = 400.0
-margin_bottom = 84.0
+margin_right = 430.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 16 )
+custom_fonts/font = ExtResource( 15 )
 text = "Name"
 
 [node name="Score" type="Label" parent="ScorePanel/Scores/ScoreList/ScoreEntry8"]
-margin_left = 400.0
-margin_top = 3.0
-margin_right = 800.0
-margin_bottom = 80.0
+margin_left = 430.0
+margin_right = 860.0
+margin_bottom = 77.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 15 )
 text = "1234567890"
 align = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="ScorePanel/Scores"]
-margin_top = 839.0
+margin_top = 783.0
 margin_right = 1520.0
-margin_bottom = 951.0
+margin_bottom = 895.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -648,6 +645,7 @@ rect_min_size = Vector2( 200, 0 )
 text = "Back"
 
 [connection signal="button_down" from="MainPanel/Menu/Start" to="." method="_on_Start_button_down"]
+[connection signal="button_down" from="MainPanel/Menu/Scores" to="." method="_on_Scores_button_down"]
 [connection signal="button_down" from="MainPanel/Menu/Scores" to="MainPanel" method="hide_panel"]
 [connection signal="button_down" from="MainPanel/Menu/Scores" to="ScorePanel" method="show_panel"]
 [connection signal="button_down" from="MainPanel/Menu/Options" to="MainPanel" method="hide_panel"]
