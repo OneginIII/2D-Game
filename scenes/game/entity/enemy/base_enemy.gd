@@ -6,6 +6,7 @@ export var health : int = 100
 export (Array, NodePath) var flashing_sprites
 export var activation_margin : float = 64.0
 export var score_value := 10
+export (PackedScene) var alternative_explosion
 
 onready var shape := $Shape
 
@@ -53,7 +54,11 @@ func destroy():
 	activation_timer.stop()
 	game_node.score += score_value
 	shape.set_deferred("disabled", true)
-	var explosion = explosion_scene.instance()
+	var explosion
+	if alternative_explosion != null:
+		explosion = alternative_explosion.instance()
+	else:
+		explosion = explosion_scene.instance()
 	explosion.position = global_position
 	explosion.position -= effects_parent.global_position
 	effects_parent.add_child(explosion)
