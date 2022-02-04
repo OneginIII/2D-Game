@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/game/level/base_level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entity/enemy/turret/turret.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/game/entity/enemy/bomb/bomb.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/entity/checkpoint/checkpoint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/entity/enemy/frigate/frigate.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/game/entity/enemy/boss/boss.tscn" type="PackedScene" id=8]
 
 [node name="Level" instance=ExtResource( 1 )]
 level_length = 128
@@ -22,10 +23,10 @@ tile_data = PoolIntArray( -7864322, 1, 0, -7864321, 1, 1, -7929856, 1, 2, -79298
 tile_data = PoolIntArray( -6160377, 2, 0, -6160376, 4, 0, -6160375, 4, 0, -6160374, 4, 0, -6160373, 2, 0, -6094841, 5, 0, -6094840, 3, 0, -6094839, 3, 0, -6094838, 3, 0, -6094837, 5, 0, -6029305, 5, 0, -6029304, 3, 0, -6029303, 3, 0, -6029302, 3, 0, -6029301, 5, 0, -5963769, 5, 0, -5963768, 3, 0, -5963767, 3, 0, -5963766, 3, 0, -5963765, 5, 0, -5898233, 2, 0, -5898232, 4, 0, -5898231, 4, 0, -5898230, 4, 0, -5898229, 2, 0, -5308415, 2, 0, -5308414, 4, 0, -5308413, 4, 0, -5308412, 4, 0, -5308411, 2, 0, -5242879, 5, 0, -5242878, 3, 0, -5242877, 3, 0, -5242876, 3, 0, -5242875, 3, 0, -5177343, 2, 0, -5177342, 3, 0, -5177341, 3, 0, -5177340, 3, 0, -5177339, 3, 0 )
 
 [node name="Turret" parent="Enemies" index="0" instance=ExtResource( 2 )]
-position = Vector2( 192, -1344 )
+position = Vector2( 448, -5568 )
 
 [node name="Turret2" parent="Enemies" index="1" instance=ExtResource( 2 )]
-position = Vector2( 1088, -2368 )
+position = Vector2( 1344, -6592 )
 
 [node name="Turret3" parent="Enemies" index="2" instance=ExtResource( 2 )]
 position = Vector2( 1280, -5888 )
@@ -43,7 +44,7 @@ position = Vector2( 960, -11968 )
 position = Vector2( 1480, -11456 )
 
 [node name="DronePath" parent="Enemies" index="7" instance=ExtResource( 4 )]
-position = Vector2( 960, -3328 )
+position = Vector2( 960, -3904 )
 speed = 200.0
 
 [node name="Drone2" parent="Enemies" index="8" instance=ExtResource( 3 )]
@@ -65,25 +66,22 @@ position = Vector2( 1472, -10560 )
 position = Vector2( 512, -12416 )
 
 [node name="Bomb" parent="Enemies" index="14" instance=ExtResource( 5 )]
-position = Vector2( 960, -576 )
+position = Vector2( 1536, -4992 )
 
-[node name="Bomb2" parent="Enemies" index="15" instance=ExtResource( 5 )]
-position = Vector2( 704, -832 )
+[node name="Frigate" parent="Enemies" index="15" instance=ExtResource( 7 )]
+position = Vector2( 512, -5120 )
 
-[node name="Bomb3" parent="Enemies" index="16" instance=ExtResource( 5 )]
-position = Vector2( 1216, -832 )
-
-[node name="Bomb4" parent="Enemies" index="17" instance=ExtResource( 5 )]
-position = Vector2( 960, -1088 )
-
-[node name="Frigate" parent="Enemies" index="18" instance=ExtResource( 7 )]
-position = Vector2( 960, -1664 )
+[node name="Boss" parent="Enemies" index="16" instance=ExtResource( 8 )]
+position = Vector2( 960, -768 )
 
 [node name="Effects" parent="." index="4"]
 z_index = 1
 
+[node name="Checkpoints" parent="." index="6"]
+position = Vector2( 640, -320 )
+
 [node name="Checkpoint" parent="Checkpoints" index="0"]
-position = Vector2( 960, 540 )
+position = Vector2( 320, 896 )
 display_message = false
 
 [node name="Checkpoint2" parent="Checkpoints" index="1" instance=ExtResource( 6 )]

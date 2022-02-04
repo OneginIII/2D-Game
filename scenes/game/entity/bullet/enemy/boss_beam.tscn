@@ -1,0 +1,205 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/game/entity/bullet/assets/boss_beam.png" type="Texture" id=2]
+[ext_resource path="res://scenes/game/entity/bullet/assets/bullet_light.png" type="Texture" id=3]
+[ext_resource path="res://scenes/game/entity/bullet/assets/rainbow_beam.gdshader" type="Shader" id=4]
+[ext_resource path="res://assets/rainbow_gradient.tres" type="Gradient" id=5]
+[ext_resource path="res://scenes/game/entity/bullet/enemy/boss_beam.gd" type="Script" id=6]
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 48.0
+height = 224.0
+
+[sub_resource type="GradientTexture" id=4]
+gradient = ExtResource( 5 )
+width = 1024
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 4 )
+shader_param/rainbow_speed = 1.0
+shader_param/rainbow_blend = 0.5
+shader_param/currect_color = null
+shader_param/rainbow_gradient = SubResource( 4 )
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Shape:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Transform/Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.5, 0.5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Transform/Light:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 3 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Shape:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 160 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Transform/Sprite:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 160 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Transform/Light:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 160 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Transform:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Transform:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "fire"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Shape:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 4.5, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 640 ), Vector2( 0, 640 ), Vector2( 0, 2640 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Transform:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 4.5, 5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 2000 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Transform:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1e-05 ), Vector2( 1, 4 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Shape:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1e-05 ), Vector2( 1, 4 ) ]
+}
+
+[node name="BossBeam" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 6 )
+speed = 0.0
+damage = 2
+
+[node name="Shape" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 160 )
+shape = SubResource( 5 )
+
+[node name="Transform" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Transform"]
+material = SubResource( 3 )
+position = Vector2( 0, 160 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+
+[node name="Light" type="Sprite" parent="Transform"]
+material = SubResource( 3 )
+position = Vector2( 0, 160 )
+scale = Vector2( 1.5, 3 )
+texture = ExtResource( 3 )
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 6 )
+anims/fire = SubResource( 7 )
+
+[connection signal="body_entered" from="." to="." method="hit_target"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

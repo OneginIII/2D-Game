@@ -5,8 +5,9 @@
 [ext_resource path="res://scenes/game/entity/bullet/assets/frigate_bullet.png" type="Texture" id=3]
 [ext_resource path="res://scenes/game/entity/bullet/enemy/frigate_bullet.gd" type="Script" id=4]
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 14.0
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 11.0
+height = 18.0
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1

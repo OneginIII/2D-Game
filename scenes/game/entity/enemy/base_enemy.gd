@@ -2,6 +2,8 @@ extends Node2D
 
 const explosion_scene := preload("res://scenes/game/entity/effect/explosion/explosion.tscn")
 
+signal on_activate()
+
 export var health : int = 100
 export (Array, NodePath) var flashing_sprites
 export var activation_margin : float = 64.0
@@ -69,6 +71,7 @@ func destroy():
 func check_activation():
 	if global_position.y > -activation_margin and not active:
 		active = true
+		emit_signal("on_activate")
 	elif global_position.y > get_viewport_rect().size.y + activation_margin and active:
 		active = false
 		activation_timer.stop()

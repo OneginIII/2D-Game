@@ -9,6 +9,7 @@ const FULL_LIVES := 3
 const DEATH_DELAY := 3.0
 const SPAWN_OFFSET := Vector2(0.5, 0.75)
 const SPAWN_LENGTH := 2.0
+const INVUL_TIME := 0.1
 
 signal health_updated(value)
 signal player_death(out_of_lives)
@@ -27,12 +28,14 @@ func set_lives(value: int):
 	emit_signal("lives_updated", lives)
 export var acceleration := 10.0
 export(PackedScene) var death_particles
+export var invulnerable := false
 
 onready var player_visual := $Visual
 onready var player_gun := $Gun
 onready var player_shape := $Shape
 onready var initial_position := position
 onready var tween := Tween.new()
+onready var invul_timer := Timer.new()
 
 var input_move_vector := Vector2.ZERO
 var current_move_vector := Vector2.ZERO
@@ -42,6 +45,8 @@ var controllable := false
 func _ready():
 	visible = false
 	add_child(tween)
+	add_child(invul_timer)
+	invul_timer.one_shot = true
 	player_gun.connect("gun_fired", player_visual, "gun_fired")
 	controllable = false
 	position += SPAWN_OFFSET
@@ -62,7 +67,12 @@ func _physics_process(_delta):
 func take_damage(amount: int, color: Color):
 	if dead:
 		return
+	if not invul_timer.is_stopped():
+		return
+	invul_timer.start(INVUL_TIME)
 	player_visual.damage_flash(color)
+	if invulnerable:
+		return
 	self.health -= amount
 	if health <= 0:
 		death()
