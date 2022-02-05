@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/game/level/base_level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/game/entity/enemy/boss/boss.tscn" type="PackedScene" id=2]
+
+[node name="TestLevel" instance=ExtResource( 1 )]
+level_length = 128
+scroll_speed = 120.0
+
+[node name="Boss" parent="Enemies" index="0" instance=ExtResource( 2 )]
+position = Vector2( 960, -640 )

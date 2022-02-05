@@ -18,6 +18,7 @@ func _physics_process(delta):
 func _process(_delta):
 	color = gradient.interpolate(fmod((OS.get_ticks_msec() / 1000.0), 1.0))
 	color *= Color(1.5, 1.5, 1.5, 1.0)
+	color.s = 0.5
 	if target_node != null:
 		target_node.take_damage(damage, color)
 
