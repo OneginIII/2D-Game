@@ -23,8 +23,8 @@ func _ready():
 func _on_Start_button_down():
 	tween.interpolate_property(self, "modulate", null, Color.transparent, 0.5)
 	tween.start()
-	yield(tween, "tween_all_completed")
 	emit_signal("game_started")
+	yield(tween, "tween_all_completed")
 	visible = false
 
 func _on_Scores_button_down():

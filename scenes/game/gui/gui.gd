@@ -14,7 +14,7 @@ var game_node
 var tween := Tween.new()
 var display_score: int
 
-const tween_SPEED = 50.0
+const TWEEN_SPEED = 100.0
 
 func _ready():
 	player_node = get_tree().root.find_node("Player", true, false)
@@ -45,7 +45,7 @@ func set_power(value: int):
 	power.value = float(value + 1)
 
 func update_score(value: int):
-	var time = abs(display_score - value) / tween_SPEED
+	var time = abs(display_score - value) / TWEEN_SPEED
 	tween.interpolate_method(self, "set_score_text", display_score, value, time)
 	tween.start()
 	display_score = value
@@ -55,6 +55,7 @@ func set_score_text(value: int):
 	score.text = score.text.replace("0", "O")
 
 func set_score(value: int):
+	tween.remove(self, "set_score_text")
 	display_score = value
 	set_score_text(value)
 

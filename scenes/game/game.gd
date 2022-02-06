@@ -4,9 +4,11 @@ const POWERUP_PICKUP := preload("res://scenes/game/entity/powerup/powerup_pickup
 const POWERUP_INTERVAL := 200
 const CHECKPOINT_MESSAGE := "Checkpoint Reached"
 const GAME_OVER_MESSAGE := "Game Over"
+const VICTORY_MESSAGE := "Game Complete"
 const DEATH_SCORE_MULTIPLY := 0.75
 const LEVEL_WIDTH := 1920.0
 const GAME_OVER_DELAY := 4.0
+const VICTORY_DELAY := 5.0
 
 signal score_updated(value)
 signal exit_game()
@@ -49,11 +51,18 @@ func start_game():
 	tween.interpolate_property(gui_node, "modulate", null, Color.white, 1.0)
 	tween.start()
 
-func game_over():
-	gui_node.center_message(GAME_OVER_MESSAGE)
-	player_node.controllable = false
+func game_over(victory: bool = false):
+	if victory:
+		gui_node.center_message(VICTORY_MESSAGE)
+	else:
+		gui_node.center_message(GAME_OVER_MESSAGE)
+		player_node.controllable = false
 	yield(get_tree().create_timer(GAME_OVER_DELAY), "timeout")
+	player_node.controllable = false
+	if victory:
+		player_node.player_victory()
 	level_node.running = false
+	gui_node.set_score(score)
 	if main_node:
 		if main_node.check_highscore(score):
 			gui_node.enter_score()
@@ -106,7 +115,7 @@ func spawn_powerup():
 	powerup_node.powerup_resource = load(powerup_list[powerup_type])
 	powerup_node.position = powerup_spawn_point.position
 	powerup_node.position -= level_node.global_position
-	level_node.call_deferred("add_child", powerup_node)
+	level_node.powerups.call_deferred("add_child", powerup_node)
 	if powerup_index < powerup_order.size() - 1:
 		powerup_index += 1
 	else:
@@ -119,3 +128,10 @@ func checkpoint_reached(checkpoint_name: String, display_message: bool):
 	level_node.checkpoints[checkpoint_name].active = false
 	if display_message:
 		gui_node.center_message(CHECKPOINT_MESSAGE)
+
+func on_boss_defeated():
+	yield(get_tree(), "idle_frame")
+	for node in level_node.powerups.get_children():
+		node.queue_free()
+	yield(get_tree().create_timer(VICTORY_DELAY), "timeout")
+	game_over(true)

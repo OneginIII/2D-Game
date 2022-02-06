@@ -9,6 +9,7 @@ export (Array, NodePath) var flashing_sprites
 export var activation_margin : float = 64.0
 export var score_value := 10
 export (PackedScene) var alternative_explosion
+export var destroy_delay := 0.5
 
 onready var shape := $Shape
 
@@ -22,7 +23,6 @@ var activation_timer := Timer.new()
 
 const FLASH_MULTIPLY = 2.5
 const FLASH_TIME = 0.2
-const DESTROY_DELAY = 0.5
 const ACTIVATION_INTERVAL = 0.1
 
 func _ready():
@@ -64,9 +64,9 @@ func destroy():
 	explosion.position = global_position
 	explosion.position -= effects_parent.global_position
 	effects_parent.add_child(explosion)
-	modulate_tween.interpolate_property(self, "modulate", Color.white, Color.transparent, DESTROY_DELAY)
+	modulate_tween.interpolate_property(self, "modulate", Color.white, Color.transparent, destroy_delay)
 	modulate_tween.start()
-	get_tree().create_timer(DESTROY_DELAY).connect("timeout", self, "queue_free")
+	get_tree().create_timer(destroy_delay).connect("timeout", self, "queue_free")
 
 func check_activation():
 	if global_position.y > -activation_margin and not active:

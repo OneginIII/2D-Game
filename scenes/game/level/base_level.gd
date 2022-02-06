@@ -7,6 +7,7 @@ export(float) var scroll_speed = 1.0
 
 onready var bullets := $Bullets
 onready var checkpoints: Dictionary
+onready var powerups := $Powerups
 
 var level_rect := Rect2()
 

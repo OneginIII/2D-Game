@@ -95,6 +95,7 @@ func death():
 	self.lives -= 1
 
 func reset_player(full_reset: bool = false):
+	tween.remove_all()
 	visible = true
 	player_visual.modulate = Color.white
 	dead = false
@@ -115,3 +116,8 @@ func reset_player(full_reset: bool = false):
 	# Enable controls only after animation
 	yield(tween, "tween_all_completed")
 	controllable = true
+
+func player_victory():
+	tween.interpolate_property(self, "position", null,
+		position - Vector2(0.0, 2000.0), 3.0, Tween.TRANS_QUAD, Tween.EASE_IN)
+	tween.start()
