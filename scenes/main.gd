@@ -37,8 +37,6 @@ func _input(event):
 		return
 	if event is InputEventKey:
 		if event.pressed:
-			if event.scancode == KEY_ESCAPE:
-				get_tree().quit()
 			if event.scancode == KEY_R:
 				Engine.time_scale = 5.0
 			if event.scancode == KEY_P:

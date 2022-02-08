@@ -22,6 +22,7 @@ export(PackedScene) var level_scene
 export(Dictionary) var powerup_list
 export(Array, String) var powerup_order
 
+var game_running := false
 var level_node
 var powerup_index := 0
 var score_treshold := POWERUP_INTERVAL
@@ -50,8 +51,10 @@ func start_game():
 	reload_level()
 	tween.interpolate_property(gui_node, "modulate", null, Color.white, 1.0)
 	tween.start()
+	game_running = true
 
 func game_over(victory: bool = false):
+	game_running = false
 	if victory:
 		gui_node.center_message(VICTORY_MESSAGE)
 	else:
@@ -75,6 +78,7 @@ func set_highscore(entered_name: String):
 	exit_game()
 
 func exit_game():
+	game_running = false
 	emit_signal("exit_game")
 	yield(get_tree().create_timer(0.5), "timeout")
 	reset_score()
@@ -135,3 +139,10 @@ func on_boss_defeated():
 		node.queue_free()
 	yield(get_tree().create_timer(VICTORY_DELAY), "timeout")
 	game_over(true)
+
+func _unhandled_input(event):
+	if game_running:
+		if event.is_action_pressed("pause"):
+			var pause = $GuiLayer/Pause
+			if pause.visible == false:
+				pause.pause(true)

@@ -1,0 +1,117 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/menu/assets/menu_title_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/menu/menu_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/game/gui/pause.gd" type="Script" id=3]
+[ext_resource path="res://scenes/menu/assets/scores_font.tres" type="DynamicFont" id=4]
+
+[node name="Pause" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.501961 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -170.5
+margin_top = -187.0
+margin_right = 170.5
+margin_bottom = 187.0
+rect_pivot_offset = Vector2( -1600, -796 )
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Menu"]
+margin_right = 341.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 0, 150 )
+custom_fonts/font = ExtResource( 1 )
+text = "Paused"
+align = 1
+
+[node name="Resume" parent="Menu" instance=ExtResource( 2 )]
+margin_top = 150.0
+margin_right = 341.0
+margin_bottom = 262.0
+rect_min_size = Vector2( 200, 0 )
+focus_neighbour_bottom = NodePath("../Quit")
+text = "Resume"
+
+[node name="Quit" parent="Menu" instance=ExtResource( 2 )]
+margin_top = 262.0
+margin_right = 341.0
+margin_bottom = 374.0
+rect_min_size = Vector2( 200, 0 )
+focus_neighbour_top = NodePath("../Resume")
+text = "Quit"
+
+[node name="QuitConfirm" type="VBoxContainer" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -304.0
+margin_top = -201.0
+margin_right = 304.0
+margin_bottom = 201.0
+rect_pivot_offset = Vector2( -1600, -796 )
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="QuitConfirm"]
+margin_right = 608.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 0, 150 )
+custom_fonts/font = ExtResource( 1 )
+text = "Quit game?"
+align = 1
+
+[node name="Explanation" type="Label" parent="QuitConfirm"]
+margin_top = 170.0
+margin_right = 608.0
+margin_bottom = 270.0
+rect_min_size = Vector2( 0, 100 )
+custom_fonts/font = ExtResource( 4 )
+text = "Progress will be lost!"
+align = 1
+
+[node name="Buttons" type="HBoxContainer" parent="QuitConfirm"]
+margin_top = 290.0
+margin_right = 608.0
+margin_bottom = 402.0
+custom_constants/separation = 180
+
+[node name="Back" parent="QuitConfirm/Buttons" instance=ExtResource( 2 )]
+margin_right = 200.0
+rect_min_size = Vector2( 200, 0 )
+text = "Back"
+
+[node name="Quit" parent="QuitConfirm/Buttons" instance=ExtResource( 2 )]
+margin_left = 380.0
+margin_right = 580.0
+rect_min_size = Vector2( 200, 0 )
+text = "Quit"
+
+[connection signal="button_down" from="Menu/Resume" to="." method="pause" binds= [ false ]]
+[connection signal="button_down" from="Menu/Quit" to="." method="quit_confirm" binds= [ true ]]
+[connection signal="button_down" from="QuitConfirm/Buttons/Back" to="." method="quit_confirm" binds= [ false ]]
+[connection signal="button_down" from="QuitConfirm/Buttons/Quit" to="." method="quit_game"]

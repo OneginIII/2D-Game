@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/game/entity/player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entity/edge_collision/edge_collision.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/gui/gui.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/game/level/level/test_level.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=5]
+[ext_resource path="res://scenes/game/gui/pause.tscn" type="PackedScene" id=6]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 5 )
@@ -35,6 +36,8 @@ position = Vector2( 960, 864 )
 layer = 64
 
 [node name="GameGui" parent="GuiLayer" instance=ExtResource( 3 )]
+
+[node name="Pause" parent="GuiLayer" instance=ExtResource( 6 )]
 
 [node name="PowerupSpawnPoint" type="Position2D" parent="."]
 position = Vector2( 960, -256 )
