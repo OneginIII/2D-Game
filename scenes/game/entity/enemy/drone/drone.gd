@@ -14,7 +14,7 @@ func _ready():
 
 func _physics_process(delta):
 	if active:
-		translate(Vector2.DOWN * movement_speed * delta)
+		translate(Vector2.RIGHT.rotated(rotation) * movement_speed * delta)
 
 func shoot():
 	if !active:

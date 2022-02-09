@@ -51,7 +51,7 @@ func update_score(value: int):
 	display_score = value
 
 func set_score_text(value: int):
-	score.text = "%08d" % value
+	score.text = "%06d" % value
 	score.text = score.text.replace("0", "O")
 
 func set_score(value: int):

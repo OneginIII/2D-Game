@@ -38,6 +38,7 @@ layer = 64
 [node name="GameGui" parent="GuiLayer" instance=ExtResource( 3 )]
 
 [node name="Pause" parent="GuiLayer" instance=ExtResource( 6 )]
+visible = false
 
 [node name="PowerupSpawnPoint" type="Position2D" parent="."]
 position = Vector2( 960, -256 )

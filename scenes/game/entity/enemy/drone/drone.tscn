@@ -21,10 +21,10 @@ blend_mode = 1
 scale = Vector2( 0.5, 0.5 )
 collision_mask = 0
 script = ExtResource( 4 )
-health = 75
 flashing_sprites = [ NodePath("Sprite") ]
 activation_margin = 128.0
-score_value = 50
+score_value = 80
+movement_speed = 100.0
 
 [node name="Shape" parent="." index="0"]
 shape = null

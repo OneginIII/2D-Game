@@ -146,7 +146,7 @@ func beam():
 func destroy():
 	.destroy()
 	destroyed = true
-	tween.seek(10000.0)
+	$Rotator/Lights.visible = false
 	tween.remove_all()
 	if get_node_or_null(current_beam_path):
 		get_node(current_beam_path).queue_free()

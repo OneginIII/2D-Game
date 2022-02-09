@@ -60,9 +60,9 @@ tracks/0/keys = {
 scale = Vector2( 0.5, 0.5 )
 collision_mask = 0
 script = ExtResource( 6 )
-health = 50
+health = 60
 flashing_sprites = [ NodePath("Sprite") ]
-score_value = 25
+score_value = 30
 
 [node name="WaterEdge" type="Sprite" parent="." index="0"]
 material = SubResource( 6 )
@@ -94,6 +94,7 @@ anims/Blink = SubResource( 3 )
 anims/RESET = SubResource( 4 )
 
 [node name="ShootArm" type="Node2D" parent="." index="5"]
+rotation = 0.785398
 
 [node name="ShootPoint" type="Position2D" parent="ShootArm" index="0"]
-position = Vector2( 0, -140 )
+position = Vector2( 0, -120 )

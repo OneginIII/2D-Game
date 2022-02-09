@@ -26,8 +26,10 @@ collision_mask = 0
 script = ExtResource( 6 )
 health = 500
 flashing_sprites = [ NodePath("Sprite") ]
+activation_margin = 128.0
 score_value = 150
 alternative_explosion = ExtResource( 7 )
+movement_speed = -50.0
 
 [node name="Shape" parent="." index="0"]
 shape = SubResource( 1 )

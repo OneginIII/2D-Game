@@ -19,6 +19,8 @@ func update_highscore(new_score: Array):
 		highscore_list.remove(MAX_HIGHSCORES)
 
 func check_highscore(new_score: int):
+	if new_score <= 0:
+		return false
 	if highscore_list.size() < MAX_HIGHSCORES:
 		return true
 	for score in highscore_list:
@@ -39,8 +41,12 @@ func _input(event):
 		if event.pressed:
 			if event.scancode == KEY_R:
 				Engine.time_scale = 5.0
+			if event.scancode == KEY_T:
+				Engine.time_scale = 0.1
 			if event.scancode == KEY_P:
 				$Game.score += 100
 		else:
 			if event.scancode == KEY_R:
+				Engine.time_scale = 1.0
+			if event.scancode == KEY_T:
 				Engine.time_scale = 1.0

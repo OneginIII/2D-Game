@@ -14,16 +14,23 @@ const INVUL_TIME := 0.1
 signal health_updated(value)
 signal player_death(out_of_lives)
 signal lives_updated(value)
+signal bonus_upgrade()
 
 export var health := FULL_HEALTH setget set_health
 func set_health(value: int):
+	if value > FULL_HEALTH:
+		emit_signal("bonus_upgrade")
 	health = int(min(value, FULL_HEALTH))
 	emit_signal("health_updated", health)
 export var speed := DEFAULT_SPEED setget set_speed
 func set_speed(value: float):
+	if value > MAX_SPEED:
+		emit_signal("bonus_upgrade")
 	speed = min(value, MAX_SPEED)
 export var lives: int = FULL_LIVES setget set_lives
 func set_lives(value: int):
+	if value > FULL_LIVES:
+		emit_signal("bonus_upgrade")
 	lives = int(min(value, FULL_LIVES))
 	emit_signal("lives_updated", lives)
 export var acceleration := 10.0
@@ -48,6 +55,7 @@ func _ready():
 	add_child(invul_timer)
 	invul_timer.one_shot = true
 	player_gun.connect("gun_fired", player_visual, "gun_fired")
+	player_gun.connect("gun_level_bonus", self, "on_gun_level_bonus")
 	controllable = false
 	position += SPAWN_OFFSET
 
@@ -121,3 +129,6 @@ func player_victory():
 	tween.interpolate_property(self, "position", null,
 		position - Vector2(0.0, 2000.0), 3.0, Tween.TRANS_QUAD, Tween.EASE_IN)
 	tween.start()
+
+func on_gun_level_bonus():
+	emit_signal("bonus_upgrade")

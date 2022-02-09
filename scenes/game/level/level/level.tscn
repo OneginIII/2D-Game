@@ -1,9 +1,8 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/game/level/base_level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entity/enemy/turret/turret.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/level/assets/props/rock.png" type="Texture" id=3]
-[ext_resource path="res://scenes/game/entity/enemy/drone/drone_path.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/game/entity/enemy/bomb/bomb.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/game/entity/checkpoint/checkpoint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/game/entity/enemy/frigate/frigate.tscn" type="PackedScene" id=7]
@@ -12,21 +11,7 @@
 [ext_resource path="res://scenes/game/level/assets/props/plant.png" type="Texture" id=10]
 [ext_resource path="res://scenes/game/level/assets/props/building.png" type="Texture" id=11]
 [ext_resource path="res://scenes/game/level/assets/props/battery.png" type="Texture" id=12]
-
-[sub_resource type="Curve2D" id=1]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, -2, -130.024, 2, 130.024, 0, 256, -480.652, 0.535158, 480.652, -0.535158, 960, 1280 )
-}
-
-[sub_resource type="Curve2D" id=2]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 1.1748, -187.17, -1.1748, 187.17, 0, 256, 506.711, -8.98925, -506.711, 8.98925, -1024, 1280 )
-}
-
-[sub_resource type="Curve2D" id=3]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 1.1748, -184.342, -1.1748, 184.342, 0, 256, 342.075, 2.4651, -342.075, -2.4651, -384, 768, 320.235, -3.17667, -320.235, 3.17667, -960, 384, 318, 0, -318, 0, -1536, 768, 0, 0, 0, 0, -2048, 768 )
-}
+[ext_resource path="res://scenes/game/entity/enemy/drone/drone.tscn" type="PackedScene" id=13]
 
 [node name="Level" instance=ExtResource( 1 )]
 level_length = 512
@@ -100,7 +85,6 @@ texture = ExtResource( 3 )
 [node name="RockSmall5" type="Sprite" parent="Props/Rocks" index="11"]
 position = Vector2( 1801, -19580 )
 rotation = -1.83454
-scale = Vector2( 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Rock8" type="Sprite" parent="Props/Rocks" index="12"]
@@ -144,7 +128,6 @@ texture = ExtResource( 3 )
 [node name="RockSmall8" type="Sprite" parent="Props/Rocks" index="20"]
 position = Vector2( 1516, -33364 )
 rotation = -1.84651
-scale = Vector2( 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="Rock14" type="Sprite" parent="Props/Rocks" index="21"]
@@ -160,7 +143,6 @@ texture = ExtResource( 3 )
 [node name="Rock16" type="Sprite" parent="Props/Rocks" index="23"]
 position = Vector2( 1665, -39632 )
 rotation = -1.2945
-scale = Vector2( 1, 1 )
 texture = ExtResource( 3 )
 
 [node name="RockSmall9" type="Sprite" parent="Props/Rocks" index="24"]
@@ -435,262 +417,296 @@ position = Vector2( 768, -7616 )
 [node name="Bomb4" parent="Enemies" index="3" instance=ExtResource( 5 )]
 position = Vector2( 832, -10816 )
 
-[node name="Bomb5" parent="Enemies" index="4" instance=ExtResource( 5 )]
+[node name="Bomb20" parent="Enemies" index="4" instance=ExtResource( 5 )]
+position = Vector2( 1472, -10944 )
+
+[node name="Bomb5" parent="Enemies" index="5" instance=ExtResource( 5 )]
 position = Vector2( 320, -12736 )
 
-[node name="Bomb6" parent="Enemies" index="5" instance=ExtResource( 5 )]
+[node name="Bomb6" parent="Enemies" index="6" instance=ExtResource( 5 )]
 position = Vector2( 1336, -12480 )
 
-[node name="Bomb7" parent="Enemies" index="6" instance=ExtResource( 5 )]
+[node name="Bomb7" parent="Enemies" index="7" instance=ExtResource( 5 )]
 position = Vector2( 576, -17600 )
 
-[node name="Bomb8" parent="Enemies" index="7" instance=ExtResource( 5 )]
+[node name="Bomb8" parent="Enemies" index="8" instance=ExtResource( 5 )]
 position = Vector2( 192, -17344 )
 
-[node name="Bomb9" parent="Enemies" index="8" instance=ExtResource( 5 )]
+[node name="Bomb9" parent="Enemies" index="9" instance=ExtResource( 5 )]
 position = Vector2( 960, -17792 )
 
-[node name="Bomb10" parent="Enemies" index="9" instance=ExtResource( 5 )]
+[node name="Bomb10" parent="Enemies" index="10" instance=ExtResource( 5 )]
 position = Vector2( 1344, -17984 )
 
-[node name="Bomb11" parent="Enemies" index="10" instance=ExtResource( 5 )]
+[node name="Bomb11" parent="Enemies" index="11" instance=ExtResource( 5 )]
 position = Vector2( 1728, -18176 )
 
-[node name="Bomb12" parent="Enemies" index="11" instance=ExtResource( 5 )]
+[node name="Bomb12" parent="Enemies" index="12" instance=ExtResource( 5 )]
 position = Vector2( 1728, -19008 )
 
-[node name="Bomb13" parent="Enemies" index="12" instance=ExtResource( 5 )]
+[node name="Bomb13" parent="Enemies" index="13" instance=ExtResource( 5 )]
 position = Vector2( 1344, -19200 )
 
-[node name="Bomb14" parent="Enemies" index="13" instance=ExtResource( 5 )]
+[node name="Bomb14" parent="Enemies" index="14" instance=ExtResource( 5 )]
 position = Vector2( 960, -19328 )
 
-[node name="Bomb15" parent="Enemies" index="14" instance=ExtResource( 5 )]
+[node name="Bomb15" parent="Enemies" index="15" instance=ExtResource( 5 )]
 position = Vector2( 576, -19328 )
 
-[node name="Bomb16" parent="Enemies" index="15" instance=ExtResource( 5 )]
+[node name="Bomb16" parent="Enemies" index="16" instance=ExtResource( 5 )]
 position = Vector2( 192, -19200 )
 
-[node name="Bomb17" parent="Enemies" index="16" instance=ExtResource( 5 )]
+[node name="Bomb17" parent="Enemies" index="17" instance=ExtResource( 5 )]
 position = Vector2( 320, -23232 )
 
-[node name="Bomb18" parent="Enemies" index="17" instance=ExtResource( 5 )]
-position = Vector2( 960, -24768 )
+[node name="Bomb18" parent="Enemies" index="18" instance=ExtResource( 5 )]
+position = Vector2( 576, -24704 )
 
-[node name="Bomb19" parent="Enemies" index="18" instance=ExtResource( 5 )]
-position = Vector2( 1600, -26688 )
-
-[node name="Bomb20" parent="Enemies" index="19" instance=ExtResource( 5 )]
-position = Vector2( 960, -26432 )
+[node name="Bomb19" parent="Enemies" index="19" instance=ExtResource( 5 )]
+position = Vector2( 1344, -26944 )
 
 [node name="Bomb21" parent="Enemies" index="20" instance=ExtResource( 5 )]
 position = Vector2( 832, -27968 )
 
-[node name="Bomb22" parent="Enemies" index="21" instance=ExtResource( 5 )]
-position = Vector2( 1216, -29120 )
+[node name="Bomb23" parent="Enemies" index="21" instance=ExtResource( 5 )]
+position = Vector2( 320, -30144 )
 
-[node name="Bomb23" parent="Enemies" index="22" instance=ExtResource( 5 )]
-position = Vector2( 448, -29888 )
-
-[node name="Bomb24" parent="Enemies" index="23" instance=ExtResource( 5 )]
+[node name="Bomb24" parent="Enemies" index="22" instance=ExtResource( 5 )]
 position = Vector2( 320, -31680 )
 
-[node name="Bomb25" parent="Enemies" index="24" instance=ExtResource( 5 )]
+[node name="Bomb25" parent="Enemies" index="23" instance=ExtResource( 5 )]
 position = Vector2( 576, -33216 )
 
-[node name="Bomb26" parent="Enemies" index="25" instance=ExtResource( 5 )]
+[node name="Bomb26" parent="Enemies" index="24" instance=ExtResource( 5 )]
 position = Vector2( 1088, -33024 )
 
-[node name="Turret" parent="Enemies" index="26" instance=ExtResource( 2 )]
+[node name="Turret" parent="Enemies" index="25" instance=ExtResource( 2 )]
 position = Vector2( 768, -4160 )
 
-[node name="Turret2" parent="Enemies" index="27" instance=ExtResource( 2 )]
+[node name="Turret2" parent="Enemies" index="26" instance=ExtResource( 2 )]
 position = Vector2( 1344, -5888 )
 
-[node name="Turret3" parent="Enemies" index="28" instance=ExtResource( 2 )]
+[node name="Turret3" parent="Enemies" index="27" instance=ExtResource( 2 )]
 position = Vector2( 384, -7168 )
 
-[node name="Turret4" parent="Enemies" index="29" instance=ExtResource( 2 )]
+[node name="Turret4" parent="Enemies" index="28" instance=ExtResource( 2 )]
 position = Vector2( 192, -10304 )
 
-[node name="Turret5" parent="Enemies" index="30" instance=ExtResource( 2 )]
+[node name="Turret5" parent="Enemies" index="29" instance=ExtResource( 2 )]
 position = Vector2( 1472, -11968 )
 
-[node name="Turret6" parent="Enemies" index="31" instance=ExtResource( 2 )]
+[node name="Turret24" parent="Enemies" index="30" instance=ExtResource( 2 )]
+position = Vector2( 576, -13504 )
+
+[node name="Turret25" parent="Enemies" index="31" instance=ExtResource( 2 )]
+position = Vector2( 1344, -13504 )
+
+[node name="Turret35" parent="Enemies" index="32" instance=ExtResource( 2 )]
+position = Vector2( 1344, -15936 )
+
+[node name="Turret36" parent="Enemies" index="33" instance=ExtResource( 2 )]
+position = Vector2( 576, -15936 )
+
+[node name="Turret6" parent="Enemies" index="34" instance=ExtResource( 2 )]
 position = Vector2( 960, -11456 )
 
-[node name="Turret7" parent="Enemies" index="32" instance=ExtResource( 2 )]
+[node name="Turret7" parent="Enemies" index="35" instance=ExtResource( 2 )]
 position = Vector2( 1088, -16960 )
 
-[node name="Turret8" parent="Enemies" index="33" instance=ExtResource( 2 )]
+[node name="Turret8" parent="Enemies" index="36" instance=ExtResource( 2 )]
 position = Vector2( 832, -18688 )
 
-[node name="Turret9" parent="Enemies" index="34" instance=ExtResource( 2 )]
+[node name="Turret9" parent="Enemies" index="37" instance=ExtResource( 2 )]
 position = Vector2( 320, -19712 )
 
-[node name="Turret10" parent="Enemies" index="35" instance=ExtResource( 2 )]
+[node name="Turret10" parent="Enemies" index="38" instance=ExtResource( 2 )]
 position = Vector2( 1472, -19904 )
 
-[node name="Turret11" parent="Enemies" index="36" instance=ExtResource( 2 )]
+[node name="Turret11" parent="Enemies" index="39" instance=ExtResource( 2 )]
 position = Vector2( 1344, -24384 )
 
-[node name="Turret18" parent="Enemies" index="37" instance=ExtResource( 2 )]
+[node name="Turret18" parent="Enemies" index="40" instance=ExtResource( 2 )]
 position = Vector2( 1344, -23744 )
 
-[node name="Turret12" parent="Enemies" index="38" instance=ExtResource( 2 )]
+[node name="Turret12" parent="Enemies" index="41" instance=ExtResource( 2 )]
 position = Vector2( 576, -25152 )
 
-[node name="Turret13" parent="Enemies" index="39" instance=ExtResource( 2 )]
+[node name="Turret13" parent="Enemies" index="42" instance=ExtResource( 2 )]
 position = Vector2( 192, -25536 )
 
-[node name="Turret14" parent="Enemies" index="40" instance=ExtResource( 2 )]
+[node name="Turret14" parent="Enemies" index="43" instance=ExtResource( 2 )]
 position = Vector2( 192, -27712 )
 
-[node name="Turret15" parent="Enemies" index="41" instance=ExtResource( 2 )]
+[node name="Turret15" parent="Enemies" index="44" instance=ExtResource( 2 )]
 position = Vector2( 1472, -27712 )
 
-[node name="Turret16" parent="Enemies" index="42" instance=ExtResource( 2 )]
+[node name="Turret16" parent="Enemies" index="45" instance=ExtResource( 2 )]
 position = Vector2( 576, -27328 )
 
-[node name="Turret17" parent="Enemies" index="43" instance=ExtResource( 2 )]
+[node name="Turret17" parent="Enemies" index="46" instance=ExtResource( 2 )]
 position = Vector2( 832, -31424 )
 
-[node name="Turret19" parent="Enemies" index="44" instance=ExtResource( 2 )]
+[node name="Turret19" parent="Enemies" index="47" instance=ExtResource( 2 )]
 position = Vector2( 1216, -31424 )
 
-[node name="Turret20" parent="Enemies" index="45" instance=ExtResource( 2 )]
+[node name="Turret20" parent="Enemies" index="48" instance=ExtResource( 2 )]
 position = Vector2( 448, -32704 )
 
-[node name="Turret21" parent="Enemies" index="46" instance=ExtResource( 2 )]
+[node name="Turret21" parent="Enemies" index="49" instance=ExtResource( 2 )]
 position = Vector2( 1600, -32704 )
 
-[node name="Turret22" parent="Enemies" index="47" instance=ExtResource( 2 )]
+[node name="Turret22" parent="Enemies" index="50" instance=ExtResource( 2 )]
 position = Vector2( 832, -33984 )
 
-[node name="Turret23" parent="Enemies" index="48" instance=ExtResource( 2 )]
+[node name="Turret23" parent="Enemies" index="51" instance=ExtResource( 2 )]
 position = Vector2( 1216, -35008 )
 
-[node name="Turret26" parent="Enemies" index="49" instance=ExtResource( 2 )]
+[node name="Turret26" parent="Enemies" index="52" instance=ExtResource( 2 )]
 position = Vector2( 832, -36032 )
 
-[node name="Turret27" parent="Enemies" index="50" instance=ExtResource( 2 )]
+[node name="Turret27" parent="Enemies" index="53" instance=ExtResource( 2 )]
 position = Vector2( 576, -37952 )
 
-[node name="Turret28" parent="Enemies" index="51" instance=ExtResource( 2 )]
+[node name="Turret28" parent="Enemies" index="54" instance=ExtResource( 2 )]
 position = Vector2( 576, -38208 )
 
-[node name="Turret29" parent="Enemies" index="52" instance=ExtResource( 2 )]
+[node name="Turret29" parent="Enemies" index="55" instance=ExtResource( 2 )]
 position = Vector2( 832, -38464 )
 
-[node name="Turret30" parent="Enemies" index="53" instance=ExtResource( 2 )]
+[node name="Turret30" parent="Enemies" index="56" instance=ExtResource( 2 )]
 position = Vector2( 1088, -38464 )
 
-[node name="Turret31" parent="Enemies" index="54" instance=ExtResource( 2 )]
+[node name="Turret31" parent="Enemies" index="57" instance=ExtResource( 2 )]
 position = Vector2( 1344, -38208 )
 
-[node name="Turret32" parent="Enemies" index="55" instance=ExtResource( 2 )]
+[node name="Turret32" parent="Enemies" index="58" instance=ExtResource( 2 )]
 position = Vector2( 1344, -37952 )
 
-[node name="Turret33" parent="Enemies" index="56" instance=ExtResource( 2 )]
+[node name="Turret33" parent="Enemies" index="59" instance=ExtResource( 2 )]
 position = Vector2( 832, -37696 )
 
-[node name="Turret34" parent="Enemies" index="57" instance=ExtResource( 2 )]
+[node name="Turret34" parent="Enemies" index="60" instance=ExtResource( 2 )]
 position = Vector2( 1088, -37696 )
 
-[node name="DronePath" parent="Enemies" index="58" instance=ExtResource( 4 )]
+[node name="Drone" parent="Enemies" index="61" instance=ExtResource( 13 )]
 position = Vector2( 1216, -8320 )
+rotation = 1.8326
 
-[node name="DronePath2" parent="Enemies" index="59" instance=ExtResource( 4 )]
-position = Vector2( 384, -14336 )
-curve = SubResource( 1 )
+[node name="Drone3" parent="Enemies" index="62" instance=ExtResource( 13 )]
+position = Vector2( 960, -6464 )
+rotation = 1.57079
 
-[node name="DronePath4" parent="Enemies" index="60" instance=ExtResource( 4 )]
-position = Vector2( 384, -14848 )
-curve = SubResource( 1 )
+[node name="Drone4" parent="Enemies" index="63" instance=ExtResource( 13 )]
+position = Vector2( 320, -3136 )
+rotation = 1.0472
 
-[node name="DronePath7" parent="Enemies" index="61" instance=ExtResource( 4 )]
-position = Vector2( 384, -15360 )
-curve = SubResource( 1 )
+[node name="Drone2" parent="Enemies" index="64" instance=ExtResource( 13 )]
+position = Vector2( 576, -13888 )
+rotation = 1.0472
 
-[node name="DronePath3" parent="Enemies" index="62" instance=ExtResource( 4 )]
-position = Vector2( 1536, -14336 )
-curve = SubResource( 2 )
+[node name="Drone5" parent="Enemies" index="65" instance=ExtResource( 13 )]
+position = Vector2( 1344, -14400 )
+rotation = 2.0944
 
-[node name="DronePath5" parent="Enemies" index="63" instance=ExtResource( 4 )]
-position = Vector2( 1536, -14848 )
-curve = SubResource( 2 )
+[node name="Drone6" parent="Enemies" index="66" instance=ExtResource( 13 )]
+position = Vector2( 576, -14912 )
+rotation = 1.0472
 
-[node name="DronePath6" parent="Enemies" index="64" instance=ExtResource( 4 )]
-position = Vector2( 1536, -15360 )
-curve = SubResource( 2 )
+[node name="Drone7" parent="Enemies" index="67" instance=ExtResource( 13 )]
+position = Vector2( 448, -16576 )
+rotation = 1.57079
 
-[node name="DronePath8" parent="Enemies" index="65" instance=ExtResource( 4 )]
-position = Vector2( 1792, -22400 )
-curve = SubResource( 3 )
+[node name="Drone8" parent="Enemies" index="68" instance=ExtResource( 13 )]
+position = Vector2( 1472, -16576 )
+rotation = 1.57079
 
-[node name="DronePath10" parent="Enemies" index="66" instance=ExtResource( 4 )]
-position = Vector2( 1792, -23296 )
-curve = SubResource( 3 )
+[node name="Drone9" parent="Enemies" index="69" instance=ExtResource( 13 )]
+position = Vector2( 1728, -22400 )
+rotation = 3.14159
 
-[node name="DronePath12" parent="Enemies" index="67" instance=ExtResource( 4 )]
-position = Vector2( 1792, -24320 )
-curve = SubResource( 3 )
+[node name="Drone10" parent="Enemies" index="70" instance=ExtResource( 13 )]
+position = Vector2( 256, -22400 )
 
-[node name="DronePath9" parent="Enemies" index="68" instance=ExtResource( 4 )]
-position = Vector2( 128, -22784 )
-scale = Vector2( -1, 1 )
-curve = SubResource( 3 )
+[node name="Drone11" parent="Enemies" index="71" instance=ExtResource( 13 )]
+position = Vector2( 1536, -24064 )
+rotation = -3.14159
 
-[node name="DronePath11" parent="Enemies" index="69" instance=ExtResource( 4 )]
-position = Vector2( 128, -23808 )
-scale = Vector2( -1, 1 )
-curve = SubResource( 3 )
+[node name="Drone12" parent="Enemies" index="72" instance=ExtResource( 13 )]
+position = Vector2( 384, -25984 )
+rotation = -4.71238
 
-[node name="DronePath13" parent="Enemies" index="70" instance=ExtResource( 4 )]
-position = Vector2( 128, -24832 )
-scale = Vector2( -1, 1 )
-curve = SubResource( 3 )
+[node name="Drone19" parent="Enemies" index="73" instance=ExtResource( 13 )]
+position = Vector2( 384, -26752 )
+rotation = -4.71238
 
-[node name="Frigate" parent="Enemies" index="71" instance=ExtResource( 7 )]
+[node name="Drone13" parent="Enemies" index="74" instance=ExtResource( 13 )]
+position = Vector2( 384, -27520 )
+rotation = -6.28318
+
+[node name="Drone14" parent="Enemies" index="75" instance=ExtResource( 13 )]
+position = Vector2( 1664, -28288 )
+rotation = -4.71238
+
+[node name="Drone15" parent="Enemies" index="76" instance=ExtResource( 13 )]
+position = Vector2( 1664, -29376 )
+rotation = -4.71238
+
+[node name="Drone20" parent="Enemies" index="77" instance=ExtResource( 13 )]
+position = Vector2( 1664, -30464 )
+rotation = -4.71238
+
+[node name="Drone18" parent="Enemies" index="78" instance=ExtResource( 13 )]
+position = Vector2( 512, -29696 )
+rotation = -5.23598
+
+[node name="Drone16" parent="Enemies" index="79" instance=ExtResource( 13 )]
+position = Vector2( 1024, -31424 )
+rotation = -4.71238
+
+[node name="Drone17" parent="Enemies" index="80" instance=ExtResource( 13 )]
+position = Vector2( 192, -23616 )
+rotation = 0.785397
+
+[node name="Frigate" parent="Enemies" index="81" instance=ExtResource( 7 )]
 position = Vector2( 960, -15360 )
 
-[node name="Frigate2" parent="Enemies" index="72" instance=ExtResource( 7 )]
+[node name="Frigate2" parent="Enemies" index="82" instance=ExtResource( 7 )]
 position = Vector2( 1280, -25984 )
 
-[node name="Frigate3" parent="Enemies" index="73" instance=ExtResource( 7 )]
+[node name="Frigate3" parent="Enemies" index="83" instance=ExtResource( 7 )]
 position = Vector2( 512, -28800 )
 
-[node name="Frigate4" parent="Enemies" index="74" instance=ExtResource( 7 )]
+[node name="Frigate4" parent="Enemies" index="84" instance=ExtResource( 7 )]
 position = Vector2( 1152, -29696 )
 
-[node name="Frigate5" parent="Enemies" index="75" instance=ExtResource( 7 )]
+[node name="Frigate5" parent="Enemies" index="85" instance=ExtResource( 7 )]
 position = Vector2( 704, -32320 )
 
-[node name="Frigate6" parent="Enemies" index="76" instance=ExtResource( 7 )]
+[node name="Frigate6" parent="Enemies" index="86" instance=ExtResource( 7 )]
 position = Vector2( 1344, -32320 )
 
-[node name="Frigate7" parent="Enemies" index="77" instance=ExtResource( 7 )]
+[node name="Frigate7" parent="Enemies" index="87" instance=ExtResource( 7 )]
 position = Vector2( 512, -34304 )
 
-[node name="Frigate8" parent="Enemies" index="78" instance=ExtResource( 7 )]
+[node name="Frigate8" parent="Enemies" index="88" instance=ExtResource( 7 )]
 position = Vector2( 1536, -35328 )
 
-[node name="Frigate9" parent="Enemies" index="79" instance=ExtResource( 7 )]
+[node name="Frigate9" parent="Enemies" index="89" instance=ExtResource( 7 )]
 position = Vector2( 512, -36352 )
 
-[node name="Frigate10" parent="Enemies" index="80" instance=ExtResource( 7 )]
+[node name="Frigate10" parent="Enemies" index="90" instance=ExtResource( 7 )]
 position = Vector2( 512, -38528 )
 
-[node name="Frigate11" parent="Enemies" index="81" instance=ExtResource( 7 )]
+[node name="Frigate11" parent="Enemies" index="91" instance=ExtResource( 7 )]
 position = Vector2( 1408, -38528 )
 
-[node name="Frigate12" parent="Enemies" index="82" instance=ExtResource( 7 )]
+[node name="Frigate12" parent="Enemies" index="92" instance=ExtResource( 7 )]
 position = Vector2( 1408, -37632 )
 
-[node name="Frigate13" parent="Enemies" index="83" instance=ExtResource( 7 )]
+[node name="Frigate13" parent="Enemies" index="93" instance=ExtResource( 7 )]
 position = Vector2( 512, -37632 )
 
-[node name="Boss" parent="Enemies" index="84" instance=ExtResource( 8 )]
+[node name="Boss" parent="Enemies" index="94" instance=ExtResource( 8 )]
 position = Vector2( 960, -44800 )
 
 [node name="Effects" parent="." index="5"]

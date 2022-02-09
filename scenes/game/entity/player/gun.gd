@@ -2,8 +2,10 @@ extends Node2D
 
 signal gun_fired(gun_position, gun_color)
 signal gun_level_set(gun_level)
+signal gun_level_bonus()
 
 const BULLET_INDEX_LIMIT := 100
+const MAX_GUN_LEVEL := 6
 
 enum GunPosition {GUN_LEFT, GUN_RIGHT, GUN_BOTH}
 
@@ -13,7 +15,9 @@ onready var gun_position_right := $GunPositionRight
 export(Array, Resource) var gun_levels
 export var current_gun_level := 0 setget set_gun_level
 func set_gun_level(level: int):
-	current_gun_level = int(min(level, 6))
+	if level > MAX_GUN_LEVEL:
+		emit_signal("gun_level_bonus")
+	current_gun_level = int(min(level, MAX_GUN_LEVEL))
 	emit_signal("gun_level_set", current_gun_level)
 
 var bullet_scene

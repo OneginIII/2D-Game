@@ -37,7 +37,7 @@ func trigger(destroyed: bool = false):
 		var bullet = BULLET_SCENE.instance()
 		bullet.position = shoot_point.global_position
 		bullet.position -= bullets_parent.global_position
-		bullet.direction = Vector2.UP.rotated(rotation_increment * i)
+		bullet.direction = Vector2.UP.rotated(rotation_increment * i + ROTATION_ANGLE)
 		bullets_parent.call_deferred("add_child", bullet)
 		shoot_arm.rotate(rotation_increment)
 	if !destroyed:

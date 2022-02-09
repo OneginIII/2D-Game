@@ -1,11 +1,12 @@
 extends Node2D
 
 const POWERUP_PICKUP := preload("res://scenes/game/entity/powerup/powerup_pickup.tscn")
-const POWERUP_INTERVAL := 200
+const POWERUP_INTERVAL := 250
+const POWERUP_MAXED_BONUS := 100
 const CHECKPOINT_MESSAGE := "Checkpoint Reached"
 const GAME_OVER_MESSAGE := "Game Over"
 const VICTORY_MESSAGE := "Game Complete"
-const DEATH_SCORE_MULTIPLY := 0.75
+const DEATH_SCORE_MULTIPLY := (1.0 / 3.0) * 2.0
 const LEVEL_WIDTH := 1920.0
 const GAME_OVER_DELAY := 4.0
 const VICTORY_DELAY := 5.0
@@ -42,6 +43,7 @@ func _ready():
 	add_child(level_node)
 	add_child(tween)
 	player_node.connect("player_death", self, "player_death")
+	player_node.connect("bonus_upgrade", self, "on_bonus_powerup")
 	gui_node.modulate = Color.transparent
 
 func start_game():
@@ -112,6 +114,8 @@ func player_death(out_of_lives: bool):
 	player_node.reset_player()
 	self.score *= DEATH_SCORE_MULTIPLY
 	score_treshold = int(ceil(float(score) / float(POWERUP_INTERVAL)) * float(POWERUP_INTERVAL))
+	if score_treshold < POWERUP_INTERVAL:
+		score_treshold = POWERUP_INTERVAL
 
 func spawn_powerup():
 	var powerup_node = POWERUP_PICKUP.instance()
@@ -124,6 +128,9 @@ func spawn_powerup():
 		powerup_index += 1
 	else:
 		powerup_index = 0
+
+func on_bonus_powerup():
+	self.score += POWERUP_MAXED_BONUS
 
 func checkpoint_reached(checkpoint_name: String, display_message: bool):
 	current_checkpoint = checkpoint_name

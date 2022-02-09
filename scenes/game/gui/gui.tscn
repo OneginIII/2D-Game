@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/game/gui/assets/status_title_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/game/gui/assets/life.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scenes/game/gui/assets/center_text_font.tres" type="DynamicFont" id=10]
 [ext_resource path="res://scenes/game/gui/assets/center_shadow.png" type="Texture" id=11]
 [ext_resource path="res://scenes/menu/menu_button.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/game/gui/assets/score_number_text.tres" type="DynamicFont" id=13]
 [ext_resource path="res://scenes/menu/assets/slider_dot.png" type="Texture" id=14]
 [ext_resource path="res://scenes/menu/assets/menu_title_font.tres" type="DynamicFont" id=15]
 
@@ -221,8 +222,7 @@ margin_left = 1437.0
 margin_right = 1837.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 400, 0 )
-size_flags_vertical = 3
-custom_constants/separation = -5
+custom_constants/separation = -10
 
 [node name="Title" type="Label" parent="PlayerInfo/Score"]
 margin_right = 400.0
@@ -233,10 +233,10 @@ align = 2
 uppercase = true
 
 [node name="Score" type="Label" parent="PlayerInfo/Score"]
-margin_top = 46.0
+margin_top = 41.0
 margin_right = 400.0
-margin_bottom = 123.0
-custom_fonts/font = ExtResource( 7 )
+margin_bottom = 124.0
+custom_fonts/font = ExtResource( 13 )
 text = "01234567"
 align = 2
 
