@@ -31,3 +31,11 @@ func _unhandled_input(event):
 		if event.is_action_pressed("pause"):
 			pause(false)
 			get_tree().set_input_as_handled()
+
+func settings(state: bool):
+	$Menu.visible = !state
+	$Settings.visible = state
+	if state == true:
+		$Settings/CenterContainer/Back.grab_focus()
+	else:
+		$Menu/Settings.grab_focus()

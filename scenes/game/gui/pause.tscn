@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/menu/assets/menu_title_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/menu_button.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/game/gui/pause.gd" type="Script" id=3]
 [ext_resource path="res://scenes/menu/assets/scores_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://scenes/menu/settings_menu.tscn" type="PackedScene" id=5]
 
 [node name="Pause" type="Control"]
 pause_mode = 2
@@ -28,11 +29,11 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -170.5
-margin_top = -187.0
+margin_top = -273.0
 margin_right = 170.5
-margin_bottom = 187.0
+margin_bottom = 273.0
 rect_pivot_offset = Vector2( -1600, -796 )
-custom_constants/separation = 0
+custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -46,19 +47,28 @@ text = "Paused"
 align = 1
 
 [node name="Resume" parent="Menu" instance=ExtResource( 2 )]
-margin_top = 150.0
+margin_top = 170.0
 margin_right = 341.0
-margin_bottom = 262.0
+margin_bottom = 282.0
 rect_min_size = Vector2( 200, 0 )
-focus_neighbour_bottom = NodePath("../Quit")
+focus_neighbour_bottom = NodePath("../Settings")
 text = "Resume"
 
-[node name="Quit" parent="Menu" instance=ExtResource( 2 )]
-margin_top = 262.0
+[node name="Settings" parent="Menu" instance=ExtResource( 2 )]
+margin_top = 302.0
 margin_right = 341.0
-margin_bottom = 374.0
+margin_bottom = 414.0
 rect_min_size = Vector2( 200, 0 )
 focus_neighbour_top = NodePath("../Resume")
+focus_neighbour_bottom = NodePath("../Quit")
+text = "Settings"
+
+[node name="Quit" parent="Menu" instance=ExtResource( 2 )]
+margin_top = 434.0
+margin_right = 341.0
+margin_bottom = 546.0
+rect_min_size = Vector2( 200, 0 )
+focus_neighbour_top = NodePath("../Settings")
 text = "Quit"
 
 [node name="QuitConfirm" type="VBoxContainer" parent="."]
@@ -111,7 +121,14 @@ margin_right = 580.0
 rect_min_size = Vector2( 200, 0 )
 text = "Quit"
 
+[node name="Settings" parent="." instance=ExtResource( 5 )]
+visible = false
+
 [connection signal="button_down" from="Menu/Resume" to="." method="pause" binds= [ false ]]
+[connection signal="button_down" from="Menu/Settings" to="." method="settings" binds= [ true ]]
 [connection signal="button_down" from="Menu/Quit" to="." method="quit_confirm" binds= [ true ]]
 [connection signal="button_down" from="QuitConfirm/Buttons/Back" to="." method="quit_confirm" binds= [ false ]]
 [connection signal="button_down" from="QuitConfirm/Buttons/Quit" to="." method="quit_game"]
+[connection signal="button_down" from="Settings/CenterContainer/Back" to="." method="settings" binds= [ false ]]
+
+[editable path="Settings"]

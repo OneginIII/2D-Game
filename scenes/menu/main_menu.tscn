@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://scenes/menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/assets/background.png" type="Texture" id=2]
@@ -17,8 +17,7 @@
 [ext_resource path="res://scenes/game/gui/assets/submenu_font.tres" type="DynamicFont" id=15]
 [ext_resource path="res://scenes/menu/assets/scores_font.tres" type="DynamicFont" id=16]
 [ext_resource path="res://scenes/menu/menu_panel.gd" type="Script" id=17]
-[ext_resource path="res://scenes/menu/assets/slider_dot.png" type="Texture" id=18]
-[ext_resource path="res://scenes/menu/assets/settings_font.tres" type="DynamicFont" id=19]
+[ext_resource path="res://scenes/menu/settings_menu.tscn" type="PackedScene" id=18]
 [ext_resource path="res://scenes/menu/highscore_list.gd" type="Script" id=20]
 [ext_resource path="res://scenes/menu/assets/buttons/arrows.png" type="Texture" id=21]
 [ext_resource path="res://scenes/menu/assets/buttons/ls.png" type="Texture" id=22]
@@ -147,35 +146,6 @@ size = 48
 use_filter = true
 font_data = ExtResource( 33 )
 
-[sub_resource type="StyleBoxTexture" id=10]
-texture = ExtResource( 18 )
-region_rect = Rect2( 0, 0, 40, 40 )
-margin_left = 20.0
-margin_right = 20.0
-margin_top = 20.0
-margin_bottom = 20.0
-modulate_color = Color( 0, 0, 0, 0.752941 )
-
-[sub_resource type="StyleBoxTexture" id=11]
-texture = ExtResource( 18 )
-region_rect = Rect2( 0, 0, 40, 40 )
-margin_left = 20.0
-margin_right = 20.0
-margin_top = 20.0
-margin_bottom = 20.0
-expand_margin_right = 20.0
-modulate_color = Color( 1, 1, 1, 0.752941 )
-
-[sub_resource type="StyleBoxTexture" id=12]
-texture = ExtResource( 18 )
-region_rect = Rect2( 0, 0, 40, 40 )
-margin_left = 20.0
-margin_right = 20.0
-margin_top = 20.0
-margin_bottom = 20.0
-expand_margin_right = 20.0
-modulate_color = Color( 1, 1, 1, 0.627451 )
-
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -254,7 +224,6 @@ __meta__ = {
 }
 
 [node name="MainPanel" type="MarginContainer" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 0
@@ -564,6 +533,7 @@ rect_min_size = Vector2( 200, 0 )
 text = "Back"
 
 [node name="HelpPanel" type="MarginContainer" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/margin_right = 160
@@ -888,107 +858,15 @@ __meta__ = {
 }
 initial_focus_target = NodePath("Settings/CenterContainer/Back")
 
-[node name="Settings" type="VBoxContainer" parent="SettingsPanel"]
+[node name="Settings" parent="SettingsPanel" instance=ExtResource( 18 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 200.0
-margin_top = 281.0
+margin_top = 222.0
 margin_right = 1720.0
-margin_bottom = 798.0
-size_flags_vertical = 4
-custom_constants/separation = 40
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Title" type="Label" parent="SettingsPanel/Settings"]
-margin_right = 1520.0
-margin_bottom = 127.0
-custom_fonts/font = ExtResource( 14 )
-text = "Settings"
-align = 1
-
-[node name="SettingsList" type="VBoxContainer" parent="SettingsPanel/Settings"]
-margin_left = 316.0
-margin_top = 167.0
-margin_right = 1204.0
-margin_bottom = 365.0
-rect_min_size = Vector2( 800, 0 )
-size_flags_horizontal = 4
-custom_constants/separation = 40
-
-[node name="Sound" type="HBoxContainer" parent="SettingsPanel/Settings/SettingsList"]
-margin_right = 888.0
-margin_bottom = 79.0
-custom_constants/separation = 80
-
-[node name="Label" type="Label" parent="SettingsPanel/Settings/SettingsList/Sound"]
-margin_right = 408.0
-margin_bottom = 79.0
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 19 )
-text = "Sound volume"
-
-[node name="Slider" type="HSlider" parent="SettingsPanel/Settings/SettingsList/Sound"]
-margin_left = 488.0
-margin_right = 888.0
-margin_bottom = 79.0
-rect_min_size = Vector2( 400, 0 )
-size_flags_horizontal = 10
-size_flags_vertical = 1
-custom_icons/grabber_disabled = ExtResource( 18 )
-custom_icons/grabber_highlight = ExtResource( 18 )
-custom_icons/grabber = ExtResource( 18 )
-custom_styles/slider = SubResource( 10 )
-custom_styles/grabber_area_highlight = SubResource( 11 )
-custom_styles/grabber_area = SubResource( 12 )
-max_value = 1.0
-step = 0.1
-value = 0.5
-
-[node name="Music" type="HBoxContainer" parent="SettingsPanel/Settings/SettingsList"]
-margin_top = 119.0
-margin_right = 888.0
-margin_bottom = 198.0
-custom_constants/separation = 80
-
-[node name="Label" type="Label" parent="SettingsPanel/Settings/SettingsList/Music"]
-margin_right = 391.0
-margin_bottom = 79.0
-size_flags_vertical = 1
-custom_fonts/font = ExtResource( 19 )
-text = "Music volume"
-
-[node name="Slider" type="HSlider" parent="SettingsPanel/Settings/SettingsList/Music"]
-margin_left = 488.0
-margin_right = 888.0
-margin_bottom = 79.0
-rect_min_size = Vector2( 400, 0 )
-size_flags_horizontal = 10
-size_flags_vertical = 1
-custom_icons/grabber_disabled = ExtResource( 18 )
-custom_icons/grabber_highlight = ExtResource( 18 )
-custom_icons/grabber = ExtResource( 18 )
-custom_styles/slider = SubResource( 10 )
-custom_styles/grabber_area_highlight = SubResource( 11 )
-custom_styles/grabber_area = SubResource( 12 )
-max_value = 1.0
-step = 0.1
-value = 0.5
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="CenterContainer" type="CenterContainer" parent="SettingsPanel/Settings"]
-margin_top = 405.0
-margin_right = 1520.0
-margin_bottom = 517.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Back" parent="SettingsPanel/Settings/CenterContainer" instance=ExtResource( 4 )]
-margin_left = 660.0
-margin_right = 860.0
-rect_min_size = Vector2( 200, 0 )
-text = "Back"
+margin_bottom = 858.0
 
 [connection signal="button_down" from="MainPanel/Menu/Start" to="." method="_on_Start_button_down"]
 [connection signal="button_down" from="MainPanel/Menu/Scores" to="." method="_on_Scores_button_down"]
@@ -1005,3 +883,5 @@ text = "Back"
 [connection signal="button_down" from="HelpPanel/HowToPlay/CenterContainer/Back" to="HelpPanel" method="hide_panel"]
 [connection signal="button_down" from="SettingsPanel/Settings/CenterContainer/Back" to="MainPanel" method="show_panel"]
 [connection signal="button_down" from="SettingsPanel/Settings/CenterContainer/Back" to="SettingsPanel" method="hide_panel"]
+
+[editable path="SettingsPanel/Settings"]

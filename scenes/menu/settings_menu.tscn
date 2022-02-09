@@ -1,0 +1,199 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scenes/menu/assets/slider_dot.png" type="Texture" id=1]
+[ext_resource path="res://scenes/menu/assets/checkbox_checked.png" type="Texture" id=2]
+[ext_resource path="res://scenes/menu/assets/menu_title_font.tres" type="DynamicFont" id=3]
+[ext_resource path="res://scenes/menu/assets/settings_font.tres" type="DynamicFont" id=4]
+[ext_resource path="res://scenes/menu/menu_button.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/menu/assets/checkbox.png" type="Texture" id=6]
+[ext_resource path="res://scenes/menu/assets/checkbox_bg.png" type="Texture" id=7]
+[ext_resource path="res://scenes/menu/settings_menu.gd" type="Script" id=8]
+
+[sub_resource type="StyleBoxTexture" id=10]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 40, 40 )
+margin_left = 20.0
+margin_right = 20.0
+margin_top = 20.0
+margin_bottom = 20.0
+modulate_color = Color( 0, 0, 0, 0.752941 )
+
+[sub_resource type="StyleBoxTexture" id=11]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 40, 40 )
+margin_left = 20.0
+margin_right = 20.0
+margin_top = 20.0
+margin_bottom = 20.0
+expand_margin_right = 20.0
+modulate_color = Color( 1, 1, 1, 0.752941 )
+
+[sub_resource type="StyleBoxTexture" id=12]
+texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 40, 40 )
+margin_left = 20.0
+margin_right = 20.0
+margin_top = 20.0
+margin_bottom = 20.0
+expand_margin_right = 20.0
+modulate_color = Color( 1, 1, 1, 0.627451 )
+
+[sub_resource type="StyleBoxTexture" id=14]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 60, 60 )
+modulate_color = Color( 1, 1, 1, 0.501961 )
+
+[sub_resource type="StyleBoxTexture" id=15]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 60, 60 )
+modulate_color = Color( 1, 1, 1, 0.627451 )
+
+[sub_resource type="StyleBoxEmpty" id=16]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="Settings" type="VBoxContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -760.0
+margin_top = -318.0
+margin_right = 760.0
+margin_bottom = 318.0
+size_flags_vertical = 4
+custom_constants/separation = 40
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_right = 1520.0
+margin_bottom = 127.0
+custom_fonts/font = ExtResource( 3 )
+text = "Settings"
+align = 1
+
+[node name="SettingsList" type="VBoxContainer" parent="."]
+margin_left = 316.0
+margin_top = 167.0
+margin_right = 1204.0
+margin_bottom = 484.0
+rect_min_size = Vector2( 800, 0 )
+size_flags_horizontal = 4
+custom_constants/separation = 40
+
+[node name="Sound" type="HBoxContainer" parent="SettingsList"]
+margin_right = 888.0
+margin_bottom = 79.0
+custom_constants/separation = 80
+
+[node name="Label" type="Label" parent="SettingsList/Sound"]
+margin_right = 408.0
+margin_bottom = 79.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 4 )
+text = "Sound volume"
+
+[node name="Slider" type="HSlider" parent="SettingsList/Sound"]
+margin_left = 488.0
+margin_right = 888.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 400, 0 )
+size_flags_horizontal = 10
+size_flags_vertical = 1
+custom_icons/grabber_disabled = ExtResource( 1 )
+custom_icons/grabber_highlight = ExtResource( 1 )
+custom_icons/grabber = ExtResource( 1 )
+custom_styles/slider = SubResource( 10 )
+custom_styles/grabber_area_highlight = SubResource( 11 )
+custom_styles/grabber_area = SubResource( 12 )
+max_value = 1.0
+step = 0.1
+value = 0.5
+
+[node name="Music" type="HBoxContainer" parent="SettingsList"]
+margin_top = 119.0
+margin_right = 888.0
+margin_bottom = 198.0
+custom_constants/separation = 80
+
+[node name="Label" type="Label" parent="SettingsList/Music"]
+margin_right = 391.0
+margin_bottom = 79.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 4 )
+text = "Music volume"
+
+[node name="Slider" type="HSlider" parent="SettingsList/Music"]
+margin_left = 488.0
+margin_right = 888.0
+margin_bottom = 79.0
+rect_min_size = Vector2( 400, 0 )
+size_flags_horizontal = 10
+size_flags_vertical = 1
+custom_icons/grabber_disabled = ExtResource( 1 )
+custom_icons/grabber_highlight = ExtResource( 1 )
+custom_icons/grabber = ExtResource( 1 )
+custom_styles/slider = SubResource( 10 )
+custom_styles/grabber_area_highlight = SubResource( 11 )
+custom_styles/grabber_area = SubResource( 12 )
+max_value = 1.0
+step = 0.1
+value = 0.5
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Fullscreen" type="HBoxContainer" parent="SettingsList"]
+margin_top = 238.0
+margin_right = 888.0
+margin_bottom = 317.0
+custom_constants/separation = 60
+alignment = 1
+
+[node name="Label" type="Label" parent="SettingsList/Fullscreen"]
+margin_left = 241.0
+margin_right = 527.0
+margin_bottom = 79.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 4 )
+text = "Fullscreen"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CheckBox" type="CheckBox" parent="SettingsList/Fullscreen"]
+margin_left = 587.0
+margin_top = 9.0
+margin_right = 647.0
+margin_bottom = 69.0
+size_flags_vertical = 4
+custom_icons/checked = ExtResource( 2 )
+custom_icons/unchecked = ExtResource( 6 )
+custom_styles/hover = SubResource( 14 )
+custom_styles/pressed = SubResource( 15 )
+custom_styles/focus = SubResource( 14 )
+custom_styles/normal = SubResource( 16 )
+align = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_top = 524.0
+margin_right = 1520.0
+margin_bottom = 636.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Back" parent="CenterContainer" instance=ExtResource( 5 )]
+margin_left = 660.0
+margin_right = 860.0
+rect_min_size = Vector2( 200, 0 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
+text = "Back"
+
+[connection signal="visibility_changed" from="." to="." method="on_visibility_changed"]
