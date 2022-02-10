@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/player_gun_3.ogg-29e7caa24c9a141c941b3bf22934b3a0.oggstr"
+
+[deps]
+
+source_file="res://scenes/game/entity/player/assets/sounds/player_gun_3.ogg"
+dest_files=[ "res://.import/player_gun_3.ogg-29e7caa24c9a141c941b3bf22934b3a0.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

@@ -9,3 +9,5 @@ export var bullet_scene: PackedScene
 export var alternating := true
 export var give_index := false
 export var give_side := false
+export var audio_stream : AudioStream
+export var audio_volume := 0.0

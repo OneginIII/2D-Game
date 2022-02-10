@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/menu/assets/menu_button_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/menu_button.gd" type="Script" id=2]
 [ext_resource path="res://scenes/menu/assets/selection_icon.png" type="Texture" id=3]
+[ext_resource path="res://scenes/menu/assets/sounds/menu_accept.ogg" type="AudioStream" id=4]
+[ext_resource path="res://scenes/menu/assets/sounds/menu_select.ogg" type="AudioStream" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -24,8 +26,11 @@ text = "Start"
 align = 0
 script = ExtResource( 2 )
 __meta__ = {
+"_edit_use_anchors_": false,
 "_editor_description_": ""
 }
+focus_sound = ExtResource( 5 )
+accept_sound = ExtResource( 4 )
 
 [node name="Icon" type="TextureRect" parent="."]
 modulate = Color( 1, 1, 1, 0 )
@@ -40,7 +45,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -6.0
+bus = "Sound"
+
+[connection signal="button_down" from="." to="." method="press"]
 [connection signal="focus_entered" from="." to="." method="highlight_enter"]
 [connection signal="focus_exited" from="." to="." method="highlight_exit"]
 [connection signal="mouse_entered" from="." to="." method="grab_focus"]
 [connection signal="mouse_exited" from="." to="." method="release_focus"]
+[connection signal="visibility_changed" from="." to="." method="visibility_changed"]

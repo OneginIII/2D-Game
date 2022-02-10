@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/powerup.ogg-d32a046774db39db0fa70d9dddbe8c56.oggstr"
+
+[deps]
+
+source_file="res://scenes/game/entity/powerup/assets/powerup.ogg"
+dest_files=[ "res://.import/powerup.ogg-d32a046774db39db0fa70d9dddbe8c56.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

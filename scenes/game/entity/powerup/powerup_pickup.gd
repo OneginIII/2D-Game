@@ -10,6 +10,7 @@ func _on_PowerupPickup_body_entered(body):
 	$Particles.emitting = true
 	$Sprite.visible = false
 	$Shape.set_deferred("disabled", true)
+	$Audio.play()
 	if body is PlayerShip:
 		powerup_resource.powerup_activate(body)
 	get_tree().create_timer(1.5).connect("timeout", self, "queue_free")

@@ -29,6 +29,7 @@ func shoot():
 	bullets_parent.add_child(bullet)
 	light_tween.interpolate_property(turret_light, "modulate", bullet.color, Color.black, 0.5)
 	light_tween.start()
+	.shoot()
 
 func _on_ShootTimer_timeout():
 	shoot()

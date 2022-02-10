@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/beam_charge.ogg-b6009a0138fdd07c83c85eac877a2417.oggstr"
+
+[deps]
+
+source_file="res://scenes/game/entity/enemy/boss/assets/beam_charge.ogg"
+dest_files=[ "res://.import/beam_charge.ogg-b6009a0138fdd07c83c85eac877a2417.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

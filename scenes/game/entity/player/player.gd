@@ -36,6 +36,8 @@ func set_lives(value: int):
 export var acceleration := 10.0
 export(PackedScene) var death_particles
 export var invulnerable := false
+export var damage_sound : AudioStream
+export var damage_volume := 0.0
 
 onready var player_visual := $Visual
 onready var player_gun := $Gun
@@ -43,6 +45,7 @@ onready var player_shape := $Shape
 onready var initial_position := position
 onready var tween := Tween.new()
 onready var invul_timer := Timer.new()
+onready var audio := AudioStreamPlayer2D.new()
 
 var input_move_vector := Vector2.ZERO
 var current_move_vector := Vector2.ZERO
@@ -58,6 +61,8 @@ func _ready():
 	player_gun.connect("gun_level_bonus", self, "on_gun_level_bonus")
 	controllable = false
 	position += SPAWN_OFFSET
+	add_child(audio)
+	audio.bus = "Sound"
 
 func _process(delta):
 	input_move_vector = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
@@ -79,6 +84,9 @@ func take_damage(amount: int, color: Color):
 		return
 	invul_timer.start(INVUL_TIME)
 	player_visual.damage_flash(color)
+	audio.stream = damage_sound
+	audio.volume_db = damage_volume
+	audio.play()
 	if invulnerable:
 		return
 	self.health -= amount

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/enemy_gun_2.ogg-b75c353a496c6634360f9cb3570514ee.oggstr"
+
+[deps]
+
+source_file="res://scenes/game/entity/enemy/assets/enemy_gun_2.ogg"
+dest_files=[ "res://.import/enemy_gun_2.ogg-b75c353a496c6634360f9cb3570514ee.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

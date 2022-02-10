@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://scenes/game/entity/player/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game/entity/player/assets/ship.png" type="Texture" id=2]
@@ -13,6 +13,10 @@
 [ext_resource path="res://scenes/game/entity/bullet/player/player_bullet_lvl3.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scenes/game/entity/player/gun_level.gd" type="Script" id=12]
 [ext_resource path="res://scenes/game/entity/effect/explosion/player_explosion.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/game/entity/player/assets/sounds/player_gun_3.ogg" type="AudioStream" id=14]
+[ext_resource path="res://scenes/game/entity/player/assets/sounds/player_gun_2.ogg" type="AudioStream" id=15]
+[ext_resource path="res://scenes/game/entity/player/assets/sounds/player_gun_1.ogg" type="AudioStream" id=16]
+[ext_resource path="res://scenes/game/entity/player/assets/sounds/player_hit.ogg" type="AudioStream" id=17]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 3 )
@@ -45,6 +49,8 @@ bullet_scene = ExtResource( 9 )
 alternating = true
 give_index = false
 give_side = false
+audio_stream = ExtResource( 16 )
+audio_volume = -6.0
 
 [sub_resource type="Resource" id=12]
 script = ExtResource( 12 )
@@ -55,6 +61,8 @@ bullet_scene = ExtResource( 9 )
 alternating = true
 give_index = false
 give_side = false
+audio_stream = ExtResource( 16 )
+audio_volume = -6.0
 
 [sub_resource type="Resource" id=13]
 script = ExtResource( 12 )
@@ -65,6 +73,8 @@ bullet_scene = ExtResource( 9 )
 alternating = true
 give_index = false
 give_side = false
+audio_stream = ExtResource( 16 )
+audio_volume = -6.0
 
 [sub_resource type="Resource" id=14]
 script = ExtResource( 12 )
@@ -75,6 +85,8 @@ bullet_scene = ExtResource( 10 )
 alternating = false
 give_index = false
 give_side = false
+audio_stream = ExtResource( 15 )
+audio_volume = -4.0
 
 [sub_resource type="Resource" id=15]
 script = ExtResource( 12 )
@@ -85,6 +97,8 @@ bullet_scene = ExtResource( 10 )
 alternating = false
 give_index = false
 give_side = false
+audio_stream = ExtResource( 15 )
+audio_volume = -4.0
 
 [sub_resource type="Resource" id=16]
 script = ExtResource( 12 )
@@ -95,6 +109,8 @@ bullet_scene = ExtResource( 10 )
 alternating = false
 give_index = false
 give_side = false
+audio_stream = ExtResource( 15 )
+audio_volume = -4.0
 
 [sub_resource type="Resource" id=17]
 script = ExtResource( 12 )
@@ -105,6 +121,8 @@ bullet_scene = ExtResource( 11 )
 alternating = false
 give_index = true
 give_side = true
+audio_stream = ExtResource( 14 )
+audio_volume = -2.0
 
 [node name="Player" type="KinematicBody2D"]
 z_index = 2
@@ -112,6 +130,7 @@ collision_layer = 2
 collision_mask = 25
 script = ExtResource( 1 )
 death_particles = ExtResource( 13 )
+damage_sound = ExtResource( 17 )
 
 [node name="Visual" type="Node2D" parent="."]
 position = Vector2( 0, 48 )

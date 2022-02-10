@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/game/entity/effect/assets/circle_particle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/game/entity/effect/explosion/explosion.gd" type="Script" id=2]
 [ext_resource path="res://scenes/game/entity/bullet/assets/bullet_light.png" type="Texture" id=3]
+[ext_resource path="res://scenes/game/entity/effect/assets/explosion.ogg" type="AudioStream" id=4]
 
 [sub_resource type="Shader" id=9]
 code = "shader_type canvas_item;
@@ -110,3 +111,9 @@ texture = ExtResource( 3 )
 [node name="Animation" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 15 )
 anims/light = SubResource( 16 )
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = -2.0
+autoplay = true
+bus = "Sound"

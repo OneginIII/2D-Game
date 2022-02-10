@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/boss_explosion.ogg-4b9679a0b134c7c88ccf1eb192720cd0.oggstr"
+
+[deps]
+
+source_file="res://scenes/game/entity/effect/assets/boss_explosion.ogg"
+dest_files=[ "res://.import/boss_explosion.ogg-4b9679a0b134c7c88ccf1eb192720cd0.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

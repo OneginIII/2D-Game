@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/game/entity/enemy/base_enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/game/entity/enemy/turret/turret.gd" type="Script" id=2]
 [ext_resource path="res://scenes/game/entity/enemy/turret/assets/turret.png" type="Texture" id=3]
 [ext_resource path="res://scenes/game/entity/enemy/turret/assets/turret_head.png" type="Texture" id=4]
 [ext_resource path="res://scenes/game/entity/enemy/turret/assets/turret_light.png" type="Texture" id=5]
+[ext_resource path="res://scenes/game/entity/enemy/assets/enemy_gun_1.ogg" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 112, 112 )
@@ -20,6 +21,8 @@ health = 80
 flashing_sprites = [ NodePath("Sprite"), NodePath("Head") ]
 activation_margin = 96.0
 score_value = 50
+shoot_sound = ExtResource( 6 )
+shoot_volume = -4.0
 
 [node name="Shape" parent="." index="0"]
 shape = SubResource( 1 )

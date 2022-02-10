@@ -11,6 +11,7 @@ enum GunPosition {GUN_LEFT, GUN_RIGHT, GUN_BOTH}
 
 onready var gun_position_left := $GunPositionLeft
 onready var gun_position_right := $GunPositionRight
+onready var audio := AudioStreamPlayer2D.new()
 
 export(Array, Resource) var gun_levels
 export var current_gun_level := 0 setget set_gun_level
@@ -30,6 +31,8 @@ func _ready():
 	bullet_scene = gun_levels[0].bullet_scene
 	add_child(fire_rate_timer)
 	fire_rate_timer.one_shot = true
+	add_child(audio)
+	audio.bus = "Sound"
 
 func fire():
 	if fire_rate_timer.is_stopped():
@@ -72,3 +75,6 @@ func fire():
 			bullets_parent.add_child(bullet_right)
 			emit_signal("gun_fired", GunPosition.GUN_BOTH, bullet_left.color)
 		fire_rate_timer.start(gun.fire_rate)
+		audio.stream = gun.audio_stream
+		audio.volume_db = gun.audio_volume
+		audio.play()

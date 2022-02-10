@@ -301,6 +301,7 @@ rect_min_size = Vector2( 420, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 3
 text = "Quit"
+play_accept_sound = false
 
 [node name="ScorePanel" type="MarginContainer" parent="."]
 visible = false

@@ -34,6 +34,7 @@ func shoot():
 	bullet.position -= bullets_parent.global_position
 	bullets_parent.add_child(bullet)
 	light_tween.start()
+	.shoot()
 
 func _on_ShootTimer_timeout():
 	shoot()

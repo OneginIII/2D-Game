@@ -10,8 +10,11 @@ export var activation_margin : float = 64.0
 export var score_value := 10
 export (PackedScene) var alternative_explosion
 export var destroy_delay := 0.5
+export var shoot_sound : AudioStream
+export var shoot_volume := 0.0
 
 onready var shape := $Shape
+onready var audio := AudioStreamPlayer2D.new()
 
 var player_node
 var bullets_parent
@@ -34,6 +37,8 @@ func _ready():
 	add_child(activation_timer)
 	activation_timer.connect("timeout", self, "check_activation")
 	activation_timer.start(ACTIVATION_INTERVAL)
+	add_child(audio)
+	audio.bus = "Sound"
 
 func take_damage(amount: int, color: Color):
 	health -= amount
@@ -75,3 +80,8 @@ func check_activation():
 	elif global_position.y > get_viewport_rect().size.y + activation_margin and active:
 		active = false
 		activation_timer.stop()
+
+func shoot():
+	audio.stream = shoot_sound
+	audio.volume_db = shoot_volume
+	audio.play()

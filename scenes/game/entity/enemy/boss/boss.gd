@@ -10,12 +10,16 @@ const GUN_AMOUNT := 12
 const BEAM_DELAY := 4.0
 const BEAM_LENGTH := 5.0
 
+export var chargeup_sound : AudioStream
+export var beam_sound : AudioStream
+
 onready var bullet_scene := preload("res://scenes/game/entity/bullet/enemy/boss_bullet.tscn")
 onready var beam_scene := preload("res://scenes/game/entity/bullet/enemy/boss_beam.tscn")
 onready var rotator := $Rotator
 onready var guns := $Rotator/Guns.get_children()
 onready var gun_lights := $Rotator/Lights/Guns.get_children()
 onready var doors := $Rotator/Doors.get_children()
+onready var beam_audio := AudioStreamPlayer2D.new()
 
 var tween := Tween.new()
 var gun_timer := Timer.new()
@@ -45,6 +49,8 @@ func _ready():
 	gun_timer.connect("timeout", self, "on_gun_timer_timeout")
 	beam_timer.connect("timeout", self, "on_beam_timer_timeout")
 	connect("boss_defeated", game_node, "on_boss_defeated")
+	add_child(beam_audio)
+	beam_audio.bus = "Sound"
 
 func _physics_process(delta):
 	if !active and !destroyed:
@@ -104,6 +110,8 @@ func shoot():
 	bullets_parent.add_child(bullet)
 	tween.interpolate_property(gun_lights[gun_index], "modulate", bullet.color, Color.black, 0.5)
 	tween.start()
+	audio.global_position = guns[gun_index].get_node("Position").global_position
+	.shoot()
 
 func animate_doors(open: bool = true):
 	if open:
@@ -123,6 +131,7 @@ func on_beam_timer_timeout():
 func beam_effects():
 	var center_shader := $Rotator/CenterEffect.material as ShaderMaterial
 	var fade_time := 0.5
+	beam_audio.volume_db = 0.0
 	tween.interpolate_property(center_shader, "shader_param/pulse_blend", 0.0, 1.0,
 		BEAM_DELAY, Tween.TRANS_QUAD, Tween.EASE_IN)
 	tween.interpolate_property(center_shader, "shader_param/pulse_blend", 1.0, 0.0,
@@ -131,7 +140,11 @@ func beam_effects():
 		fade_time, Tween.TRANS_QUAD, Tween.EASE_IN, BEAM_DELAY - fade_time)
 	tween.interpolate_property(center_shader, "shader_param/rainbow_blend", 1.0, 0.0,
 		fade_time, Tween.TRANS_QUAD, Tween.EASE_IN, BEAM_DELAY + BEAM_LENGTH - fade_time)
+	tween.interpolate_property(beam_audio, "volume_db", 0.0, linear2db(0.0),
+		fade_time * 2.0, Tween.TRANS_QUAD, Tween.EASE_IN, BEAM_DELAY + BEAM_LENGTH)
 	tween.start()
+	beam_audio.stream = chargeup_sound
+	beam_audio.play()
 
 func beam():
 	if !active:
@@ -142,6 +155,8 @@ func beam():
 	beam.fire()
 	bullets_parent.add_child(beam)
 	current_beam_path = beam.get_path()
+	beam_audio.stream = beam_sound
+	beam_audio.play()
 
 func destroy():
 	.destroy()
