@@ -13,6 +13,7 @@ func pause(state: bool):
 		$Menu/Resume.grab_focus()
 		$Menu.visible = true
 		$QuitConfirm.visible = false
+		$Settings.visible = false
 
 func quit_confirm(state: bool):
 	$Menu.visible = !state

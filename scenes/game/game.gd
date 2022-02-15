@@ -18,6 +18,7 @@ onready var main_node := get_node_or_null("/root/Main")
 onready var player_node := $Player
 onready var gui_node := $GuiLayer/GameGui
 onready var powerup_spawn_point := $PowerupSpawnPoint
+onready var music_game := $Music/Game
 
 export(PackedScene) var level_scene
 export(Dictionary) var powerup_list
@@ -42,6 +43,7 @@ func _ready():
 	level_node = level_scene.instance()
 	add_child(level_node)
 	add_child(tween)
+	tween.pause_mode = PAUSE_MODE_PROCESS
 	player_node.connect("player_death", self, "player_death")
 	player_node.connect("bonus_upgrade", self, "on_bonus_powerup")
 	gui_node.modulate = Color.transparent
@@ -54,6 +56,8 @@ func start_game():
 	tween.interpolate_property(gui_node, "modulate", null, Color.white, 1.0)
 	tween.start()
 	game_running = true
+	music_game.volume_db = 0.0
+	music_game.play()
 
 func game_over(victory: bool = false):
 	game_running = false
@@ -62,6 +66,8 @@ func game_over(victory: bool = false):
 	else:
 		gui_node.center_message(GAME_OVER_MESSAGE)
 		player_node.controllable = false
+	tween.interpolate_property(music_game, "volume_db", null, -80.0, GAME_OVER_DELAY)
+	tween.start()
 	yield(get_tree().create_timer(GAME_OVER_DELAY), "timeout")
 	player_node.controllable = false
 	if victory:
@@ -81,16 +87,26 @@ func set_highscore(entered_name: String):
 
 func exit_game():
 	game_running = false
+	level_node.running = false
 	emit_signal("exit_game")
+	tween.interpolate_property(music_game, "volume_db", null, -80.0, 0.5)
+	tween.start()
 	yield(get_tree().create_timer(0.5), "timeout")
 	reset_score()
+	remove_level()
+	music_game.stop()
 
 func reset_score():
 	score = 0
 	gui_node.set_score(score)
 
+func remove_level():
+	if level_node != null:
+		level_node.queue_free()
+		level_node = null
+
 func reload_level():
-	level_node.queue_free()
+	remove_level()
 	yield(get_tree(), "idle_frame")
 	level_node = level_scene.instance()
 	add_child(level_node)
