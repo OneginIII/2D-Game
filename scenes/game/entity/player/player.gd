@@ -12,6 +12,7 @@ const SPAWN_LENGTH := 2.0
 const INVUL_TIME := 0.1
 
 signal health_updated(value)
+signal player_destroyed()
 signal player_death(out_of_lives)
 signal lives_updated(value)
 signal bonus_upgrade()
@@ -94,6 +95,7 @@ func take_damage(amount: int, color: Color):
 		death()
 
 func death():
+	emit_signal("player_destroyed")
 	dead = true
 	controllable = false
 	player_shape.set_deferred("disabled", true)

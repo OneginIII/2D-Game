@@ -60,7 +60,7 @@ tracks/0/keys = {
 scale = Vector2( 0.5, 0.5 )
 collision_mask = 0
 script = ExtResource( 6 )
-health = 60
+health = 50
 flashing_sprites = [ NodePath("Sprite") ]
 score_value = 30
 

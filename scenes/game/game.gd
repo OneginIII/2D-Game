@@ -10,6 +10,7 @@ const DEATH_SCORE_MULTIPLY := (1.0 / 3.0) * 2.0
 const LEVEL_WIDTH := 1920.0
 const GAME_OVER_DELAY := 4.0
 const VICTORY_DELAY := 5.0
+const MUSIC_FADE := 4.0
 
 signal score_updated(value)
 signal exit_game()
@@ -19,6 +20,7 @@ onready var player_node := $Player
 onready var gui_node := $GuiLayer/GameGui
 onready var powerup_spawn_point := $PowerupSpawnPoint
 onready var music_game := $Music/Game
+onready var music_boss := $Music/Boss
 
 export(PackedScene) var level_scene
 export(Dictionary) var powerup_list
@@ -45,6 +47,7 @@ func _ready():
 	add_child(tween)
 	tween.pause_mode = PAUSE_MODE_PROCESS
 	player_node.connect("player_death", self, "player_death")
+	player_node.connect("player_destroyed", self, "player_destroyed")
 	player_node.connect("bonus_upgrade", self, "on_bonus_powerup")
 	gui_node.modulate = Color.transparent
 
@@ -56,8 +59,7 @@ func start_game():
 	tween.interpolate_property(gui_node, "modulate", null, Color.white, 1.0)
 	tween.start()
 	game_running = true
-	music_game.volume_db = 0.0
-	music_game.play()
+	play_music()
 
 func game_over(victory: bool = false):
 	game_running = false
@@ -66,8 +68,7 @@ func game_over(victory: bool = false):
 	else:
 		gui_node.center_message(GAME_OVER_MESSAGE)
 		player_node.controllable = false
-	tween.interpolate_property(music_game, "volume_db", null, -80.0, GAME_OVER_DELAY)
-	tween.start()
+	stop_music()
 	yield(get_tree().create_timer(GAME_OVER_DELAY), "timeout")
 	player_node.controllable = false
 	if victory:
@@ -88,13 +89,12 @@ func set_highscore(entered_name: String):
 func exit_game():
 	game_running = false
 	level_node.running = false
+	player_node.controllable = false
 	emit_signal("exit_game")
-	tween.interpolate_property(music_game, "volume_db", null, -80.0, 0.5)
-	tween.start()
+	stop_music()
 	yield(get_tree().create_timer(0.5), "timeout")
 	reset_score()
 	remove_level()
-	music_game.stop()
 
 func reset_score():
 	score = 0
@@ -122,12 +122,16 @@ func reload_level():
 	# Level is ready to start scrolling
 	level_node.running = true
 
+func player_destroyed():
+	stop_music()
+
 func player_death(out_of_lives: bool):
 	if out_of_lives:
 		game_over()
 		return
 	reload_level()
 	player_node.reset_player()
+	play_music()
 	self.score *= DEATH_SCORE_MULTIPLY
 	score_treshold = int(ceil(float(score) / float(POWERUP_INTERVAL)) * float(POWERUP_INTERVAL))
 	if score_treshold < POWERUP_INTERVAL:
@@ -148,23 +152,52 @@ func spawn_powerup():
 func on_bonus_powerup():
 	self.score += POWERUP_MAXED_BONUS
 
-func checkpoint_reached(checkpoint_name: String, display_message: bool):
+func checkpoint_reached(checkpoint_name: String, display_message: bool, stop_music: bool):
 	current_checkpoint = checkpoint_name
 	for checkpoint in level_node.checkpoints:
 		level_node.checkpoints[checkpoint].active = true
 	level_node.checkpoints[checkpoint_name].active = false
 	if display_message:
 		gui_node.center_message(CHECKPOINT_MESSAGE)
+	if stop_music:
+		stop_music()
+
+func on_boss_started():
+	play_music(true)
 
 func on_boss_defeated():
+	stop_music()
 	yield(get_tree(), "idle_frame")
 	for node in level_node.powerups.get_children():
 		node.queue_free()
 	yield(get_tree().create_timer(VICTORY_DELAY), "timeout")
+	stop_music()
 	game_over(true)
 
+func play_music(boss: bool = false):
+	if boss:
+		tween.remove(music_boss, "volume_db")
+		music_boss.play()
+		music_boss.volume_db = 0.0
+	else:
+		tween.remove(music_game, "volume_db")
+		music_game.play()
+		music_game.volume_db = 0.0
+
+func stop_music():
+	if music_game.playing:
+		tween.interpolate_property(music_game, "volume_db", null, -80.0, MUSIC_FADE)
+	if music_boss.playing:
+		tween.interpolate_property(music_boss, "volume_db", null, -80.0, MUSIC_FADE)
+	tween.start()
+	yield(get_tree().create_timer(MUSIC_FADE), "timeout")
+	if music_game.volume_db < -70.0:
+		music_game.stop()
+	if music_boss.volume_db < -70.0:
+		music_boss.stop()
+
 func _unhandled_input(event):
-	if game_running:
+	if game_running and player_node.controllable:
 		if event.is_action_pressed("pause"):
 			var pause = $GuiLayer/Pause
 			if pause.visible == false:

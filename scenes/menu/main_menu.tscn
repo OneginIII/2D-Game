@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://scenes/menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/assets/background.png" type="Texture" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://scenes/menu/assets/scores_font.tres" type="DynamicFont" id=16]
 [ext_resource path="res://scenes/menu/menu_panel.gd" type="Script" id=17]
 [ext_resource path="res://scenes/menu/settings_menu.tscn" type="PackedScene" id=18]
+[ext_resource path="res://scenes/menu/assets/sounds/menu.ogg" type="AudioStream" id=19]
 [ext_resource path="res://scenes/menu/highscore_list.gd" type="Script" id=20]
 [ext_resource path="res://scenes/menu/assets/buttons/arrows.png" type="Texture" id=21]
 [ext_resource path="res://scenes/menu/assets/buttons/ls.png" type="Texture" id=22]
@@ -868,6 +869,10 @@ margin_left = 200.0
 margin_top = 222.0
 margin_right = 1720.0
 margin_bottom = 858.0
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+bus = "Music"
 
 [connection signal="button_down" from="MainPanel/Menu/Start" to="." method="_on_Start_button_down"]
 [connection signal="button_down" from="MainPanel/Menu/Scores" to="." method="_on_Scores_button_down"]

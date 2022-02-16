@@ -1,5 +1,6 @@
 extends "res://scenes/game/entity/enemy/base_enemy.gd"
 
+signal boss_started()
 signal boss_defeated()
 
 const INITIAL_DELAY := 7.5
@@ -32,6 +33,7 @@ var gun_index := 0
 var doors_open := false
 var current_beam_path : NodePath
 var destroyed := false
+var center_shader : ShaderMaterial
 
 func _ready():
 	level_scroll = game_node.level_node.scroll_speed
@@ -49,8 +51,11 @@ func _ready():
 	gun_timer.connect("timeout", self, "on_gun_timer_timeout")
 	beam_timer.connect("timeout", self, "on_beam_timer_timeout")
 	connect("boss_defeated", game_node, "on_boss_defeated")
+	connect("boss_started", game_node, "on_boss_started")
 	add_child(beam_audio)
 	beam_audio.bus = "Sound"
+	center_shader = $Rotator/CenterEffect.material as ShaderMaterial
+	center_shader.set_shader_param("rainbow_blend", 0.0)
 
 func _physics_process(delta):
 	if !active and !destroyed:
@@ -62,6 +67,7 @@ func _physics_process(delta):
 
 func on_activate():
 	main_timer.start(INITIAL_DELAY)
+	emit_signal("boss_started")
 
 func on_main_timer_timeout():
 	if destroyed:
@@ -129,7 +135,6 @@ func on_beam_timer_timeout():
 	beam()
 
 func beam_effects():
-	var center_shader := $Rotator/CenterEffect.material as ShaderMaterial
 	var fade_time := 0.5
 	beam_audio.volume_db = 0.0
 	tween.interpolate_property(center_shader, "shader_param/pulse_blend", 0.0, 1.0,
@@ -140,7 +145,7 @@ func beam_effects():
 		fade_time, Tween.TRANS_QUAD, Tween.EASE_IN, BEAM_DELAY - fade_time)
 	tween.interpolate_property(center_shader, "shader_param/rainbow_blend", 1.0, 0.0,
 		fade_time, Tween.TRANS_QUAD, Tween.EASE_IN, BEAM_DELAY + BEAM_LENGTH - fade_time)
-	tween.interpolate_property(beam_audio, "volume_db", 0.0, linear2db(0.0),
+	tween.interpolate_property(beam_audio, "volume_db", 0.0, -80.0,
 		fade_time * 2.0, Tween.TRANS_QUAD, Tween.EASE_IN, BEAM_DELAY + BEAM_LENGTH)
 	tween.start()
 	beam_audio.stream = chargeup_sound
@@ -160,9 +165,11 @@ func beam():
 
 func destroy():
 	.destroy()
+	tween.remove_all()
+	tween.interpolate_property(beam_audio, "volume_db", null, -80.0, 1.0)
+	tween.start()
 	destroyed = true
 	$Rotator/Lights.visible = false
-	tween.remove_all()
 	if get_node_or_null(current_beam_path):
 		get_node(current_beam_path).queue_free()
 	emit_signal("boss_defeated")

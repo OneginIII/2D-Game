@@ -6,6 +6,9 @@ export var debug := true
 
 var highscore_list : Array
 
+func _ready():
+	randomize()
+
 func game_started():
 	$Game.start_game()
 
@@ -40,7 +43,7 @@ func _input(event):
 	if event is InputEventKey:
 		if event.pressed:
 			if event.scancode == KEY_R:
-				Engine.time_scale = 5.0
+				Engine.time_scale = 25.0
 			if event.scancode == KEY_T:
 				Engine.time_scale = 0.1
 			if event.scancode == KEY_P:
