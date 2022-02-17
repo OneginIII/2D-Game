@@ -50,9 +50,9 @@ _global_script_class_icons={
 
 [application]
 
-config/name="2d Game"
+config/name="Island Assault"
 run/main_scene="res://scenes/main.tscn"
-config/icon="res://icon.png"
+config/icon="res://assets/icon.png"
 
 [debug]
 
