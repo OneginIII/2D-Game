@@ -154,7 +154,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-default_focus_target = NodePath("MainPanel/Menu/Start")
+default_focus_target = NodePath("MainPanel/Margin/Menu/Start")
 highscore_list_node = NodePath("ScorePanel/Scores/ScoreList")
 
 [node name="Background" type="TextureRect" parent="."]
@@ -213,10 +213,22 @@ autoplay = "Hover"
 anims/Hover = SubResource( 7 )
 anims/RESET = SubResource( 8 )
 
-[node name="MenuDarkGradient" type="TextureRect" parent="."]
-modulate = Color( 1, 1, 1, 0.501961 )
+[node name="MainPanel" type="MarginContainer" parent="."]
+visible = false
+anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+direction_multiplier = -1.0
+initial_focus_target = NodePath("Margin/Menu/Start")
+
+[node name="MenuDarkGradient" type="TextureRect" parent="MainPanel"]
+modulate = Color( 1, 1, 1, 0.501961 )
 margin_right = 1080.0
+margin_bottom = 1080.0
+size_flags_horizontal = 0
 size_flags_vertical = 3
 texture = ExtResource( 11 )
 stretch_mode = 1
@@ -224,86 +236,99 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MainPanel" type="MarginContainer" parent="."]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_constants/margin_right = 0
+[node name="Margin" type="MarginContainer" parent="MainPanel"]
+margin_right = 1920.0
+margin_bottom = 1080.0
+custom_constants/margin_right = 200
 custom_constants/margin_top = 160
 custom_constants/margin_left = 200
 custom_constants/margin_bottom = 120
-script = ExtResource( 17 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-direction_multiplier = -1.0
-initial_focus_target = NodePath("Menu/Start")
 
-[node name="Menu" type="VBoxContainer" parent="MainPanel"]
+[node name="Menu" type="VBoxContainer" parent="MainPanel/Margin"]
 margin_left = 200.0
 margin_top = 160.0
-margin_right = 1920.0
+margin_right = 1720.0
 margin_bottom = 960.0
 custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Logo" type="TextureRect" parent="MainPanel/Menu"]
-margin_right = 1720.0
+[node name="Logo" type="TextureRect" parent="MainPanel/Margin/Menu"]
+margin_right = 1520.0
 margin_bottom = 101.0
 texture = ExtResource( 3 )
 
-[node name="Margin" type="MarginContainer" parent="MainPanel/Menu"]
+[node name="Margin" type="MarginContainer" parent="MainPanel/Margin/Menu"]
 margin_top = 101.0
-margin_right = 1720.0
+margin_right = 1520.0
 margin_bottom = 181.0
 custom_constants/margin_bottom = 80
 
-[node name="Start" parent="MainPanel/Menu" instance=ExtResource( 4 )]
+[node name="Start" parent="MainPanel/Margin/Menu" instance=ExtResource( 4 )]
 margin_top = 181.0
 margin_right = 420.0
-margin_bottom = 304.0
+margin_bottom = 307.0
 rect_min_size = Vector2( 420, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 3
 
-[node name="Scores" parent="MainPanel/Menu" instance=ExtResource( 4 )]
-margin_top = 304.0
+[node name="Scores" parent="MainPanel/Margin/Menu" instance=ExtResource( 4 )]
+margin_top = 307.0
 margin_right = 420.0
-margin_bottom = 428.0
+margin_bottom = 434.0
 rect_min_size = Vector2( 420, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 3
 text = "Scores"
 
-[node name="Help" parent="MainPanel/Menu" instance=ExtResource( 4 )]
-margin_top = 428.0
+[node name="Help" parent="MainPanel/Margin/Menu" instance=ExtResource( 4 )]
+margin_top = 434.0
 margin_right = 465.0
-margin_bottom = 552.0
+margin_bottom = 561.0
 rect_min_size = Vector2( 420, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 3
 text = "How to Play"
 
-[node name="Options" parent="MainPanel/Menu" instance=ExtResource( 4 )]
-margin_top = 552.0
+[node name="Options" parent="MainPanel/Margin/Menu" instance=ExtResource( 4 )]
+margin_top = 561.0
 margin_right = 420.0
-margin_bottom = 676.0
+margin_bottom = 688.0
 rect_min_size = Vector2( 420, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 3
 text = "Options"
 
-[node name="Quit" parent="MainPanel/Menu" instance=ExtResource( 4 )]
-margin_top = 676.0
-margin_right = 420.0
+[node name="Quit and About" type="HBoxContainer" parent="MainPanel/Margin/Menu"]
+margin_top = 688.0
+margin_right = 1520.0
 margin_bottom = 800.0
+
+[node name="Quit" parent="MainPanel/Margin/Menu/Quit and About" instance=ExtResource( 4 )]
+margin_right = 420.0
 rect_min_size = Vector2( 420, 0 )
+focus_neighbour_right = NodePath("../About")
 size_flags_horizontal = 0
 size_flags_vertical = 3
 text = "Quit"
 play_accept_sound = false
+
+[node name="Margin" type="MarginContainer" parent="MainPanel/Margin/Menu/Quit and About"]
+margin_left = 424.0
+margin_right = 1216.0
+margin_bottom = 112.0
+size_flags_horizontal = 3
+
+[node name="About" parent="MainPanel/Margin/Menu/Quit and About" instance=ExtResource( 4 )]
+margin_left = 1220.0
+margin_right = 1520.0
+rect_min_size = Vector2( 300, 0 )
+focus_neighbour_left = NodePath("../Quit")
+focus_neighbour_top = NodePath("../../Options")
+size_flags_horizontal = 0
+size_flags_vertical = 3
+text = "About"
 
 [node name="ScorePanel" type="MarginContainer" parent="."]
 visible = false
@@ -871,24 +896,102 @@ margin_top = 222.0
 margin_right = 1720.0
 margin_bottom = 858.0
 
+[node name="AboutPanel" type="MarginContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 160
+custom_constants/margin_top = 40
+custom_constants/margin_left = 160
+custom_constants/margin_bottom = 40
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+initial_focus_target = NodePath("HowToPlay/CenterContainer/Back")
+
+[node name="HowToPlay" type="VBoxContainer" parent="AboutPanel"]
+margin_left = 160.0
+margin_top = 179.0
+margin_right = 1760.0
+margin_bottom = 901.0
+size_flags_vertical = 4
+custom_constants/separation = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="AboutPanel/HowToPlay"]
+margin_right = 1600.0
+margin_bottom = 127.0
+custom_fonts/font = ExtResource( 14 )
+text = "About"
+align = 1
+
+[node name="Text" type="HBoxContainer" parent="AboutPanel/HowToPlay"]
+margin_top = 157.0
+margin_right = 1600.0
+margin_bottom = 580.0
+custom_constants/separation = 30
+alignment = 1
+
+[node name="Name" type="Label" parent="AboutPanel/HowToPlay/Text"]
+margin_left = 344.0
+margin_right = 1255.0
+margin_bottom = 423.0
+custom_fonts/font = SubResource( 13 )
+text = "Island Assault was created as a part
+of a Bachelor's thesis by Tero Salmela
+
+Created using Godot Engine 3.4.2
+Please view licensing information at:
+godotengine.org/license"
+align = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="AboutPanel/HowToPlay"]
+margin_top = 610.0
+margin_right = 1600.0
+margin_bottom = 722.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Back" parent="AboutPanel/HowToPlay/CenterContainer" instance=ExtResource( 4 )]
+margin_left = 700.0
+margin_right = 900.0
+rect_min_size = Vector2( 200, 0 )
+text = "Back"
+
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 19 )
 bus = "Music"
 
-[connection signal="button_down" from="MainPanel/Menu/Start" to="." method="_on_Start_button_down"]
-[connection signal="button_down" from="MainPanel/Menu/Scores" to="." method="_on_Scores_button_down"]
-[connection signal="button_down" from="MainPanel/Menu/Scores" to="MainPanel" method="hide_panel"]
-[connection signal="button_down" from="MainPanel/Menu/Scores" to="ScorePanel" method="show_panel"]
-[connection signal="button_down" from="MainPanel/Menu/Help" to="MainPanel" method="hide_panel"]
-[connection signal="button_down" from="MainPanel/Menu/Help" to="HelpPanel" method="show_panel"]
-[connection signal="button_down" from="MainPanel/Menu/Options" to="MainPanel" method="hide_panel"]
-[connection signal="button_down" from="MainPanel/Menu/Options" to="SettingsPanel" method="show_panel"]
-[connection signal="button_down" from="MainPanel/Menu/Quit" to="." method="_on_Quit_button_down"]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Start" to="." method="_on_Start_button_down"]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Start" to="ShipDecoration" method="start_ship"]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Scores" to="." method="_on_Scores_button_down"]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Scores" to="ShipDecoration" method="hide_ship" binds= [ true ]]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Scores" to="MainPanel" method="hide_panel"]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Scores" to="ScorePanel" method="show_panel"]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Help" to="ShipDecoration" method="hide_ship" binds= [ true ]]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Help" to="MainPanel" method="hide_panel"]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Help" to="HelpPanel" method="show_panel"]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Options" to="ShipDecoration" method="hide_ship" binds= [ true ]]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Options" to="MainPanel" method="hide_panel"]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Options" to="SettingsPanel" method="show_panel"]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Quit and About/Quit" to="." method="_on_Quit_button_down"]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Quit and About/About" to="ShipDecoration" method="hide_ship" binds= [ true ]]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Quit and About/About" to="MainPanel" method="hide_panel"]
+[connection signal="button_down" from="MainPanel/Margin/Menu/Quit and About/About" to="AboutPanel" method="show_panel"]
+[connection signal="button_down" from="ScorePanel/Scores/CenterContainer/Back" to="ShipDecoration" method="hide_ship" binds= [ false ]]
 [connection signal="button_down" from="ScorePanel/Scores/CenterContainer/Back" to="MainPanel" method="show_panel"]
 [connection signal="button_down" from="ScorePanel/Scores/CenterContainer/Back" to="ScorePanel" method="hide_panel"]
+[connection signal="button_down" from="HelpPanel/HowToPlay/CenterContainer/Back" to="ShipDecoration" method="hide_ship" binds= [ false ]]
 [connection signal="button_down" from="HelpPanel/HowToPlay/CenterContainer/Back" to="MainPanel" method="show_panel"]
 [connection signal="button_down" from="HelpPanel/HowToPlay/CenterContainer/Back" to="HelpPanel" method="hide_panel"]
+[connection signal="button_down" from="SettingsPanel/Settings/CenterContainer/Back" to="ShipDecoration" method="hide_ship" binds= [ false ]]
 [connection signal="button_down" from="SettingsPanel/Settings/CenterContainer/Back" to="MainPanel" method="show_panel"]
 [connection signal="button_down" from="SettingsPanel/Settings/CenterContainer/Back" to="SettingsPanel" method="hide_panel"]
+[connection signal="button_down" from="AboutPanel/HowToPlay/CenterContainer/Back" to="ShipDecoration" method="hide_ship" binds= [ false ]]
+[connection signal="button_down" from="AboutPanel/HowToPlay/CenterContainer/Back" to="MainPanel" method="show_panel"]
+[connection signal="button_down" from="AboutPanel/HowToPlay/CenterContainer/Back" to="AboutPanel" method="hide_panel"]
 
 [editable path="SettingsPanel/Settings"]

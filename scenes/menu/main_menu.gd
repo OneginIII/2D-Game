@@ -11,6 +11,7 @@ export(NodePath) var highscore_list_node
 onready var main_node := get_node_or_null("/root/Main")
 onready var main_panel := $MainPanel
 onready var music := $Music
+onready var ship := $ShipDecoration
 
 var tween := Tween.new()
 
@@ -21,6 +22,7 @@ func _ready():
 func start_menu(first_start: bool = false):
 	visible = true
 	main_panel.visible = true
+	ship.reset_ship()
 	toggle_music(true)
 	var initial_button = null
 	if default_focus_target:

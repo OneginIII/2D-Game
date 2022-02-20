@@ -14,7 +14,7 @@
 [ext_resource path="res://scenes/game/entity/enemy/drone/drone.tscn" type="PackedScene" id=13]
 
 [node name="Level" instance=ExtResource( 1 )]
-level_length = 512
+level_length = 365
 scroll_speed = 120.0
 
 [node name="SandTiles" parent="." index="0"]

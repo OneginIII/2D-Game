@@ -53,6 +53,7 @@ _global_script_class_icons={
 config/name="Island Assault"
 run/main_scene="res://scenes/main.tscn"
 config/icon="res://assets/icon.png"
+config/windows_native_icon="res://assets/icon.ico"
 
 [debug]
 

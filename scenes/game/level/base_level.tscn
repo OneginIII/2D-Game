@@ -37,9 +37,9 @@ z_index = -1
 [node name="Bullets" type="Node2D" parent="."]
 script = ExtResource( 3 )
 
+[node name="Powerups" type="Node2D" parent="."]
+
 [node name="Checkpoints" type="Node2D" parent="."]
 
 [node name="Checkpoint" parent="Checkpoints" instance=ExtResource( 4 )]
 position = Vector2( 960, 864 )
-
-[node name="Powerups" type="Node2D" parent="."]
