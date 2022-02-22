@@ -1,5 +1,10 @@
 extends Path2D
 
+# Depracated feature.
+
+# The drone had the ability to follow a path forward, which was unused because
+# setting up the paths and balancing the enemy didn't work out well enough.
+
 onready var follow := $DroneFollow
 onready var drone := $DroneFollow/Drone
 

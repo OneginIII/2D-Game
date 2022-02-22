@@ -28,7 +28,6 @@ activation_margin = 128.0
 score_value = 80
 shoot_sound = ExtResource( 8 )
 shoot_volume = -3.0
-movement_speed = 100.0
 
 [node name="Shape" parent="." index="0"]
 shape = null

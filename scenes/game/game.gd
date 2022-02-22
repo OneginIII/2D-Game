@@ -15,7 +15,7 @@ const MUSIC_FADE := 4.0
 signal score_updated(value)
 signal exit_game()
 
-onready var main_node := get_node_or_null("/root/Main")
+onready var main_node := find_parent("Main")
 onready var player_node := $Player
 onready var gui_node := $GuiLayer/GameGui
 onready var powerup_spawn_point := $PowerupSpawnPoint

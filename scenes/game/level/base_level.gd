@@ -14,6 +14,7 @@ export(int) var level_length = 20 setget update_level_size
 export(float) var scroll_speed = 1.0
 
 # Variables for references.
+onready var effects := $Effects
 onready var bullets := $Bullets
 onready var powerups := $Powerups
 # Storing the checkpoints in a dictionary.

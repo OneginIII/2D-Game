@@ -44,13 +44,6 @@ var modulate_tween := Tween.new()
 var activation_timer := Timer.new()
 
 func _ready():
-	# Filling the reference variables. This is not the most optimal
-	# or safe way of doing this, as find_node is slow and passing
-	# a lot of references around can lead to problems.
-	player_node = get_tree().root.find_node("Player", true, false)
-	game_node = get_tree().root.find_node("Game", true, false)
-	bullets_parent = get_tree().root.find_node("Bullets", true, false)
-	effects_parent = get_tree().root.find_node("Effects", true, false)
 	add_child(modulate_tween)
 	add_child(activation_timer)
 	# Starting and connecting the activation timer, repeating by default.
@@ -59,6 +52,18 @@ func _ready():
 	# Adding audio player child for shooting sound.
 	add_child(audio)
 	audio.bus = "Sound"
+	# Using find_parent to get the game node and then using that reference
+	# as a base to get the other nodes the base enemy needs.
+	game_node = find_parent("Game")
+	# If game node is found all the rest should be available.
+	if game_node:
+		# The player nodes name and position in tree should be fixed.
+		player_node = game_node.get_node("Player")
+		# Have to use find_node here since the level node's name might change.
+		bullets_parent = game_node.find_node("Bullets", true, false)
+		effects_parent = game_node.find_node("Effects", true, false)
+		# You can't use the game node's variables for this since it's ready
+		# callback will only be called after it's children's ready.
 
 # This method is called by incoming bullets to damage enemies.
 func take_damage(amount: int, color: Color):

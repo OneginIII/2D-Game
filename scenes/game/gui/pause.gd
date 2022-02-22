@@ -3,7 +3,7 @@ extends Control
 var game_node
 
 func _ready():
-	game_node = get_tree().root.find_node("Game", true, false)
+	game_node = find_parent("Game")
 	visible = false
 
 func pause(state: bool):
