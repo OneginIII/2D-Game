@@ -55,5 +55,3 @@ bus = "Music"
 [node name="Boss" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource( 8 )
 bus = "Music"
-
-[connection signal="highscore_entry" from="GuiLayer/GameGui" to="." method="set_highscore"]

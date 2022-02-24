@@ -94,7 +94,7 @@ func destroy():
 	active = false
 	activation_timer.stop()
 	# Give score for defeating enemy.
-	game_node.score += score_value
+	ScoreManager.score += score_value
 	shape.set_deferred("disabled", true)
 	# Setting up default or alternative explosion.
 	var explosion

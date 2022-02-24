@@ -308,7 +308,7 @@ placeholder_text = "Enter name"
 placeholder_alpha = 0.25
 caret_blink = true
 
-[node name="Back" parent="ScoreEntry/Menu" instance=ExtResource( 12 )]
+[node name="Confirm" parent="ScoreEntry/Menu" instance=ExtResource( 12 )]
 margin_left = 188.0
 margin_top = 324.0
 margin_right = 518.0
@@ -318,4 +318,4 @@ size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "Confirm"
 
-[connection signal="button_down" from="ScoreEntry/Menu/Back" to="." method="score_entered"]
+[connection signal="button_down" from="ScoreEntry/Menu/Confirm" to="." method="score_entered"]

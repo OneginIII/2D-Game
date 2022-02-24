@@ -60,6 +60,7 @@ func _ready():
 	invul_timer.one_shot = true
 	player_gun.connect("gun_fired", player_visual, "gun_fired")
 	player_gun.connect("gun_level_bonus", self, "on_gun_level_bonus")
+	connect("bonus_upgrade", ScoreManager, "on_bonus_powerup")
 	controllable = false
 	position += SPAWN_OFFSET
 	add_child(audio)

@@ -1,6 +1,5 @@
 extends Node
 
-const MAX_HIGHSCORES := 8
 const CONFIG_CATEGORY := "settings"
 const CONFIG_PATH := "user://settings.cfg"
 const SAVE_PATH := "user://save.data"
@@ -12,7 +11,6 @@ onready var menu := $MainMenuLayer/MainMenu
 
 var config_version := 0
 var save_version := 0
-var highscore_list : Array
 
 func _ready():
 	randomize()
@@ -26,34 +24,12 @@ func game_started():
 func game_ended():
 	menu.start_menu()
 
-func update_highscore(new_score: Array):
-	highscore_list.append(new_score)
-	highscore_list.sort_custom(self, "sort_highscore")
-	if highscore_list.size() > MAX_HIGHSCORES:
-		highscore_list.remove(MAX_HIGHSCORES)
-
-func check_highscore(new_score: int):
-	if new_score <= 0:
-		return false
-	if highscore_list.size() < MAX_HIGHSCORES:
-		return true
-	for score in highscore_list:
-		if score[1] < new_score:
-			return true
-	return false
-
-func sort_highscore(a: Array, b: Array):
-	if a[1] > b[1]:
-		return true
-	else:
-		return false
-
 func save_game():
 	var save_file = File.new()
 	save_file.open(SAVE_PATH, File.WRITE)
 	var save_data = {
 		"version" : save_version,
-		"highscores" : highscore_list
+		"highscores" : ScoreManager.highscore_list
 	}
 	save_file.store_var(save_data)
 	save_file.close()
@@ -64,7 +40,7 @@ func load_game():
 		return
 	save_file.open(SAVE_PATH, File.READ)
 	var save_data = save_file.get_var()
-	highscore_list = save_data.get("highscores", highscore_list)
+	ScoreManager.highscore_list = save_data.get("highscores", ScoreManager.highscore_list)
 	save_file.close()
 
 func save_config():
@@ -104,7 +80,7 @@ func _input(event):
 			if event.scancode == KEY_T:
 				Engine.time_scale = 0.1
 			if event.scancode == KEY_P:
-				$Game.score += 100
+				ScoreManager.score += 100
 		else:
 			if event.scancode == KEY_R:
 				Engine.time_scale = 1.0

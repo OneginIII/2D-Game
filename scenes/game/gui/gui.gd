@@ -19,9 +19,6 @@ const TWEEN_SPEED = 100.0
 func _ready():
 	game_node = find_parent("Game")
 	if game_node:
-		game_node.connect("score_updated", self, "update_score")
-		set_score_text(game_node.score)
-		display_score = game_node.score
 		player_node = game_node.get_node("Player")
 		if player_node:
 			player_node.connect("health_updated", self, "update_health_bar")
@@ -30,6 +27,10 @@ func _ready():
 			set_lives(player_node.lives)
 			set_power(player_node.player_gun.current_gun_level)
 	add_child(tween)
+	connect("highscore_entry", ScoreManager, "set_highscore")
+	ScoreManager.connect("score_updated", self, "update_score")
+	set_score_text(ScoreManager.score)
+	display_score = ScoreManager.score
 	center_text.modulate = Color.transparent
 
 func update_health_bar(value: int):

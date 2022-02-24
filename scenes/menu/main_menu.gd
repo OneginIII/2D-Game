@@ -56,8 +56,8 @@ func _on_Start_button_down():
 	exit_menu()
 
 func _on_Scores_button_down():
-	if main_node and get_node_or_null(highscore_list_node):
-		get_node(highscore_list_node).update_scores(main_node.highscore_list)
+	if get_node_or_null(highscore_list_node):
+		get_node(highscore_list_node).update_scores(ScoreManager.highscore_list)
 
 func _on_Quit_button_down():
 	emit_signal("game_quit")

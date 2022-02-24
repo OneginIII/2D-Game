@@ -168,6 +168,8 @@ func shoot():
 	bullet.rotation = guns[gun_index].get_node("Position").global_rotation
 	bullet.direction = bullet.direction.rotated(bullet.rotation)
 	bullets_parent.add_child(bullet)
+	# Adding boss bullets to a group for deletion on defeat.
+	bullet.add_to_group("boss_bullets")
 	# Flashing the appropriate gun light.
 	tween.interpolate_property(gun_lights[gun_index], "modulate", bullet.color, Color.black, 0.5)
 	tween.start()
@@ -249,5 +251,7 @@ func destroy():
 	# If there exists a beam object in the saved node path, remove it here.
 	if get_node_or_null(current_beam_path):
 		get_node(current_beam_path).queue_free()
+	# Call a method on the group of regular bullets to neatly remove them.
+	get_tree().call_group("boss_bullets", "destroy")
 	# Emitting a signal that triggers various game completion features.
 	emit_signal("boss_defeated")

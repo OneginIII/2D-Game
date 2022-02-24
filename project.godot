@@ -55,6 +55,10 @@ run/main_scene="res://scenes/main.tscn"
 config/icon="res://assets/icon.png"
 config/windows_native_icon="res://assets/icon.ico"
 
+[autoload]
+
+ScoreManager="*res://src/global/score_manager.gd"
+
 [debug]
 
 gdscript/warnings/return_value_discarded=false
