@@ -32,7 +32,6 @@ score_value = 150
 alternative_explosion = ExtResource( 7 )
 shoot_sound = ExtResource( 9 )
 shoot_volume = -2.0
-movement_speed = -50.0
 
 [node name="Shape" parent="." index="0"]
 shape = SubResource( 1 )
