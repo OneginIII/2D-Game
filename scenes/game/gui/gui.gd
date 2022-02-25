@@ -47,7 +47,7 @@ func _ready():
 
 # This method updates the health bar based on player's health.
 func update_health_bar(value: int):
-	# Converting the int health value to a float for the meter.
+	# Converting the integer health value to a float for the meter.
 	health_bar.value = float(value)
 
 # This method updates the life counter based on the player's lives.
@@ -77,8 +77,8 @@ func update_score(value: int):
 func set_score_text(value: int):
 	# Sets the score value to be padded to six zeroes.
 	score.text = "%06d" % value
-	# Replacing zeroes in the score text by the letter O. I found the O to be
-	# visually nicer than the zero in the font I used.
+	# Replacing zeroes in the score text by the letter O.
+	# I found the O to be visually nicer than the zero in the font I used.
 	score.text = score.text.replace("0", "O")
 
 # This method can be called to skip animating the score and instantly set it.

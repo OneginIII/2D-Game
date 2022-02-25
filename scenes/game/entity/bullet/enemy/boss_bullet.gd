@@ -10,6 +10,8 @@ var compensation := 0.0
 
 # If not "destroyed", move normally. Otherwise just follow the level.
 func _physics_process(delta):
+	# Parent physics process checks if the bullet is still on screen.
+	._physics_process(delta)
 	if !destroyed:
 		translate(direction * speed * delta)
 	else:
