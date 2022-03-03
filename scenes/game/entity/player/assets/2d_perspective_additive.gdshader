@@ -1,6 +1,9 @@
 shader_type canvas_item;
 render_mode blend_add;
 
+// Deprecated. Was used by the player gun lights, but now the player ship uses a viewport texture.
+// Essentially identical to 2D perspective shader, just with an additive blend mode.
+
 uniform float gradient_effect : hint_range(-0.1, 0.1) = 0.0;
 uniform float warp_effect : hint_range(-0.1, 0.1) = 0.0;
 
