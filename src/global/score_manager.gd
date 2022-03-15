@@ -82,7 +82,7 @@ func update_highscore(new_score: Array):
 
 # Check if the current score is a new highscore. If not, highscore entry prompt
 # will not be displayed.
-func check_highscore():
+func check_highscore() -> bool:
 	# A score of zero does not give a new highscore.
 	if score <= 0:
 		return false
@@ -102,7 +102,7 @@ func check_highscore():
 
 # Custom sort method for the highscores. Takes in two arrays of highscore entries.
 # Check the Godot class reference for Array's sort_custom for more information.
-func sort_highscore(a: Array, b: Array):
+func sort_highscore(a: Array, b: Array) -> bool:
 	# Checks which of the index 1s, the score amount, is higher.
 	if a[1] > b[1]:
 		return true
