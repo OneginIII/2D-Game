@@ -28,6 +28,7 @@ export var shoot_volume := 0.0
 # Audio player for shoot sound.
 onready var audio := AudioStreamPlayer2D.new()
 onready var shape := $Shape
+onready var polygon := $Polygon
 
 # Variables for references to certain nodes that the
 # enemy might need to function, such as the player
@@ -52,18 +53,28 @@ func _ready():
 	# Adding audio player child for shooting sound.
 	add_child(audio)
 	audio.bus = "Sound"
+	# Get references
+	get_references()
+
+# Refererences are retrieved in a seperate method so they can be searched for again
+# to avoid issues likely related to reinstancing the level node.
+func get_references() -> void:
 	# Using find_parent to get the game node and then using that reference
 	# as a base to get the other nodes the base enemy needs.
-	game_node = find_parent("Game")
+	if not game_node:
+		game_node = find_parent("Game")
 	# If game node is found all the rest should be available.
-	if game_node:
-		# The player nodes name and position in tree should be fixed.
+	# The player nodes name and position in tree should be fixed.
+	# The instances validities are checked to avoid unnecessarily searching again.
+	if player_node == null or not is_instance_valid(player_node):
 		player_node = game_node.get_node("Player")
-		# Have to use find_node here since the level node's name might change.
+	# Have to use find_node here since the level node's name might change.
+	if not bullets_parent == null or not is_instance_valid(bullets_parent):
 		bullets_parent = game_node.find_node("Bullets", true, false)
+	if not effects_parent == null or not is_instance_valid(effects_parent):
 		effects_parent = game_node.find_node("Effects", true, false)
-		# You can't use the game node's variables for this since it's ready
-		# callback will only be called after it's children's ready.
+	# You can't just use the game node's variables for this since it's ready
+	# callback will only be called after it's children's ready.
 
 # This method is called by incoming bullets to damage enemies.
 func take_damage(amount: int, color: Color):
@@ -93,9 +104,12 @@ func destroy():
 		return
 	active = false
 	activation_timer.stop()
+	# Making sure references are available (for explosion).
+	get_references()
 	# Give score for defeating enemy.
 	ScoreManager.score += score_value
 	shape.set_deferred("disabled", true)
+	polygon.set_deferred("disabled", true)
 	# Setting up default or alternative explosion.
 	var explosion
 	if alternative_explosion != null:
@@ -118,6 +132,8 @@ func check_activation():
 		active = true
 		# Emitting a signal on activation.
 		emit_signal("on_activate")
+		# Making sure references exist as the enemy activates.
+		get_references()
 	# Stop checking for enemies that have passed the bottom of the screen.
 	elif global_position.y > get_viewport_rect().size.y + activation_margin and active:
 		active = false

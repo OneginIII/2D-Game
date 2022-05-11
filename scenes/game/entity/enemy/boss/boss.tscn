@@ -284,11 +284,11 @@ beam_sound = ExtResource( 15 )
 [node name="Shape" parent="." index="0"]
 shape = SubResource( 10 )
 
-[node name="Sprite" parent="." index="1"]
+[node name="Sprite" parent="." index="2"]
 z_index = -1
 texture = ExtResource( 3 )
 
-[node name="Rotator" type="Node2D" parent="." index="2"]
+[node name="Rotator" type="Node2D" parent="." index="3"]
 z_index = 1
 
 [node name="Shadow" type="Sprite" parent="Rotator" index="0"]

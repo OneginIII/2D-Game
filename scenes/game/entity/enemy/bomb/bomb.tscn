@@ -71,9 +71,6 @@ texture = ExtResource( 7 )
 [node name="Shape" parent="." index="1"]
 shape = SubResource( 5 )
 
-[node name="Sprite" parent="." index="2"]
-texture = ExtResource( 2 )
-
 [node name="BombDot" type="Sprite" parent="." index="3"]
 modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 3 )
@@ -98,3 +95,6 @@ rotation = 0.785398
 
 [node name="ShootPoint" type="Position2D" parent="ShootArm" index="0"]
 position = Vector2( 0, -120 )
+
+[node name="Sprite" parent="." index="6"]
+texture = ExtResource( 2 )

@@ -37,8 +37,8 @@ shoot_volume = -2.0
 shape = SubResource( 1 )
 disabled = true
 
-[node name="Collision" type="CollisionPolygon2D" parent="." index="1"]
-polygon = PoolVector2Array( -256, -112, -160, -112, 0, -80, 160, -112, 256, -112, 208, 80, 128, 144, 0, 176, -128, 144, -208, 80 )
+[node name="Polygon" parent="." index="1"]
+polygon = PoolVector2Array( 0, 176, 128, 144, 128, 176, 144, 192, 176, 192, 192, 176, 208, 80, 256, -112, 160, -112, 0, -80, -160, -112, -256, -112, -208, 80, -192, 176, -176, 192, -144, 192, -128, 176, -128, 144 )
 
 [node name="Shadow" type="Sprite" parent="." index="2"]
 modulate = Color( 0, 0, 0, 0.25098 )

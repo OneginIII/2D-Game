@@ -28,6 +28,9 @@ func _ready():
 	randomize()
 	# Connect to the signal emitted when player chooses quit in the main menu.
 	menu.connect("game_quit", self, "quit_game")
+	# Set volume levels to half initially. Overriden after config loads.
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sound"),linear2db(0.5))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear2db(0.5))
 	# When game starts, load the config and save data.
 	load_config()
 	load_game()
@@ -103,9 +106,9 @@ func load_config():
 		return
 	# Directly setting the audio mixer levels based on the config data.
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sound"),
-		linear2db(config.get_value(CONFIG_CATEGORY, "sound_volume", 1.0)))
+		linear2db(config.get_value(CONFIG_CATEGORY, "sound_volume", 0.5)))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),
-		linear2db(config.get_value(CONFIG_CATEGORY, "music_volume", 1.0)))
+		linear2db(config.get_value(CONFIG_CATEGORY, "music_volume", 0.5)))
 	# Also setting the fullscreen value based on the config data.
 	OS.window_fullscreen = config.get_value(CONFIG_CATEGORY, "fullscreen", false)
 

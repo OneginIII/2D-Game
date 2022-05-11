@@ -27,10 +27,14 @@ shoot_volume = -4.0
 [node name="Shape" parent="." index="0"]
 shape = SubResource( 1 )
 
-[node name="Sprite" parent="." index="1"]
+[node name="ShootTimer" type="Timer" parent="." index="2"]
+wait_time = 2.0
+autostart = true
+
+[node name="Sprite" parent="." index="3"]
 texture = ExtResource( 3 )
 
-[node name="Head" type="Sprite" parent="." index="2"]
+[node name="Head" type="Sprite" parent="." index="4"]
 texture = ExtResource( 4 )
 
 [node name="ShootPosition" type="Position2D" parent="Head" index="0"]
@@ -40,9 +44,5 @@ position = Vector2( 0, -160 )
 modulate = Color( 1, 0.443137, 0.329412, 1 )
 material = SubResource( 2 )
 texture = ExtResource( 5 )
-
-[node name="ShootTimer" type="Timer" parent="." index="3"]
-wait_time = 2.0
-autostart = true
 
 [connection signal="timeout" from="ShootTimer" to="." method="_on_ShootTimer_timeout"]
