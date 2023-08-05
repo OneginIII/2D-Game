@@ -101,7 +101,7 @@ func _process(delta):
 	# Reading the input axex to form the input Vector2.
 	input_move_vector = Vector2(Input.get_axis("left", "right"), Input.get_axis("up", "down"))
 	# Clamping the vector length to avoid diagonal movement being faster.
-	input_move_vector = input_move_vector.clamped(1.0);
+	input_move_vector = input_move_vector.limit_length(1.0);
 	# Setting the current move vector by using the move toward method.
 	# The move toward method is used along with the delta and acceleration to
 	# give smooth yet responsive movement.

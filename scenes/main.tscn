@@ -11,12 +11,6 @@ debug = false
 
 [node name="Game" parent="." instance=ExtResource( 2 )]
 level_scene = ExtResource( 4 )
-powerup_list = {
-"gun": "res://scenes/game/entity/powerup/resources/powerup_gun.tres",
-"health": "res://scenes/game/entity/powerup/resources/powerup_health.tres",
-"life": "res://scenes/game/entity/powerup/resources/powerup_life.tres",
-"speed": "res://scenes/game/entity/powerup/resources/powerup_speed.tres"
-}
 
 [node name="MainMenuLayer" type="CanvasLayer" parent="."]
 layer = 128
