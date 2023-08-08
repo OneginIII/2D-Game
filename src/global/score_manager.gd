@@ -10,7 +10,7 @@ const POWERUP_INTERVAL := 250
 # When the respective powerup boosts are maxed, gives this bonus score.
 const POWERUP_MAXED_BONUS := 100
 # The score penalty multiplier when dying.
-const DEATH_SCORE_MULTIPLY := 2.0 / 3.0
+const DEATH_SCORE_MULTIPLY := 3.0 / 4.0
 
 # Signal for updating gui when score changes.
 signal score_updated(value)
@@ -32,6 +32,8 @@ func set_score(value: int):
 	emit_signal("score_updated", score)
 # Score threshold value for when to spawn next powerup.
 var score_treshold := POWERUP_INTERVAL
+# Score at last checkpoint for resetting
+var checkpoint_score := 0
 # Array for the list of highscores. This array is two dimensional, i.e. an array
 # of arrays. You can think of the columns as the entries and the rows as being
 # the name and score amount of each entry respectively.
@@ -41,13 +43,19 @@ var highscore_list : Array
 func reset_score():
 	# Calling score as self.score to make sure setget method is called also.
 	self.score = 0
+	score_checkpoint()
 	gui_node.set_score(score)
+
+func score_checkpoint():
+	checkpoint_score = score
 
 # Applies the death penalty multiplier to the score. Called when player dies.
 func death_penalty():
-	# Multiply the score. This line gives a narrowing conversion warning for
-	# converting from multiplied float back to integer. Works as intended.
-	self.score *= DEATH_SCORE_MULTIPLY
+	# Revert the score to checkpoint value and multiply it.
+	# This line gives a narrowing conversion warning for converting
+	# from multiplied float back to integer. Works as intended.
+	checkpoint_score = checkpoint_score * DEATH_SCORE_MULTIPLY
+	self.score = checkpoint_score
 	# This formula calculates the new score treshold. As the player loses 1/3
 	# of score on each death, the next powerup treshold is adjusted to always
 	# land on the next increment of the treshold (the next 250 in this case).

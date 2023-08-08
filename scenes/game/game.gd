@@ -215,6 +215,7 @@ func checkpoint_reached(checkpoint_name: String, display_message: bool, stop_mus
 	# Stop the music if the checkpoint calls for it. Used before the boss fight.
 	if stop_music:
 		stop_music()
+	ScoreManager.score_checkpoint()
 
 # Called when the boss fight starts to trigger the music.
 func on_boss_started():
