@@ -22,14 +22,14 @@ signal health_updated(value)
 signal lives_updated(value)
 signal player_destroyed()
 signal player_death(out_of_lives)
-signal bonus_upgrade()
+signal bonus_upgrade(bonus_name)
 
 # Exported variable for the health with a setget method.
 export var health := FULL_HEALTH setget set_health
 func set_health(value: int):
 	# If trying to set health to above full health, reward bonus points.
 	if value > FULL_HEALTH:
-		emit_signal("bonus_upgrade")
+		emit_signal("bonus_upgrade", "health")
 	# Limit health amount.
 	health = int(min(value, FULL_HEALTH))
 	# Emit signal to update gui.
@@ -39,7 +39,7 @@ export var speed := DEFAULT_SPEED setget set_speed
 func set_speed(value: float):
 	# If trying to set the speed to above maximum, reward bonus points.
 	if value > MAX_SPEED:
-		emit_signal("bonus_upgrade")
+		emit_signal("bonus_upgrade", "speed")
 	# Limit speed value.
 	speed = min(value, MAX_SPEED)
 # Exported variable for the lives with a setget method.
@@ -47,7 +47,7 @@ export var lives: int = FULL_LIVES setget set_lives
 func set_lives(value: int):
 	# If trying to set lives to above full amount, reward bonus points.
 	if value > FULL_LIVES:
-		emit_signal("bonus_upgrade")
+		emit_signal("bonus_upgrade", "lives")
 	# Limit lives amount.
 	lives = int(min(value, FULL_LIVES))
 	# Emit signal to update gui.
@@ -218,4 +218,4 @@ func player_victory():
 # This method is called by the signal from the player gun. Triggers the bonus
 # upgrade signal like health, speed and lives do.
 func on_gun_level_bonus():
-	emit_signal("bonus_upgrade")
+	emit_signal("bonus_upgrade", "gun")

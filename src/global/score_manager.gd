@@ -8,7 +8,12 @@ const MAX_HIGHSCORES := 8
 # Interval for spawning powerups every nth score reached.
 const POWERUP_INTERVAL := 250
 # When the respective powerup boosts are maxed, gives this bonus score.
-const POWERUP_MAXED_BONUS := 100
+const powerup_scores := {
+	"health": 100,
+	"speed": 50,
+	"lives": 300,
+	"gun" : 150,
+}
 # The score penalty multiplier when dying.
 const DEATH_SCORE_MULTIPLY := 3.0 / 4.0
 
@@ -66,9 +71,9 @@ func death_penalty():
 		score_treshold = POWERUP_INTERVAL
 
 # When collecting an extra powerup, this method gives bonus points.
-func on_bonus_powerup():
+func on_bonus_powerup(bonus_name: String):
 	# Calling score as self.score to make sure setget method is called also.
-	self.score += POWERUP_MAXED_BONUS
+	self.score += powerup_scores[bonus_name]
 
 # Setting a highscore in the list. Takes in the name of the entry.
 func set_highscore(entered_name: String):
