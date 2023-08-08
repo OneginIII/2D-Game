@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bomb_tick.ogg-963cdd7a26c58432bc2dfced74861cf2.oggstr"
+
+[deps]
+
+source_file="res://scenes/game/entity/enemy/bomb/assets/bomb_tick.ogg"
+dest_files=[ "res://.import/bomb_tick.ogg-963cdd7a26c58432bc2dfced74861cf2.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

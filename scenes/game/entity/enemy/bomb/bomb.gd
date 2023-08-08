@@ -13,6 +13,7 @@ const ROTATION_ANGLE := PI / 4.0
 onready var animation := $Animation
 onready var shoot_arm := $ShootArm
 onready var shoot_point := $ShootArm/ShootPoint
+onready var tick_audio = $TickAudio
 # This variable is used to prevent multiple triggerings.
 var triggered := false
 
@@ -41,6 +42,9 @@ func _physics_process(_delta):
 			# The RESET animation can be automatically created by AnimationPlayer nodes.
 			# It's handy for resetting the animation to the default pre-animation values.
 			animation.play("RESET", 0.25)
+	# Stop blinking animation and sound if not active (leaves screen)
+	elif animation.is_playing():
+		animation.play("RESET")
 
 # The trigger method of the bomb. Note that being triggered is different than just
 # being destroyed like other enemies. This method uses a bool to differentiate between
@@ -73,6 +77,8 @@ func trigger(destroyed: bool = false):
 	# If the bomb was triggered and not shot, don't give any score.
 	if !destroyed:
 		score_value = 0
+	# Stop tick audio when triggered
+	tick_audio.volume_db = linear2db(0.0)
 	# Call the base enemy destroy method for the normal enemy destruction logic.
 	.destroy()
 
