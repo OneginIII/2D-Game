@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://scenes/menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/assets/background.png" type="Texture" id=2]
@@ -143,9 +143,11 @@ use_filter = true
 font_data = ExtResource( 34 )
 
 [sub_resource type="DynamicFont" id=13]
-size = 48
+size = 42
 use_filter = true
 font_data = ExtResource( 33 )
+
+[sub_resource type="ButtonGroup" id=15]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -215,9 +217,6 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 17 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 direction_multiplier = -1.0
 initial_focus_target = NodePath("Margin/Menu/Start")
 
@@ -264,38 +263,46 @@ custom_constants/margin_bottom = 80
 
 [node name="Start" parent="MainPanel/Margin/Menu" instance=ExtResource( 4 )]
 margin_top = 181.0
-margin_right = 420.0
+margin_right = 536.0
 margin_bottom = 307.0
 rect_min_size = Vector2( 420, 0 )
+focus_neighbour_bottom = NodePath("../Scores")
 size_flags_horizontal = 0
 size_flags_vertical = 3
+text = "MENU_START"
 
 [node name="Scores" parent="MainPanel/Margin/Menu" instance=ExtResource( 4 )]
 margin_top = 307.0
-margin_right = 420.0
+margin_right = 606.0
 margin_bottom = 434.0
 rect_min_size = Vector2( 420, 0 )
+focus_neighbour_top = NodePath("../Start")
+focus_neighbour_bottom = NodePath("../Help")
 size_flags_horizontal = 0
 size_flags_vertical = 3
-text = "Scores"
+text = "MENU_SCORES"
 
 [node name="Help" parent="MainPanel/Margin/Menu" instance=ExtResource( 4 )]
 margin_top = 434.0
-margin_right = 465.0
+margin_right = 472.0
 margin_bottom = 561.0
 rect_min_size = Vector2( 420, 0 )
+focus_neighbour_top = NodePath("../Scores")
+focus_neighbour_bottom = NodePath("../Options")
 size_flags_horizontal = 0
 size_flags_vertical = 3
-text = "How to Play"
+text = "MENU_HELP"
 
 [node name="Options" parent="MainPanel/Margin/Menu" instance=ExtResource( 4 )]
 margin_top = 561.0
-margin_right = 420.0
+margin_right = 661.0
 margin_bottom = 688.0
 rect_min_size = Vector2( 420, 0 )
+focus_neighbour_top = NodePath("../Help")
+focus_neighbour_bottom = NodePath("../Quit and About/Quit")
 size_flags_horizontal = 0
 size_flags_vertical = 3
-text = "Options"
+text = "MENU_SETTINGS"
 
 [node name="Quit and About" type="HBoxContainer" parent="MainPanel/Margin/Menu"]
 margin_top = 688.0
@@ -303,29 +310,30 @@ margin_right = 1520.0
 margin_bottom = 800.0
 
 [node name="Quit" parent="MainPanel/Margin/Menu/Quit and About" instance=ExtResource( 4 )]
-margin_right = 420.0
+margin_right = 474.0
 rect_min_size = Vector2( 420, 0 )
+focus_neighbour_top = NodePath("../../Options")
 focus_neighbour_right = NodePath("../About")
 size_flags_horizontal = 0
 size_flags_vertical = 3
-text = "Quit"
+text = "MENU_QUIT"
 play_accept_sound = false
 
 [node name="Margin" type="MarginContainer" parent="MainPanel/Margin/Menu/Quit and About"]
-margin_left = 424.0
-margin_right = 1216.0
+margin_left = 478.0
+margin_right = 957.0
 margin_bottom = 112.0
 size_flags_horizontal = 3
 
 [node name="About" parent="MainPanel/Margin/Menu/Quit and About" instance=ExtResource( 4 )]
-margin_left = 1220.0
+margin_left = 961.0
 margin_right = 1520.0
 rect_min_size = Vector2( 300, 0 )
 focus_neighbour_left = NodePath("../Quit")
 focus_neighbour_top = NodePath("../../Options")
 size_flags_horizontal = 0
 size_flags_vertical = 3
-text = "About"
+text = "MENU_ABOUT"
 
 [node name="ScorePanel" type="MarginContainer" parent="."]
 visible = false
@@ -336,9 +344,6 @@ custom_constants/margin_top = 50
 custom_constants/margin_left = 200
 custom_constants/margin_bottom = 50
 script = ExtResource( 17 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 initial_focus_target = NodePath("Scores/CenterContainer/Back")
 
 [node name="Scores" type="VBoxContainer" parent="ScorePanel"]
@@ -356,7 +361,7 @@ __meta__ = {
 margin_right = 1520.0
 margin_bottom = 127.0
 custom_fonts/font = ExtResource( 14 )
-text = "Scores"
+text = "MENU_SCORES"
 align = 1
 
 [node name="ScoreList" type="VBoxContainer" parent="ScorePanel/Scores"]
@@ -552,10 +557,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Back" parent="ScorePanel/Scores/CenterContainer" instance=ExtResource( 4 )]
-margin_left = 660.0
-margin_right = 860.0
+margin_left = 505.0
+margin_right = 1014.0
 rect_min_size = Vector2( 200, 0 )
-text = "Back"
+text = "MENU_BACK"
 
 [node name="HelpPanel" type="MarginContainer" parent="."]
 visible = false
@@ -570,9 +575,9 @@ initial_focus_target = NodePath("HowToPlay/CenterContainer/Back")
 
 [node name="HowToPlay" type="VBoxContainer" parent="HelpPanel"]
 margin_left = 160.0
-margin_top = 47.0
+margin_top = 122.0
 margin_right = 1760.0
-margin_bottom = 1032.0
+margin_bottom = 957.0
 size_flags_vertical = 4
 custom_constants/separation = 30
 __meta__ = {
@@ -583,7 +588,7 @@ __meta__ = {
 margin_right = 1600.0
 margin_bottom = 127.0
 custom_fonts/font = ExtResource( 14 )
-text = "How to Play"
+text = "MENU_HELP"
 align = 1
 
 [node name="Movement" type="HBoxContainer" parent="HelpPanel/HowToPlay"]
@@ -594,16 +599,16 @@ custom_constants/separation = 40
 alignment = 1
 
 [node name="Name" type="Label" parent="HelpPanel/HowToPlay/Movement"]
-margin_left = 215.0
+margin_left = 206.0
 margin_top = 32.0
-margin_right = 552.0
+margin_right = 561.0
 margin_bottom = 116.0
 custom_fonts/font = ExtResource( 16 )
-text = "Movement:"
+text = "HELP_MOVE"
 
 [node name="Icon" type="TextureRect" parent="HelpPanel/HowToPlay/Movement"]
-margin_left = 592.0
-margin_right = 820.0
+margin_left = 601.0
+margin_right = 829.0
 margin_bottom = 148.0
 texture = ExtResource( 21 )
 stretch_mode = 6
@@ -618,8 +623,8 @@ custom_fonts/font = ExtResource( 16 )
 text = "or"
 
 [node name="Icon2" type="TextureRect" parent="HelpPanel/HowToPlay/Movement"]
-margin_left = 860.0
-margin_right = 1088.0
+margin_left = 869.0
+margin_right = 1097.0
 margin_bottom = 148.0
 texture = ExtResource( 23 )
 stretch_mode = 6
@@ -634,8 +639,8 @@ custom_fonts/font = ExtResource( 16 )
 text = "or"
 
 [node name="Icon3" type="TextureRect" parent="HelpPanel/HowToPlay/Movement"]
-margin_left = 1128.0
-margin_right = 1236.0
+margin_left = 1137.0
+margin_right = 1245.0
 margin_bottom = 148.0
 texture = ExtResource( 22 )
 stretch_mode = 6
@@ -650,8 +655,8 @@ custom_fonts/font = ExtResource( 16 )
 text = "or"
 
 [node name="Icon4" type="TextureRect" parent="HelpPanel/HowToPlay/Movement"]
-margin_left = 1276.0
-margin_right = 1384.0
+margin_left = 1285.0
+margin_right = 1393.0
 margin_bottom = 148.0
 texture = ExtResource( 24 )
 stretch_mode = 6
@@ -664,22 +669,22 @@ custom_constants/separation = 100
 alignment = 1
 
 [node name="Shoot" type="HBoxContainer" parent="HelpPanel/HowToPlay/ShootPause"]
-margin_left = 221.0
-margin_right = 802.0
+margin_left = 86.0
+margin_right = 770.0
 margin_bottom = 88.0
 custom_constants/separation = 40
 alignment = 1
 
 [node name="Name" type="Label" parent="HelpPanel/HowToPlay/ShootPause/Shoot"]
 margin_top = 2.0
-margin_right = 284.0
+margin_right = 387.0
 margin_bottom = 86.0
 custom_fonts/font = ExtResource( 16 )
-text = "Shooting:"
+text = "HELP_SHOOT"
 
 [node name="Icon" type="TextureRect" parent="HelpPanel/HowToPlay/ShootPause/Shoot"]
-margin_left = 324.0
-margin_right = 472.0
+margin_left = 427.0
+margin_right = 575.0
 margin_bottom = 88.0
 texture = ExtResource( 25 )
 stretch_mode = 6
@@ -694,29 +699,29 @@ custom_fonts/font = ExtResource( 16 )
 text = "or"
 
 [node name="Icon2" type="TextureRect" parent="HelpPanel/HowToPlay/ShootPause/Shoot"]
-margin_left = 512.0
-margin_right = 581.0
+margin_left = 615.0
+margin_right = 684.0
 margin_bottom = 88.0
 texture = ExtResource( 26 )
 stretch_mode = 6
 
 [node name="Pause" type="HBoxContainer" parent="HelpPanel/HowToPlay/ShootPause"]
-margin_left = 902.0
-margin_right = 1378.0
+margin_left = 870.0
+margin_right = 1514.0
 margin_bottom = 88.0
 custom_constants/separation = 40
 alignment = 1
 
 [node name="Name" type="Label" parent="HelpPanel/HowToPlay/ShootPause/Pause"]
 margin_top = 2.0
-margin_right = 199.0
+margin_right = 367.0
 margin_bottom = 86.0
 custom_fonts/font = ExtResource( 16 )
-text = "Pause:"
+text = "HELP_PAUSE"
 
 [node name="Icon" type="TextureRect" parent="HelpPanel/HowToPlay/ShootPause/Pause"]
-margin_left = 239.0
-margin_right = 367.0
+margin_left = 407.0
+margin_right = 535.0
 margin_bottom = 88.0
 texture = ExtResource( 27 )
 stretch_mode = 6
@@ -731,8 +736,8 @@ custom_fonts/font = ExtResource( 16 )
 text = "or"
 
 [node name="Icon2" type="TextureRect" parent="HelpPanel/HowToPlay/ShootPause/Pause"]
-margin_left = 407.0
-margin_right = 476.0
+margin_left = 575.0
+margin_right = 644.0
 margin_bottom = 88.0
 texture = ExtResource( 28 )
 stretch_mode = 6
@@ -745,20 +750,20 @@ custom_constants/separation = 40
 alignment = 1
 
 [node name="Name" type="Label" parent="HelpPanel/HowToPlay/Upgrades"]
-margin_left = 201.0
+margin_left = 235.0
 margin_top = 33.0
-margin_right = 740.0
+margin_right = 703.0
 margin_bottom = 117.0
 custom_fonts/font = ExtResource( 16 )
-text = "Collect powerups:"
+text = "HELP_POWERUP"
 
 [node name="Upgrade1" type="VBoxContainer" parent="HelpPanel/HowToPlay/Upgrades"]
-margin_left = 780.0
-margin_right = 901.0
+margin_left = 743.0
+margin_right = 856.0
 margin_bottom = 150.0
 
 [node name="Icon" type="TextureRect" parent="HelpPanel/HowToPlay/Upgrades/Upgrade1"]
-margin_right = 121.0
+margin_right = 113.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
 texture = ExtResource( 31 )
@@ -767,19 +772,19 @@ stretch_mode = 6
 
 [node name="Info" type="Label" parent="HelpPanel/HowToPlay/Upgrades/Upgrade1"]
 margin_top = 104.0
-margin_right = 121.0
+margin_right = 113.0
 margin_bottom = 150.0
 custom_fonts/font = SubResource( 14 )
-text = "Speed+"
+text = "SPEED+"
 align = 1
 
 [node name="Upgrade2" type="VBoxContainer" parent="HelpPanel/HowToPlay/Upgrades"]
-margin_left = 941.0
-margin_right = 1064.0
+margin_left = 896.0
+margin_right = 1030.0
 margin_bottom = 150.0
 
 [node name="Icon" type="TextureRect" parent="HelpPanel/HowToPlay/Upgrades/Upgrade2"]
-margin_right = 123.0
+margin_right = 134.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
 texture = ExtResource( 30 )
@@ -788,19 +793,19 @@ stretch_mode = 6
 
 [node name="Info" type="Label" parent="HelpPanel/HowToPlay/Upgrades/Upgrade2"]
 margin_top = 104.0
-margin_right = 123.0
+margin_right = 134.0
 margin_bottom = 150.0
 custom_fonts/font = SubResource( 14 )
-text = "Health+"
+text = "HEALTH+"
 align = 1
 
 [node name="Upgrade3" type="VBoxContainer" parent="HelpPanel/HowToPlay/Upgrades"]
-margin_left = 1104.0
-margin_right = 1258.0
+margin_left = 1070.0
+margin_right = 1225.0
 margin_bottom = 150.0
 
 [node name="Icon" type="TextureRect" parent="HelpPanel/HowToPlay/Upgrades/Upgrade3"]
-margin_right = 154.0
+margin_right = 155.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 100, 100 )
 texture = ExtResource( 29 )
@@ -809,15 +814,15 @@ stretch_mode = 6
 
 [node name="Info" type="Label" parent="HelpPanel/HowToPlay/Upgrades/Upgrade3"]
 margin_top = 104.0
-margin_right = 154.0
+margin_right = 155.0
 margin_bottom = 150.0
 custom_fonts/font = SubResource( 14 )
-text = "Weapon+"
+text = "WEAPON+"
 align = 1
 
 [node name="Upgrade4" type="VBoxContainer" parent="HelpPanel/HowToPlay/Upgrades"]
-margin_left = 1298.0
-margin_right = 1398.0
+margin_left = 1265.0
+margin_right = 1365.0
 margin_bottom = 150.0
 
 [node name="Icon" type="TextureRect" parent="HelpPanel/HowToPlay/Upgrades/Upgrade4"]
@@ -833,38 +838,36 @@ margin_top = 104.0
 margin_right = 100.0
 margin_bottom = 150.0
 custom_fonts/font = SubResource( 14 )
-text = "Life+"
+text = "LIFE+"
 align = 1
 
 [node name="Text" type="HBoxContainer" parent="HelpPanel/HowToPlay"]
 margin_top = 633.0
 margin_right = 1600.0
-margin_bottom = 843.0
+margin_bottom = 693.0
 custom_constants/separation = 30
 alignment = 1
 
 [node name="Name" type="Label" parent="HelpPanel/HowToPlay/Text"]
-margin_left = 202.0
-margin_right = 1398.0
-margin_bottom = 210.0
+margin_left = 695.0
+margin_right = 905.0
+margin_bottom = 60.0
 custom_fonts/font = SubResource( 13 )
-text = "Aim for a high score
-Extra powerups give bonus score
-On death score reverts to checkpoint and lose 1/4"
+text = "HELP_TIPS"
 align = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="HelpPanel/HowToPlay"]
-margin_top = 873.0
+margin_top = 723.0
 margin_right = 1600.0
-margin_bottom = 985.0
+margin_bottom = 835.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Back" parent="HelpPanel/HowToPlay/CenterContainer" instance=ExtResource( 4 )]
-margin_left = 700.0
-margin_right = 900.0
+margin_left = 545.0
+margin_right = 1054.0
 rect_min_size = Vector2( 200, 0 )
-text = "Back"
+text = "MENU_BACK"
 
 [node name="SettingsPanel" type="MarginContainer" parent="."]
 visible = false
@@ -875,9 +878,6 @@ custom_constants/margin_top = 50
 custom_constants/margin_left = 200
 custom_constants/margin_bottom = 50
 script = ExtResource( 17 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 initial_focus_target = NodePath("Settings/CenterContainer/Back")
 
 [node name="Settings" parent="SettingsPanel" instance=ExtResource( 18 )]
@@ -886,9 +886,15 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 200.0
-margin_top = 222.0
+margin_top = 162.0
 margin_right = 1720.0
-margin_bottom = 858.0
+margin_bottom = 917.0
+
+[node name="EnglishBox" parent="SettingsPanel/Settings/SettingsList/Language" index="1"]
+group = SubResource( 15 )
+
+[node name="FinnishBox" parent="SettingsPanel/Settings/SettingsList/Language" index="2"]
+group = SubResource( 15 )
 
 [node name="AboutPanel" type="MarginContainer" parent="."]
 visible = false
@@ -899,16 +905,13 @@ custom_constants/margin_top = 40
 custom_constants/margin_left = 160
 custom_constants/margin_bottom = 40
 script = ExtResource( 17 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 initial_focus_target = NodePath("HowToPlay/CenterContainer/Back")
 
 [node name="HowToPlay" type="VBoxContainer" parent="AboutPanel"]
 margin_left = 160.0
-margin_top = 179.0
+margin_top = 360.0
 margin_right = 1760.0
-margin_bottom = 901.0
+margin_bottom = 719.0
 size_flags_vertical = 4
 custom_constants/separation = 30
 __meta__ = {
@@ -919,41 +922,36 @@ __meta__ = {
 margin_right = 1600.0
 margin_bottom = 127.0
 custom_fonts/font = ExtResource( 14 )
-text = "About"
+text = "MENU_ABOUT"
 align = 1
 
 [node name="Text" type="HBoxContainer" parent="AboutPanel/HowToPlay"]
 margin_top = 157.0
 margin_right = 1600.0
-margin_bottom = 580.0
+margin_bottom = 217.0
 custom_constants/separation = 30
 alignment = 1
 
-[node name="Name" type="Label" parent="AboutPanel/HowToPlay/Text"]
-margin_left = 344.0
-margin_right = 1255.0
-margin_bottom = 423.0
+[node name="Text" type="Label" parent="AboutPanel/HowToPlay/Text"]
+margin_left = 664.0
+margin_right = 936.0
+margin_bottom = 60.0
 custom_fonts/font = SubResource( 13 )
-text = "Island Assault was created as a part
-of a Bachelor's thesis by Tero Salmela
-
-Created using Godot Engine 3.4.2
-Please view licensing information at:
-godotengine.org/license"
+text = "ABOUT_TEXT"
 align = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="AboutPanel/HowToPlay"]
-margin_top = 610.0
+margin_top = 247.0
 margin_right = 1600.0
-margin_bottom = 722.0
+margin_bottom = 359.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Back" parent="AboutPanel/HowToPlay/CenterContainer" instance=ExtResource( 4 )]
-margin_left = 700.0
-margin_right = 900.0
+margin_left = 545.0
+margin_right = 1054.0
 rect_min_size = Vector2( 200, 0 )
-text = "Back"
+text = "MENU_BACK"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 19 )

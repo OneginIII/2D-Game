@@ -7,9 +7,9 @@ const POWERUP_PICKUP := preload("res://scenes/game/entity/powerup/powerup_pickup
 # Texts used by the different messages displayed in game.
 # In a larger project these should be read from seperate files that enable
 # localization to be made.
-const CHECKPOINT_MESSAGE := "Checkpoint Reached"
-const GAME_OVER_MESSAGE := "Game Over"
-const VICTORY_MESSAGE := "Game Complete"
+const CHECKPOINT_MESSAGE := "GAME_CHECKPOINT"
+const GAME_OVER_MESSAGE := "GAME_OVER"
+const VICTORY_MESSAGE := "GAME_VICTORY"
 # Some basic constant numbers used by the game node.
 const LEVEL_WIDTH := 1920.0
 const GAME_OVER_DELAY := 4.0
@@ -84,9 +84,9 @@ func game_over(victory: bool = false):
 	game_running = false
 	# The message displayed depends on if the player won or not.
 	if victory:
-		gui_node.center_message(VICTORY_MESSAGE)
+		gui_node.center_message(tr(VICTORY_MESSAGE))
 	else:
-		gui_node.center_message(GAME_OVER_MESSAGE)
+		gui_node.center_message(tr(GAME_OVER_MESSAGE))
 		# Also if defeated, the destroyed player ship can't move anymore.
 		player_node.controllable = false
 	# Stop the music.
@@ -211,7 +211,7 @@ func checkpoint_reached(checkpoint_name: String, display_message: bool, stop_mus
 	level_node.checkpoints[checkpoint_name].active = false
 	# Display the checkpoint reached message.
 	if display_message:
-		gui_node.center_message(CHECKPOINT_MESSAGE)
+		gui_node.center_message(tr(CHECKPOINT_MESSAGE))
 	# Stop the music if the checkpoint calls for it. Used before the boss fight.
 	if stop_music:
 		stop_music()

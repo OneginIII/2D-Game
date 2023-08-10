@@ -7,12 +7,17 @@ extends Control
 onready var sound_slider := $SettingsList/Sound/Slider
 onready var music_slider := $SettingsList/Music/Slider
 onready var fullscreen_box := $SettingsList/Fullscreen/CheckBox
+onready var english_box = $SettingsList/Language/EnglishBox
+onready var finnish_box = $SettingsList/Language/FinnishBox
+
 
 func _ready():
 	# Connecting the signals of the controls to the right methods.
 	sound_slider.connect("value_changed", self, "sound_value_changed")
 	music_slider.connect("value_changed", self, "music_value_changed")
 	fullscreen_box.connect("toggled", self, "fullscreen_toggled")
+	english_box.connect("toggled", self, "language_set", ["en"])
+	finnish_box.connect("toggled", self, "language_set", ["fi"])
 
 # Connected to the visibility changed signal of this control node.
 # Each time the settings menu visibility is changed, the controls are synced
@@ -24,6 +29,11 @@ func on_visibility_changed():
 	music_slider.value = db2linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")))
 	# Reading fullscreen status from OS.
 	fullscreen_box.pressed = OS.window_fullscreen
+	match TranslationServer.get_locale():
+		"en":
+			english_box.pressed = true
+		"fi":
+			finnish_box.pressed = true
 
 func sound_value_changed(value: float):
 	# Sets the sound bus volume level. Converted from linear to decibel.
@@ -36,3 +46,6 @@ func music_value_changed(value: float):
 func fullscreen_toggled(state: bool):
 	# Sets the fullscreen state.
 	OS.window_fullscreen = state
+
+func language_set(_state: bool, locale: String):
+	TranslationServer.set_locale(locale)

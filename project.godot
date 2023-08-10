@@ -134,6 +134,13 @@ pause={
 2d_physics/layer_4="Edges"
 2d_physics/layer_5="Trigger"
 
+[locale]
+
+translation_remaps={
+"res://scenes/menu/assets/simple_logo.png": PoolStringArray( "res://scenes/menu/assets/simple_logo_fi.png:fi", "res://scenes/menu/assets/simple_logo.png:en" )
+}
+translations=PoolStringArray( "res://assets/localization/strings.en.translation", "res://assets/localization/strings.fi.translation" )
+
 [mono]
 
 project/assembly_name="Island Assault"

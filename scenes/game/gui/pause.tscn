@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/menu/assets/menu_title_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/menu_button.tscn" type="PackedScene" id=2]
@@ -6,14 +6,13 @@
 [ext_resource path="res://scenes/menu/assets/scores_font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scenes/menu/settings_menu.tscn" type="PackedScene" id=5]
 
+[sub_resource type="ButtonGroup" id=1]
+
 [node name="Pause" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -23,112 +22,117 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Menu" type="VBoxContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -170.5
-margin_top = -273.0
-margin_right = 170.5
-margin_bottom = 273.0
+[node name="Menu" type="CenterContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Menu" type="VBoxContainer" parent="Menu"]
+margin_left = 617.0
+margin_top = 267.0
+margin_right = 1302.0
+margin_bottom = 813.0
+grow_horizontal = 2
 rect_pivot_offset = Vector2( -1600, -796 )
 custom_constants/separation = 20
-__meta__ = {
-"_edit_use_anchors_": false
-}
+alignment = 1
 
-[node name="Title" type="Label" parent="Menu"]
-margin_right = 341.0
+[node name="Title" type="Label" parent="Menu/Menu"]
+margin_right = 685.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 0, 150 )
 custom_fonts/font = ExtResource( 1 )
-text = "Paused"
+text = "PAUSE_TITLE"
 align = 1
 
-[node name="Resume" parent="Menu" instance=ExtResource( 2 )]
+[node name="Resume" parent="Menu/Menu" instance=ExtResource( 2 )]
 margin_top = 170.0
-margin_right = 341.0
+margin_right = 685.0
 margin_bottom = 282.0
 rect_min_size = Vector2( 200, 0 )
 focus_neighbour_bottom = NodePath("../Settings")
-text = "Resume"
+text = "PAUSE_RESUME"
 
-[node name="Settings" parent="Menu" instance=ExtResource( 2 )]
+[node name="Settings" parent="Menu/Menu" instance=ExtResource( 2 )]
 margin_top = 302.0
-margin_right = 341.0
+margin_right = 685.0
 margin_bottom = 414.0
 rect_min_size = Vector2( 200, 0 )
 focus_neighbour_top = NodePath("../Resume")
 focus_neighbour_bottom = NodePath("../Quit")
-text = "Settings"
+text = "PAUSE_SETTINGS"
 
-[node name="Quit" parent="Menu" instance=ExtResource( 2 )]
+[node name="Quit" parent="Menu/Menu" instance=ExtResource( 2 )]
 margin_top = 434.0
-margin_right = 341.0
+margin_right = 685.0
 margin_bottom = 546.0
 rect_min_size = Vector2( 200, 0 )
 focus_neighbour_top = NodePath("../Settings")
-text = "Quit"
+text = "PAUSE_QUIT"
 
-[node name="QuitConfirm" type="VBoxContainer" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -304.0
-margin_top = -201.0
-margin_right = 304.0
-margin_bottom = 201.0
+[node name="QuitConfirm" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="QuitConfirm" type="VBoxContainer" parent="QuitConfirm"]
+margin_left = 230.0
+margin_top = 339.0
+margin_right = 1689.0
+margin_bottom = 741.0
+grow_horizontal = 2
 rect_pivot_offset = Vector2( -1600, -796 )
 custom_constants/separation = 20
-__meta__ = {
-"_edit_use_anchors_": false
-}
+alignment = 1
 
-[node name="Title" type="Label" parent="QuitConfirm"]
-margin_right = 608.0
+[node name="Title" type="Label" parent="QuitConfirm/QuitConfirm"]
+margin_right = 1459.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 0, 150 )
 custom_fonts/font = ExtResource( 1 )
-text = "Quit game?"
+text = "PAUSE_QUIT_CONFIRM"
 align = 1
 
-[node name="Explanation" type="Label" parent="QuitConfirm"]
+[node name="Explanation" type="Label" parent="QuitConfirm/QuitConfirm"]
 margin_top = 170.0
-margin_right = 608.0
+margin_right = 1459.0
 margin_bottom = 270.0
 rect_min_size = Vector2( 0, 100 )
 custom_fonts/font = ExtResource( 4 )
-text = "Progress will be lost!"
+text = "PAUSE_QUIT_INFO"
 align = 1
 
-[node name="Buttons" type="HBoxContainer" parent="QuitConfirm"]
+[node name="Buttons" type="HBoxContainer" parent="QuitConfirm/QuitConfirm"]
 margin_top = 290.0
-margin_right = 608.0
+margin_right = 1459.0
 margin_bottom = 402.0
 custom_constants/separation = 180
+alignment = 1
 
-[node name="Back" parent="QuitConfirm/Buttons" instance=ExtResource( 2 )]
-margin_right = 200.0
+[node name="Back" parent="QuitConfirm/QuitConfirm/Buttons" instance=ExtResource( 2 )]
+margin_right = 781.0
 rect_min_size = Vector2( 200, 0 )
-text = "Back"
+text = "PAUSE_QUIT_BACK"
 
-[node name="Quit" parent="QuitConfirm/Buttons" instance=ExtResource( 2 )]
-margin_left = 380.0
-margin_right = 580.0
+[node name="Quit" parent="QuitConfirm/QuitConfirm/Buttons" instance=ExtResource( 2 )]
+margin_left = 961.0
+margin_right = 1459.0
 rect_min_size = Vector2( 200, 0 )
-text = "Quit"
+text = "PAUSE_QUIT"
 
 [node name="Settings" parent="." instance=ExtResource( 5 )]
 visible = false
 
-[connection signal="button_down" from="Menu/Resume" to="." method="pause" binds= [ false ]]
-[connection signal="button_down" from="Menu/Settings" to="." method="settings" binds= [ true ]]
-[connection signal="button_down" from="Menu/Quit" to="." method="quit_confirm" binds= [ true ]]
-[connection signal="button_down" from="QuitConfirm/Buttons/Back" to="." method="quit_confirm" binds= [ false ]]
-[connection signal="button_down" from="QuitConfirm/Buttons/Quit" to="." method="quit_game"]
+[node name="EnglishBox" parent="Settings/SettingsList/Language" index="1"]
+group = SubResource( 1 )
+
+[node name="FinnishBox" parent="Settings/SettingsList/Language" index="2"]
+group = SubResource( 1 )
+
+[connection signal="button_down" from="Menu/Menu/Resume" to="." method="pause" binds= [ false ]]
+[connection signal="button_down" from="Menu/Menu/Settings" to="." method="settings" binds= [ true ]]
+[connection signal="button_down" from="Menu/Menu/Quit" to="." method="quit_confirm" binds= [ true ]]
+[connection signal="button_down" from="QuitConfirm/QuitConfirm/Buttons/Back" to="." method="quit_confirm" binds= [ false ]]
+[connection signal="button_down" from="QuitConfirm/QuitConfirm/Buttons/Quit" to="." method="quit_game"]
 [connection signal="button_down" from="Settings/CenterContainer/Back" to="." method="settings" binds= [ false ]]
 
 [editable path="Settings"]

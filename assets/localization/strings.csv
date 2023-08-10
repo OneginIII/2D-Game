@@ -1,0 +1,52 @@
+keys,en,fi
+MENU_START,Start,Aloita
+MENU_SCORES,Scores,Pisteet
+MENU_HELP,How to Play,Ohjeet
+MENU_SETTINGS,Settings,Asetukset
+MENU_QUIT,Quit,Sulje
+MENU_ABOUT,About,Tietoja
+MENU_BACK,Back,Takaisin
+HELP_MOVE,Movement:,Liikkuminen:
+HELP_SHOOT,Shooting:,Ampuminen:
+HELP_PAUSE,Pause:,Tauko:
+HELP_POWERUP,Collect powerups:,Kerää bonuksia:
+HELP_TIPS,"Aim for a high score. Extra powerups give bonus score.
+If your ship is destroyed, you lose score and go back to 
+the last checkpoint. If all ships are destroyed, it's game over.","Yritä saada korkeat pisteet. Ylimääräisistä bonuksista 
+saa lisäpisteitä. Jos aluksesi tuhoutuu, menetät pisteitä ja
+palaat edelliselle välietapille. Jos kaikki alukset tuhoutuu, peli loppuu."
+SPEED+,Speed+,Nopeus+
+HEALTH+,Armor+,Suoja+
+WEAPON+,Weapon+,Ase+
+LIFE+,Ship+,Alus+
+SETTING_SOUND,Sound volume,Äänien voimakkuus
+SETTING_MUSIC,Music volume,Musiikin voimakkuus
+SETTING_FULLSCREEN,Fullscreen,Koko näyttö
+SETTING_LANGUAGE,Language,Kieli
+ABOUT_TEXT,"Island Assault was created as a part of a 
+Bachelor's thesis by Tero Salmela in April 2022.
+
+Created using Godot Engine 3.5.2
+Please view licensing information at:
+godotengine.org/license","Taistelu Saarella luotiin osana
+Tero Salmelan opinnäytetyötä huhtikuussa 2022.
+
+Tehty Godot Engine versiolla 3.5.2
+Lisenssitiedot löytyvät osoitteesta:
+godotengine.org/license"
+GUI_STATUS,Status,Alus
+GUI_POWER,Weapon,Ase
+GUI_SCORE,Score,Pisteet
+PAUSE_TITLE,Paused,Tauko
+PAUSE_RESUME,Resume,Jatka
+PAUSE_SETTINGS,Settings,Asetukset
+PAUSE_QUIT,Quit,Lopeta
+PAUSE_QUIT_CONFIRM,Quit game?,Lopeta peli?
+PAUSE_QUIT_INFO,Progress will be lost!,Peli ei tallennu!
+PAUSE_QUIT_BACK,Back,Takaisin
+GAME_CHECKPOINT,Checkpoint Reached,Välietappi saavutettu
+GAME_OVER,Game Over,Peli loppui
+GAME_VICTORY,Game Complete,Peli läpäisty
+GUI_HIGHSCORE,New highscore!,Sait korkeat pisteet!
+GUI_CONFIRM,Confirm,Hyväksy
+GUI_NAME,Enter name,Kirjoita nimesi

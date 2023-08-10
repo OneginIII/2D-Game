@@ -17,8 +17,8 @@ func pause(state: bool):
 	if state == true:
 		# If pause state is true, also focus the resume button and hide the
 		# pause menu submenus.
-		$Menu/Resume.grab_focus()
-		$Menu.visible = true
+		$Menu/Menu/Resume.grab_focus()
+		$Menu/.visible = true
 		$QuitConfirm.visible = false
 		$Settings.visible = false
 
@@ -28,9 +28,9 @@ func quit_confirm(state: bool):
 	$Menu.visible = !state
 	$QuitConfirm.visible = state
 	if state == true:
-		$QuitConfirm/Buttons/Back.grab_focus()
+		$QuitConfirm/QuitConfirm/Buttons/Back.grab_focus()
 	else:
-		$Menu/Quit.grab_focus()
+		$Menu/Menu/Quit.grab_focus()
 
 # This method is called once the game exit confirmation is made.
 func quit_game():
@@ -53,4 +53,4 @@ func settings(state: bool):
 	if state == true:
 		$Settings/CenterContainer/Back.grab_focus()
 	else:
-		$Menu/Settings.grab_focus()
+		$Menu/Menu/Settings.grab_focus()

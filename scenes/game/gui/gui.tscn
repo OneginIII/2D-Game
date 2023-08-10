@@ -41,9 +41,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 1920, 1080 )
 script = ExtResource( 8 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TestBG" type="ColorRect" parent="."]
 visible = false
@@ -64,37 +61,36 @@ margin_top = -150.0
 margin_right = 960.0
 rect_min_size = Vector2( 0, 150 )
 size_flags_horizontal = 3
-custom_constants/separation = 340
+custom_constants/separation = 360
 alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Status" type="VBoxContainer" parent="PlayerInfo"]
-margin_left = 83.0
-margin_right = 483.0
+margin_left = 57.0
+margin_right = 504.0
 margin_bottom = 150.0
-rect_min_size = Vector2( 400, 0 )
+rect_min_size = Vector2( 364, 0 )
 size_flags_vertical = 3
 custom_constants/separation = 5
 
 [node name="Top" type="HBoxContainer" parent="PlayerInfo/Status"]
-margin_right = 400.0
+margin_right = 447.0
 margin_bottom = 51.0
 custom_constants/separation = 20
 
 [node name="Title" type="Label" parent="PlayerInfo/Status/Top"]
-margin_right = 129.0
+margin_right = 218.0
 margin_bottom = 51.0
+size_flags_horizontal = 2
 custom_fonts/font = ExtResource( 1 )
-text = "Status"
+text = "GUI_STATUS"
 uppercase = true
 
 [node name="Lives" type="HBoxContainer" parent="PlayerInfo/Status/Top"]
-margin_left = 149.0
-margin_right = 358.0
+margin_left = 238.0
+margin_right = 447.0
 margin_bottom = 51.0
 custom_constants/separation = 10
+alignment = 2
 
 [node name="Slot1" type="TextureRect" parent="PlayerInfo/Status/Top/Lives"]
 margin_right = 63.0
@@ -115,9 +111,6 @@ rect_min_size = Vector2( 45, 27 )
 texture = ExtResource( 9 )
 expand = true
 stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Slot2" type="TextureRect" parent="PlayerInfo/Status/Top/Lives"]
 margin_left = 73.0
@@ -163,13 +156,10 @@ rect_min_size = Vector2( 45, 27 )
 texture = ExtResource( 9 )
 expand = true
 stretch_mode = 6
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Bottom" type="HBoxContainer" parent="PlayerInfo/Status"]
 margin_top = 56.0
-margin_right = 400.0
+margin_right = 447.0
 margin_bottom = 105.0
 
 [node name="HealthBar" type="TextureProgress" parent="PlayerInfo/Status/Bottom"]
@@ -183,8 +173,8 @@ texture_progress = ExtResource( 4 )
 texture_progress_offset = Vector2( 8, 8 )
 
 [node name="Power" type="VBoxContainer" parent="PlayerInfo"]
-margin_left = 823.0
-margin_right = 1097.0
+margin_left = 864.0
+margin_right = 1138.0
 margin_bottom = 150.0
 size_flags_vertical = 3
 custom_constants/separation = 5
@@ -196,11 +186,11 @@ custom_constants/separation = 20
 alignment = 1
 
 [node name="Title" type="Label" parent="PlayerInfo/Power/Top"]
-margin_left = 74.0
-margin_right = 200.0
+margin_left = 29.0
+margin_right = 244.0
 margin_bottom = 51.0
 custom_fonts/font = ExtResource( 1 )
-text = "Power"
+text = "GUI_POWER"
 uppercase = true
 
 [node name="Bottom" type="HBoxContainer" parent="PlayerInfo/Power"]
@@ -218,23 +208,23 @@ texture_progress = ExtResource( 6 )
 texture_progress_offset = Vector2( 8, 8 )
 
 [node name="Score" type="VBoxContainer" parent="PlayerInfo"]
-margin_left = 1437.0
-margin_right = 1837.0
+margin_left = 1498.0
+margin_right = 1862.0
 margin_bottom = 150.0
-rect_min_size = Vector2( 400, 0 )
+rect_min_size = Vector2( 364, 0 )
 custom_constants/separation = -10
 
 [node name="Title" type="Label" parent="PlayerInfo/Score"]
-margin_right = 400.0
+margin_right = 364.0
 margin_bottom = 51.0
 custom_fonts/font = ExtResource( 1 )
-text = "Score"
+text = "GUI_SCORE"
 align = 2
 uppercase = true
 
 [node name="Score" type="Label" parent="PlayerInfo/Score"]
 margin_top = 41.0
-margin_right = 400.0
+margin_right = 364.0
 margin_bottom = 124.0
 custom_fonts/font = ExtResource( 13 )
 text = "O1234567"
@@ -243,9 +233,6 @@ align = 2
 [node name="CenterText" type="CenterContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Shadow" type="TextureRect" parent="CenterText"]
 modulate = Color( 1, 1, 1, 0.376471 )
@@ -271,29 +258,26 @@ valign = 1
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Menu" type="VBoxContainer" parent="ScoreEntry"]
-margin_left = 607.0
+margin_left = 584.0
 margin_top = 322.0
-margin_right = 1313.0
+margin_right = 1335.0
 margin_bottom = 758.0
 custom_constants/separation = 40
 
 [node name="Text" type="Label" parent="ScoreEntry/Menu"]
-margin_right = 706.0
+margin_right = 751.0
 margin_bottom = 127.0
 custom_fonts/font = ExtResource( 15 )
-text = "New highscore!"
+text = "GUI_HIGHSCORE"
 align = 1
 valign = 1
 
 [node name="LineEdit" type="LineEdit" parent="ScoreEntry/Menu"]
-margin_left = 103.0
+margin_left = 125.0
 margin_top = 167.0
-margin_right = 603.0
+margin_right = 625.0
 margin_bottom = 284.0
 rect_min_size = Vector2( 500, 0 )
 size_flags_horizontal = 4
@@ -304,18 +288,18 @@ custom_styles/focus = SubResource( 3 )
 custom_styles/normal = SubResource( 1 )
 align = 1
 max_length = 12
-placeholder_text = "Enter name"
+placeholder_text = "GUI_NAME"
 placeholder_alpha = 0.25
 caret_blink = true
 
 [node name="Confirm" parent="ScoreEntry/Menu" instance=ExtResource( 12 )]
-margin_left = 188.0
+margin_left = 91.0
 margin_top = 324.0
-margin_right = 518.0
+margin_right = 660.0
 margin_bottom = 436.0
 rect_min_size = Vector2( 330, 0 )
 size_flags_horizontal = 4
 size_flags_vertical = 0
-text = "Confirm"
+text = "GUI_CONFIRM"
 
 [connection signal="button_down" from="ScoreEntry/Menu/Confirm" to="." method="score_entered"]

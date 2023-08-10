@@ -20,7 +20,7 @@ onready var menu := $MainMenuLayer/MainMenu
 # If there are changes made to data structures, this can be read to manage data
 # migrations. It is good practice to include this in the files even if you
 # don't use it for the current version of the game.
-var config_version := 0
+var config_version := 1
 var save_version := 0
 
 func _ready():
@@ -93,6 +93,7 @@ func save_config():
 		db2linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music"))))
 	# Also reading the fullscreen status directly.
 	config.set_value(CONFIG_CATEGORY, "fullscreen", OS.window_fullscreen)
+	config.set_value(CONFIG_CATEGORY, "language", TranslationServer.get_locale())
 	config.save(CONFIG_PATH)
 
 # This method loads a config file using Godot's built-in config file feature.
@@ -111,6 +112,7 @@ func load_config():
 		linear2db(config.get_value(CONFIG_CATEGORY, "music_volume", 0.5)))
 	# Also setting the fullscreen value based on the config data.
 	OS.window_fullscreen = config.get_value(CONFIG_CATEGORY, "fullscreen", false)
+	TranslationServer.set_locale(config.get_value(CONFIG_CATEGORY, "language", "en"))
 
 # Called when qutting the game. Saves config and game data before exiting.
 func quit_game():
