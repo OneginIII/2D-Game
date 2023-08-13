@@ -518,4 +518,5 @@ position = Vector2( 460, 0 )
 
 [node name="CenterEffect" type="Sprite" parent="Rotator" index="5"]
 material = SubResource( 12 )
+z_index = 1
 texture = ExtResource( 6 )
