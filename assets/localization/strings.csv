@@ -12,7 +12,7 @@ HELP_PAUSE,Pause:,Tauko:
 HELP_POWERUP,Collect powerups:,Kerää bonuksia:
 HELP_TIPS,"Aim for a high score. Extra powerups give bonus score.
 If your ship is destroyed, you lose score and go back to 
-the last checkpoint. If all ships are destroyed, it's game over.","Yritä saada korkeat pisteet. Ylimääräisistä bonuksista 
+the last checkpoint. If all ships are destroyed, it's game over.","Yritä saada korkea pistemäärä. Ylimääräisistä bonuksista 
 saa lisäpisteitä. Jos aluksesi tuhoutuu, menetät pisteitä ja
 palaat edelliselle välietapille. Jos kaikki alukset tuhoutuu, peli loppuu."
 SPEED+,Speed+,Nopeus+
@@ -47,6 +47,6 @@ PAUSE_QUIT_BACK,Back,Takaisin
 GAME_CHECKPOINT,Checkpoint Reached,Välietappi saavutettu
 GAME_OVER,Game Over,Peli loppui
 GAME_VICTORY,Game Complete,Peli läpäisty
-GUI_HIGHSCORE,New highscore!,Sait korkeat pisteet!
+GUI_HIGHSCORE,New highscore!,Uusi piste-ennätys!
 GUI_CONFIRM,Confirm,Hyväksy
-GUI_NAME,Enter name,Kirjoita nimesi
+GUI_NAME,Enter name,Kirjoita nimi

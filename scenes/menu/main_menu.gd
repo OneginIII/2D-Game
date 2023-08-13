@@ -30,6 +30,7 @@ func _ready():
 # This method handles entering the main menu. Optional boolean for first start.
 func start_menu(first_start: bool = false):
 	visible = true
+	set_process_input(false)
 	# Main panel is hidden by default. This is for menu button sound reasons.
 	main_panel.visible = true
 	# Reset the decorative ship in the main menu background.
@@ -52,6 +53,7 @@ func start_menu(first_start: bool = false):
 
 # This method handles exiting the main menu.
 func exit_menu():
+	set_process_input(true)
 	# Signal that the game is starting.
 	emit_signal("game_started")
 	# Turn off main menu music.
@@ -62,6 +64,7 @@ func exit_menu():
 	# Once faded out, make the menu hidden, so it won't interfere with anything.
 	yield(tween, "tween_all_completed")
 	visible = false
+	set_process_input(false)
 
 # This method toggles the main menu music on and off based on a boolean argument.
 func toggle_music(on: bool):
@@ -91,3 +94,6 @@ func _on_Scores_button_down():
 func _on_Quit_button_down():
 	# This signal is used by the main node to quit the game.
 	emit_signal("game_quit")
+
+func _input(_event):
+	get_tree().set_input_as_handled()
