@@ -3,7 +3,7 @@ extends Button
 # This script is used by the menu buttons for effects and sounds.
 
 # The button text offsets when hovered.
-export var hover_offset := Vector2(40.0, 0.0)
+export var hover_offset := 40
 export var tween_duration := 0.2
 # Sounds for focus/hover and accepting/pressing.
 export var focus_sound : AudioStream
@@ -18,8 +18,7 @@ onready var icon_node := $Icon
 onready var sound := $Sound
 
 var tween := Tween.new()
-# Initial position before animations.
-var initial_position := Vector2()
+
 # These booleans are used to manage sounds.
 var accepted := false
 var just_visible := false
@@ -27,23 +26,20 @@ var just_visible := false
 func _ready():
 	add_child(tween)
 	# Setting initial position.
-	initial_position = rect_position
 	# Hiding focus icon.
 	icon_node.modulate = Color.transparent
+	set("custom_styles/hover:content_margin_right", hover_offset)
 
 # This method handles entering a highlighted state.
 # Triggered by both the mouse and focus entering events.
 func highlight_enter():
-	# If the tween is not animating, reset the initial position.
-	if !tween.is_active():
-		initial_position = rect_position
 	# Interpolate the rect position of the button forward.
 	tween.interpolate_property(
-		self, "rect_position", null, initial_position + hover_offset, 
+		self, "custom_styles/hover:content_margin_left", null, hover_offset, 
 		tween_duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	# Keep the icon in place by moving it backwards.
 	tween.interpolate_property(
-		icon_node, "rect_position", null, -hover_offset, 
+		self, "custom_styles/hover:content_margin_right", null, 0, 
 		tween_duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	# Fade in the icon.
 	tween.interpolate_property(
@@ -61,11 +57,11 @@ func highlight_enter():
 func highlight_exit():
 	# Interpolate the position back to the initial value.
 	tween.interpolate_property(
-		self, "rect_position", null, initial_position, 
+		self, "custom_styles/hover:content_margin_left", null, 0, 
 		tween_duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	# Keep the icon in place by moving it forward.
 	tween.interpolate_property(
-		icon_node, "rect_position", null, Vector2.ZERO, 
+		self, "custom_styles/hover:content_margin_right", null, hover_offset, 
 		tween_duration, Tween.TRANS_QUAD, Tween.EASE_OUT)
 	# Fade the icon away.
 	tween.interpolate_property(
@@ -92,6 +88,7 @@ func visibility_changed():
 	# Set just visible to true for one frame and then back to false.
 	# What this helps with is fixing some instances where the focus sound would
 	# play unnecessarily, for example when changing between menus.
+	set("custom_styles/hover:content_margin_right", hover_offset)
 	just_visible = true
 	yield(get_tree(), "idle_frame")
 	just_visible = false

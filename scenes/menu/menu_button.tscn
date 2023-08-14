@@ -7,6 +7,8 @@
 [ext_resource path="res://scenes/menu/assets/sounds/menu_select.ogg" type="AudioStream" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=2]
+resource_local_to_scene = true
+content_margin_right = 40.0
 
 [node name="MenuButton" type="Button"]
 margin_right = 192.0
@@ -26,7 +28,6 @@ text = "Start"
 align = 0
 script = ExtResource( 2 )
 __meta__ = {
-"_edit_use_anchors_": false,
 "_editor_description_": ""
 }
 focus_sound = ExtResource( 5 )

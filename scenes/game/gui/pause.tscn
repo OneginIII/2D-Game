@@ -23,14 +23,13 @@ __meta__ = {
 }
 
 [node name="Menu" type="CenterContainer" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Menu" type="VBoxContainer" parent="Menu"]
-margin_left = 617.0
+margin_left = 597.0
 margin_top = 267.0
-margin_right = 1302.0
+margin_right = 1322.0
 margin_bottom = 813.0
 grow_horizontal = 2
 rect_pivot_offset = Vector2( -1600, -796 )
@@ -38,7 +37,7 @@ custom_constants/separation = 20
 alignment = 1
 
 [node name="Title" type="Label" parent="Menu/Menu"]
-margin_right = 685.0
+margin_right = 725.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 0, 150 )
 custom_fonts/font = ExtResource( 1 )
@@ -47,7 +46,7 @@ align = 1
 
 [node name="Resume" parent="Menu/Menu" instance=ExtResource( 2 )]
 margin_top = 170.0
-margin_right = 685.0
+margin_right = 725.0
 margin_bottom = 282.0
 rect_min_size = Vector2( 200, 0 )
 focus_neighbour_bottom = NodePath("../Settings")
@@ -55,7 +54,7 @@ text = "PAUSE_RESUME"
 
 [node name="Settings" parent="Menu/Menu" instance=ExtResource( 2 )]
 margin_top = 302.0
-margin_right = 685.0
+margin_right = 725.0
 margin_bottom = 414.0
 rect_min_size = Vector2( 200, 0 )
 focus_neighbour_top = NodePath("../Resume")
@@ -64,13 +63,14 @@ text = "PAUSE_SETTINGS"
 
 [node name="Quit" parent="Menu/Menu" instance=ExtResource( 2 )]
 margin_top = 434.0
-margin_right = 685.0
+margin_right = 725.0
 margin_bottom = 546.0
 rect_min_size = Vector2( 200, 0 )
 focus_neighbour_top = NodePath("../Settings")
 text = "PAUSE_QUIT"
 
 [node name="QuitConfirm" type="CenterContainer" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 

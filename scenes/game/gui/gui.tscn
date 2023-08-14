@@ -293,9 +293,9 @@ placeholder_alpha = 0.25
 caret_blink = true
 
 [node name="Confirm" parent="ScoreEntry/Menu" instance=ExtResource( 12 )]
-margin_left = 91.0
+margin_left = 71.0
 margin_top = 324.0
-margin_right = 660.0
+margin_right = 680.0
 margin_bottom = 436.0
 rect_min_size = Vector2( 330, 0 )
 size_flags_horizontal = 4
