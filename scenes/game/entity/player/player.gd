@@ -28,7 +28,8 @@ signal bonus_upgrade(bonus_name)
 export var health := FULL_HEALTH setget set_health
 func set_health(value: int):
 	# If trying to set health to above full health, reward bonus points.
-	if value > FULL_HEALTH:
+	# FIXME "+ 50"
+	if value >= FULL_HEALTH + 50:
 		emit_signal("bonus_upgrade", "health")
 	# Limit health amount.
 	health = int(min(value, FULL_HEALTH))

@@ -3,7 +3,7 @@ extends Control
 # This script manages the in-game gui.
 
 # This is the speed of the score counter when interpolating to a new value.
-const TWEEN_SPEED = 100.0
+const TWEEN_SPEED = 250.0
 
 # Signal for once a highscore name has been entered.
 signal highscore_entry(entry_name)
@@ -68,6 +68,7 @@ func update_score(value: int):
 	# Calculating tween animation time to be constant per score amount.
 	var time = abs(display_score - value) / TWEEN_SPEED
 	# Using an interpolation method to update the score text.
+	tween.remove_all()
 	tween.interpolate_method(self, "set_score_text", display_score, value, time)
 	tween.start()
 	# Updating the display score after triggering the tween.

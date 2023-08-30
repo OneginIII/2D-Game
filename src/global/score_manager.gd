@@ -5,17 +5,18 @@ extends Node
 
 # Limited to 8 highscores.
 const MAX_HIGHSCORES := 8
+const INITIAL_POWERUP_INTERVAL := 250
+const POWERUP_INTERVAL_PENALTY := 100
 # Interval for spawning powerups every nth score reached.
-const POWERUP_INTERVAL := 250
 # When the respective powerup boosts are maxed, gives this bonus score.
 const powerup_scores := {
 	"health": 100,
 	"speed": 50,
 	"lives": 300,
-	"gun" : 150,
+	"gun" : 50,
 }
 # The score penalty multiplier when dying.
-const DEATH_SCORE_MULTIPLY := 3.0 / 4.0
+const DEATH_SCORE_MULTIPLY := 2.0 / 3.0
 
 # Signal for updating gui when score changes.
 signal score_updated(value)
@@ -32,11 +33,12 @@ func set_score(value: int):
 	# If the score treshold has been reached, spawn powerup and raise treshold.
 	if score >= score_treshold:
 		game_node.spawn_powerup()
-		score_treshold += POWERUP_INTERVAL
+		score_treshold += powerup_interval
 	# Emit score update signal.
 	emit_signal("score_updated", score)
+var powerup_interval := 250
 # Score threshold value for when to spawn next powerup.
-var score_treshold := POWERUP_INTERVAL
+var score_treshold := powerup_interval
 # Score at last checkpoint for resetting
 var checkpoint_score := 0
 # Array for the list of highscores. This array is two dimensional, i.e. an array
@@ -50,6 +52,8 @@ func reset_score():
 	self.score = 0
 	score_checkpoint()
 	gui_node.set_score(score)
+	powerup_interval = INITIAL_POWERUP_INTERVAL
+	score_treshold = INITIAL_POWERUP_INTERVAL 
 
 func score_checkpoint():
 	checkpoint_score = score
@@ -60,15 +64,16 @@ func death_penalty():
 	# This line gives a narrowing conversion warning for converting
 	# from multiplied float back to integer. Works as intended.
 	checkpoint_score = checkpoint_score * DEATH_SCORE_MULTIPLY
+	powerup_interval += POWERUP_INTERVAL_PENALTY
 	self.score = checkpoint_score
 	# This formula calculates the new score treshold. As the player loses 1/3
 	# of score on each death, the next powerup treshold is adjusted to always
 	# land on the next increment of the treshold (the next 250 in this case).
-	score_treshold = int(ceil(float(score) / float(POWERUP_INTERVAL)) * float(POWERUP_INTERVAL))
+	score_treshold = int(ceil(float(score) / float(powerup_interval)) * float(powerup_interval))
 	# If the treshold is below the interval (below 250),
 	# make the treshold the interval.
-	if score_treshold < POWERUP_INTERVAL:
-		score_treshold = POWERUP_INTERVAL
+	if score_treshold < powerup_interval:
+		score_treshold = powerup_interval
 
 # When collecting an extra powerup, this method gives bonus points.
 func on_bonus_powerup(bonus_name: String):
