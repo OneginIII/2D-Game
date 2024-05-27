@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/menu/assets/menu_title_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/menu/menu_button.tscn" type="PackedScene" id=2]
@@ -6,7 +6,31 @@
 [ext_resource path="res://scenes/menu/assets/scores_font.tres" type="DynamicFont" id=4]
 [ext_resource path="res://scenes/menu/settings_menu.tscn" type="PackedScene" id=5]
 
+[sub_resource type="StyleBoxEmpty" id=2]
+resource_local_to_scene = true
+content_margin_right = 40.0
+
+[sub_resource type="StyleBoxEmpty" id=3]
+resource_local_to_scene = true
+content_margin_right = 40.0
+
+[sub_resource type="StyleBoxEmpty" id=4]
+resource_local_to_scene = true
+content_margin_right = 40.0
+
+[sub_resource type="StyleBoxEmpty" id=5]
+resource_local_to_scene = true
+content_margin_right = 40.0
+
+[sub_resource type="StyleBoxEmpty" id=6]
+resource_local_to_scene = true
+content_margin_right = 40.0
+
 [sub_resource type="ButtonGroup" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+resource_local_to_scene = true
+content_margin_right = 40.0
 
 [node name="Pause" type="Control"]
 pause_mode = 2
@@ -50,6 +74,11 @@ margin_right = 725.0
 margin_bottom = 282.0
 rect_min_size = Vector2( 200, 0 )
 focus_neighbour_bottom = NodePath("../Settings")
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 2 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 2 )
+custom_styles/normal = SubResource( 2 )
 text = "PAUSE_RESUME"
 
 [node name="Settings" parent="Menu/Menu" instance=ExtResource( 2 )]
@@ -59,6 +88,11 @@ margin_bottom = 414.0
 rect_min_size = Vector2( 200, 0 )
 focus_neighbour_top = NodePath("../Resume")
 focus_neighbour_bottom = NodePath("../Quit")
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
 text = "PAUSE_SETTINGS"
 
 [node name="Quit" parent="Menu/Menu" instance=ExtResource( 2 )]
@@ -67,6 +101,11 @@ margin_right = 725.0
 margin_bottom = 546.0
 rect_min_size = Vector2( 200, 0 )
 focus_neighbour_top = NodePath("../Settings")
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 4 )
 text = "PAUSE_QUIT"
 
 [node name="QuitConfirm" type="CenterContainer" parent="."]
@@ -75,9 +114,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="QuitConfirm" type="VBoxContainer" parent="QuitConfirm"]
-margin_left = 230.0
+margin_left = 190.0
 margin_top = 339.0
-margin_right = 1689.0
+margin_right = 1729.0
 margin_bottom = 741.0
 grow_horizontal = 2
 rect_pivot_offset = Vector2( -1600, -796 )
@@ -111,12 +150,22 @@ alignment = 1
 [node name="Back" parent="QuitConfirm/QuitConfirm/Buttons" instance=ExtResource( 2 )]
 margin_right = 781.0
 rect_min_size = Vector2( 200, 0 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 5 )
+custom_styles/focus = SubResource( 5 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 5 )
 text = "PAUSE_QUIT_BACK"
 
 [node name="Quit" parent="QuitConfirm/QuitConfirm/Buttons" instance=ExtResource( 2 )]
 margin_left = 961.0
 margin_right = 1459.0
 rect_min_size = Vector2( 200, 0 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 6 )
+custom_styles/disabled = SubResource( 6 )
+custom_styles/normal = SubResource( 6 )
 text = "PAUSE_QUIT"
 
 [node name="Settings" parent="." instance=ExtResource( 5 )]
@@ -127,6 +176,13 @@ group = SubResource( 1 )
 
 [node name="FinnishBox" parent="Settings/SettingsList/Language" index="2"]
 group = SubResource( 1 )
+
+[node name="Back" parent="Settings/CenterContainer" index="0"]
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 7 )
+custom_styles/disabled = SubResource( 7 )
+custom_styles/normal = SubResource( 7 )
 
 [connection signal="button_down" from="Menu/Menu/Resume" to="." method="pause" binds= [ false ]]
 [connection signal="button_down" from="Menu/Menu/Settings" to="." method="settings" binds= [ true ]]

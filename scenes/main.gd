@@ -9,6 +9,8 @@ const CONFIG_CATEGORY := "settings"
 const CONFIG_PATH := "user://settings.cfg"
 const SAVE_PATH := "user://save.data"
 
+const MOUSE_HIDE_DELAY := 5.0
+
 # Toggle for whether running in debug mode or not.
 export var debug := true
 
@@ -23,17 +25,26 @@ onready var menu := $MainMenuLayer/MainMenu
 var config_version := 1
 var save_version := 0
 
+var mouse_autohide_timer : Timer
+
 func _ready():
 	# Randomizes the seed Godot's global random number generator.
 	randomize()
 	# Connect to the signal emitted when player chooses quit in the main menu.
 	menu.connect("game_quit", self, "quit_game")
 	# Set volume levels to half initially. Overriden after config loads.
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sound"),linear2db(0.5))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Sound"), linear2db(0.5))
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), linear2db(0.5))
 	# When game starts, load the config and save data.
 	load_config()
 	load_game()
+	# Handle mouse autohide
+	mouse_autohide_timer = Timer.new()
+	mouse_autohide_timer.pause_mode = Node.PAUSE_MODE_PROCESS
+	mouse_autohide_timer.one_shot = true
+	add_child(mouse_autohide_timer)
+	mouse_autohide_timer.connect("timeout", self, "hide_mouse")
+	mouse_autohide_timer.start(MOUSE_HIDE_DELAY)
 
 # Called when the game starts. Connected via signal through the editor.
 func game_started():
@@ -42,6 +53,8 @@ func game_started():
 # Called when the game ends. Connected via signal through the editor.
 func game_ended():
 	menu.start_menu()
+# Save scores at this point, incase game is not exited normally.
+	save_game()
 
 # This method handles saving the game data.
 func save_game():
@@ -52,8 +65,8 @@ func save_game():
 	# Setting up the saved data as a dictionary.
 	var save_data = {
 		# Include save version and the highscore list array.
-		"version" : save_version,
-		"highscores" : ScoreManager.highscore_list
+		"version": save_version,
+		"highscores": ScoreManager.highscore_list
 	}
 	# Using the store var method to store the dictionary in the file.
 	# There are multiple other ways of storing data in a file, but this is a 
@@ -122,6 +135,11 @@ func quit_game():
 
 # Debug inputs for testing
 func _input(event):
+	if event is InputEventMouse:
+		if mouse_autohide_timer.time_left > 0.0:
+			mouse_autohide_timer.stop()
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		mouse_autohide_timer.start(MOUSE_HIDE_DELAY)
 	if !debug:
 		return
 	if event is InputEventKey:
@@ -140,3 +158,6 @@ func _input(event):
 				Engine.time_scale = 1.0
 			if event.scancode == KEY_T:
 				Engine.time_scale = 1.0
+
+func hide_mouse():
+	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN

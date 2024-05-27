@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/game/gui/assets/status_title_font.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/game/gui/assets/life.png" type="Texture" id=2]
@@ -35,6 +35,10 @@ margin_right = 20.0
 margin_top = 20.0
 margin_bottom = 20.0
 modulate_color = Color( 0, 0, 0, 0.501961 )
+
+[sub_resource type="StyleBoxEmpty" id=4]
+resource_local_to_scene = true
+content_margin_right = 40.0
 
 [node name="GameGui" type="Control"]
 anchor_right = 1.0
@@ -300,6 +304,11 @@ margin_bottom = 436.0
 rect_min_size = Vector2( 330, 0 )
 size_flags_horizontal = 4
 size_flags_vertical = 0
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 4 )
 text = "GUI_CONFIRM"
 
 [connection signal="button_down" from="ScoreEntry/Menu/Confirm" to="." method="score_entered"]

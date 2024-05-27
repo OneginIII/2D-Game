@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://scenes/menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://scenes/menu/assets/background.png" type="Texture" id=2]
@@ -180,6 +180,14 @@ resource_local_to_scene = true
 content_margin_right = 40.0
 
 [sub_resource type="ButtonGroup" id=15]
+
+[sub_resource type="StyleBoxEmpty" id=33]
+resource_local_to_scene = true
+content_margin_right = 40.0
+
+[sub_resource type="StyleBoxEmpty" id=34]
+resource_local_to_scene = true
+content_margin_right = 40.0
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -926,6 +934,13 @@ group = SubResource( 15 )
 [node name="FinnishBox" parent="SettingsPanel/Settings/SettingsList/Language" index="2"]
 group = SubResource( 15 )
 
+[node name="Back" parent="SettingsPanel/Settings/CenterContainer" index="0"]
+custom_styles/hover = SubResource( 33 )
+custom_styles/pressed = SubResource( 33 )
+custom_styles/focus = SubResource( 33 )
+custom_styles/disabled = SubResource( 33 )
+custom_styles/normal = SubResource( 33 )
+
 [node name="AboutPanel" type="MarginContainer" parent="."]
 visible = false
 anchor_right = 1.0
@@ -978,9 +993,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Back" parent="AboutPanel/HowToPlay/CenterContainer" instance=ExtResource( 4 )]
-margin_left = 545.0
-margin_right = 1054.0
+margin_left = 525.0
+margin_right = 1074.0
 rect_min_size = Vector2( 200, 0 )
+custom_styles/hover = SubResource( 34 )
+custom_styles/pressed = SubResource( 34 )
+custom_styles/focus = SubResource( 34 )
+custom_styles/disabled = SubResource( 34 )
+custom_styles/normal = SubResource( 34 )
 text = "MENU_BACK"
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
